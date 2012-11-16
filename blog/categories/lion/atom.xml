@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Lion | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/lion/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/lion/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Lion eats Ant, or giving Lion Java GUI programs access to environment variables (phew)]]></title>
-    <link href="http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/"/>
     <updated>2011-07-27T15:02:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew</id>
+    <id>http://noiseandheat.github.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/arthur_chapman/3462161644/"><img class="right" src="/images/thumb1.jpg" width="200" height="130" title="An ant, yesterday" ></a></p>
 
 <p>Upgrading an OS is always fun, especially when you go for a clean install and forget

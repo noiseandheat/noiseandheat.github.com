@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: procrastination | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/procrastination/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/procrastination/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Aaaaaand, the hibernation ends]]></title>
-    <link href="http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/05/aaaaaand-the-hibernation-ends/"/>
     <updated>2010-05-22T22:34:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends</id>
+    <id>http://noiseandheat.github.com/blog/2010/05/aaaaaand-the-hibernation-ends</id>
     <content type="html"><![CDATA[<p><img class="right" src="/images/01.jpg" width="200" height="130"></p>
 
 <p>Well, what a pleasant hiatus that was. Almost 3 months. However, no more! I

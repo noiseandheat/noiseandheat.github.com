@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Chrome and PPAPI Flash Audio Syncing Bug]]></title>
-    <link href="http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/"/>
     <updated>2012-11-15T21:05:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug</id>
+    <id>http://noiseandheat.github.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug</id>
     <content type="html"><![CDATA[<p>In a somewhat Microsoftian move, Google decided to change the standard browser plugin architecture called <a href="http://en.wikipedia.org/wiki/NPAPI">NPAPI</a> for Chrome and bundle a custom port of Flash which uses it. Sadly, this has lead to some differences for that version of Flash and, unfortunately, new bugs.</p>
 
 <!--more-->
@@ -75,7 +75,7 @@
 
 <h2>Example Source</h2>
 
-<p>Lest you think I&#8217;ve code anything especially insane, you can grab all the sources for the test movie:</p>
+<p>Lest you think I&#8217;ve coded anything especially insane, you can grab all the sources for the test movie:</p>
 
 <ul>
 <li><a href="https://gist.github.com/4077864">https://gist.github.com/4077864</a></li>
@@ -86,9 +86,9 @@
   
   <entry>
     <title type="html"><![CDATA[Eigen, GLM and CML: math lib performance on iOS]]></title>
-    <link href="http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/"/>
     <updated>2012-09-23T21:12:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml&#8211;math-lib-performance-on-ios</id>
+    <id>http://noiseandheat.github.com/blog/2012/09/eigen-glm-and-cml&#8211;math-lib-performance-on-ios</id>
     <content type="html"><![CDATA[<p>At the moment I&#8217;m playing around with writing a cross platform game library, because that&#8217;s what all the cool kids are doing. One of the parts I&#8217;m not particularly looking forward to is writing a math library for the rendering. Fortunately, far greater programmers than I have done so already. In fact, many greater programmers have. Three seem quite popular: <a href="http://cmldev.net/">CML</a>, <a href="http://eigen.tuxfamily.org/">Eigen</a> and <a href="http://glm.g-truc.net/">GLM</a>.</p>
 
 <!--more-->
@@ -150,9 +150,9 @@ CML multiplications     11112
   
   <entry>
     <title type="html"><![CDATA[easy_install and broken setuptools on OS X]]></title>
-    <link href="http://noiseandheat.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x/"/>
     <updated>2012-09-01T09:32:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x</id>
+    <id>http://noiseandheat.github.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x</id>
     <content type="html"><![CDATA[<p>After upgrading to Mountain Lion, <code>easy_install</code> seemed to be borked. On
 running it, this happened:</p>
 
@@ -185,10 +185,10 @@ on it over the years.</p>
   
   <entry>
     <title type="html"><![CDATA[Laptop vs iPad screen]]></title>
-    <link href="http://noiseandheat.com/blog/2012/03/laptop-vs-ipad-screen/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/03/laptop-vs-ipad-screen/"/>
     <updated>2012-03-16T12:01:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/03/laptop-vs-ipad-screen</id>
-    <content type="html"><![CDATA[<p><a href="http://noiseandheat.com/images/laptop_vs_ipad.png"><img class="center" src="http://noiseandheat.com/images/laptop_vs_ipad.png" width="512" height="384"></a></p>
+    <id>http://noiseandheat.github.com/blog/2012/03/laptop-vs-ipad-screen</id>
+    <content type="html"><![CDATA[<p><a href="http://noiseandheat.github.com/images/laptop_vs_ipad.png"><img class="center" src="http://noiseandheat.github.com/images/laptop_vs_ipad.png" width="512" height="384"></a></p>
 
 <p>Coding pains.</p>
 ]]></content>
@@ -196,9 +196,9 @@ on it over the years.</p>
   
   <entry>
     <title type="html"><![CDATA[Lazy One Liners: 'git rm' all deleted files]]></title>
-    <link href="http://noiseandheat.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/"/>
     <updated>2012-02-16T21:51:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/02/lazy-one-liners-`git-rm`-all-deleted-files</id>
+    <id>http://noiseandheat.github.com/blog/2012/02/lazy-one-liners-`git-rm`-all-deleted-files</id>
     <content type="html"><![CDATA[<p><strong>[UPDATE]</strong> <em>My <code>git</code> skills are weak. You can achieve this much more simply by typing: <code>git add -A</code>. Still, knowing about the <code>--porcelain</code> option is useful. Honest.</em></p>
 
 <p>Deleted three hundred and seventy two files and forget to use <code>git rm</code>?
@@ -238,9 +238,9 @@ page for <a href="http://schacon.github.com/git/git-status.html">git-status</a>.
   
   <entry>
     <title type="html"><![CDATA[Throttling bandwidth on OS X]]></title>
-    <link href="http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/02/throttling-bandwidth-on-os-x/"/>
     <updated>2012-02-03T22:35:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x</id>
+    <id>http://noiseandheat.github.com/blog/2012/02/throttling-bandwidth-on-os-x</id>
     <content type="html"><![CDATA[<p>Recently I started pushing a repository to GitHub only to find out it
 was a couple of GB in size. Due to my <a href="http://www.virginmedia.com/">ISPs</a> network
 connection being made of soiled tissue paper, dead earwigs and lost
@@ -314,9 +314,9 @@ for more details.</p>
   
   <entry>
     <title type="html"><![CDATA[clang failed with exit code 1]]></title>
-    <link href="http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/01/clang-failed-with-exit-code-1/"/>
     <updated>2012-01-30T15:23:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1</id>
+    <id>http://noiseandheat.github.com/blog/2012/01/clang-failed-with-exit-code-1</id>
     <content type="html"><![CDATA[<blockquote><p>Apple Mach-O Linker Error<br/>Command /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang failed with exit code 1</p><footer><strong>Xcode 4</strong> <cite>Bringing the Pain</cite></footer></blockquote>
 
 
@@ -339,7 +339,7 @@ clang: error: no such file or directory: '/Users/mnem/Library/Developer/Xcode/De
 clang: error: no such file or directory: 'Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a'
 </code></pre>
 
-<p><img class="right" src="http://noiseandheat.com/images/xcode_whitespace.png" width="128" height="128" title="The Culprit" >
+<p><img class="right" src="http://noiseandheat.github.com/images/xcode_whitespace.png" width="128" height="128" title="The Culprit" >
 You can see fairly clearly that <code>clang</code> is failing to find a directory because
 of the space in the scheme name, &#8221;<strong>NAH Distribution</strong>&#8221;. If you dig through
 the command text, it appears that Xcode doesn&#8217;t use quotes for the library
@@ -352,9 +352,9 @@ sub-projects.</p>
   
   <entry>
     <title type="html"><![CDATA[Uncrustifying Objective-C Source in Xcode 4]]></title>
-    <link href="http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/"/>
     <updated>2012-01-19T23:42:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4</id>
+    <id>http://noiseandheat.github.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4</id>
     <content type="html"><![CDATA[<p>K&amp;R. Allman. BSD. Crazy Whitesmiths. No, it&#8217;s not a nu-punk-alt-country rock
 band, but a selection of common (well, sort of) <a href="http://en.wikipedia.org/wiki/Indent_style">code indent styles</a>.
 Much blood has been spilled arguing over the merits of each.</p>
@@ -403,13 +403,13 @@ details.</p>
 <p>Now add a new Behavior to Xcode. From the Xcode menu, select
 &#8221;<strong>Edit Behaviors…</strong>&#8221;:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/uncrustify_select_behaviors.png" width="432" height="250"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/uncrustify_select_behaviors.png" width="432" height="250"></p>
 
 <p>Click the <strong>+</strong> icon in the list to add a new Behavior, give it a name and
 scroll to the &#8221;<strong>Run</strong>&#8221; script check box. Tick the check box and then select
 &#8221;<strong>Choose script…</strong>&#8221; from the drop down list next to it:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/uncrustify_select_script.png" width="750" height="528"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/uncrustify_select_script.png" width="750" height="528"></p>
 
 <p>Navigate to wherever you have the <code>nah_xcode_uncrustify.rb</code> script and select
 it.</p>
@@ -464,7 +464,7 @@ values and preview the changes on the currently loaded source file.</p>
 homepage, chuck it in your Applications folder, and then when you run it,
 select <code>uncrustify</code> as the code formatter:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/uncrustify_uig.png" width="285" height="193"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/uncrustify_uig.png" width="285" height="193"></p>
 
 <p>You can use the &#8221;<strong>Live Indent Preview</strong>&#8221; check box to toggle between the
 original file and the settings you&#8217;ve selected.</p>
@@ -522,9 +522,9 @@ Objective-C land these days, so didn&#8217;t have many test files handy.</p>
   
   <entry>
     <title type="html"><![CDATA[VPN with Amazon EC2 or Saving Your phone from Promiscuity]]></title>
-    <link href="http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/"/>
     <updated>2012-01-06T10:02:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity</id>
+    <id>http://noiseandheat.github.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity</id>
     <content type="html"><![CDATA[<p>Modern mobile devices are a wonderful, especially when combined with some handy
 public WiFi hotspot. Unfortunately ne&#8217;er-do-wells abound so if you aren&#8217;t
 careful using public hotspots, people can poke around with your data
@@ -540,7 +540,7 @@ and laptops.</p>
 
 <h2>Pre-requisites</h2>
 
-<p>Similar to my <a href="http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/">Reviewboard setup guide</a>
+<p>Similar to my <a href="http://noiseandheat.github.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/">Reviewboard setup guide</a>
 this one assumes that you have an AWS EC2 account, and that you are
 comfortable with creating instances and <code>ssh</code>&#8216;ing into them.</p>
 
@@ -688,7 +688,7 @@ way to do this is from the <a href="https://console.aws.amazon.com/ec2/">Amazon 
 EC2 tab, select the Security Groups section and then select the security group
 for the instance you have installed the VPN on:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/vpn_select_security_group.png" width="793" height="479"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/vpn_select_security_group.png" width="793" height="479"></p>
 
 <p>Now add a custom TCP rule for port 1723 to make it available to everyone. If you
 want to limit which IP address ranges can connect to your VPN, use the
@@ -696,7 +696,7 @@ appropriate <a href="http://en.wikipedia.org/wiki/CIDR_notation">CIDR</a> source
 specifier. I want to access it from unknown public IP addresses so I&#8217;m
 setting it to accept connections from all IP address, <code>0.0.0.0/0</code>:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/vpn_add_to_security_group.png" width="793" height="479"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/vpn_add_to_security_group.png" width="793" height="479"></p>
 
 <p>Also add a custom UDP rule with the same details. I&#8217;m not entirely certain
 that VPN connections support UDP, but what the hell. <strong>NOTE</strong>: Don&#8217;t forget
@@ -1040,9 +1040,9 @@ by the legislation.</p>
   
   <entry>
     <title type="html"><![CDATA[Ludum Dare 22: Afterglow]]></title>
-    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-afterglow/"/>
     <updated>2011-12-19T13:57:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow</id>
+    <id>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-afterglow</id>
     <content type="html"><![CDATA[<p>So, <a href="http://www.ludumdare.com/compo/ludum-dare-22/?action=preview&amp;etype=compo">LD22 Compo</a> is over.
 The judgement begins. My entry was <strong>Astronaut Alone</strong>
 (<a href="http://mnem.github.com/LD22_Alone/">play</a>/<a href="http://www.ludumdare.com/compo/ludum-dare-22/?uid=7397">rate</a>)
@@ -1191,9 +1191,9 @@ coding, with no firm gameplay in mind.</li>
   
   <entry>
     <title type="html"><![CDATA[Ludum Dare 22: A Log of Activity]]></title>
-    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-a-log-of-activity/"/>
     <updated>2011-12-17T09:47:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity</id>
+    <id>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-a-log-of-activity</id>
     <content type="html"><![CDATA[<ul>
 <li>This coming up with game ideas malarky is difficult. Only two ideas
 have appeared.
@@ -1276,9 +1276,9 @@ competition experience.</li>
   
   <entry>
     <title type="html"><![CDATA[Ludum Dare 22: Alone]]></title>
-    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-alone/"/>
     <updated>2011-12-17T07:47:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone</id>
+    <id>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-alone</id>
     <content type="html"><![CDATA[<p>My first venture into the world of programming competitions is beginning with
 Ludum Dare 22. I wonder if I&#8217;ll have anything finished by the end of it?</p>
 
@@ -1300,10 +1300,10 @@ breakfast.</p>
   
   <entry>
     <title type="html"><![CDATA[OS X Lion Terminal Colours]]></title>
-    <link href="http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/12/os-x-lion-terminal-colours/"/>
     <updated>2011-12-03T21:25:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours</id>
-    <content type="html"><![CDATA[<p><a href="http://www.vim.org/scripts/script.php?script_id=1349"><img class="right" src="http://noiseandheat.com/images/terminal_colours.png" width="200" height="130"></a></p>
+    <id>http://noiseandheat.github.com/blog/2011/12/os-x-lion-terminal-colours</id>
+    <content type="html"><![CDATA[<p><a href="http://www.vim.org/scripts/script.php?script_id=1349"><img class="right" src="http://noiseandheat.github.com/images/terminal_colours.png" width="200" height="130"></a></p>
 
 <p>OS X is awesome for command line stuff, that&#8217;s why <a href="http://xkcd.com/378/">real programmers</a>
 love it. But some of the defaults Apple have used make me sad. Where are all
@@ -1500,11 +1500,11 @@ session, or reload the profile:</p>
 <p>Now when you use certain commands such as traceroute, the output should be
 colourised:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/traceroute-grc.png" width="622" height="422"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/traceroute-grc.png" width="622" height="422"></p>
 
 <p>Or you can call <code>tail</code> and <code>head</code> using grc to colourise log output:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/head-grc.png" width="512" height="156"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/head-grc.png" width="512" height="156"></p>
 
 <h2>That&#8217;s all Folks!</h2>
 
@@ -1515,9 +1515,9 @@ stick them in a comment below.</p>
   
   <entry>
     <title type="html"><![CDATA[Installing ReviewBoard on Amazon EC2]]></title>
-    <link href="http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/"/>
     <updated>2011-11-30T21:44:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2</id>
+    <id>http://noiseandheat.github.com/blog/2011/11/installing-reviewboard-on-amazon-ec2</id>
     <content type="html"><![CDATA[<p>Recently at <a href="http://www.huzutech.com/">HuzuTech</a> I updated our installation
 of <a href="http://www.reviewboard.org/">ReviewBoard</a>, which is a great code review
 tool. Rather than just update packages though, I decided to rebuild the
@@ -1574,12 +1574,12 @@ it. You can use an existing pair, but I tend to use a new key pair for each
 image for finer grained access control. Make sure it&#8217;s the 32-bit Amazon
 Linux AMI which you choose.</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/rb-setup-00.png" width="934" height="441"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/rb-setup-00.png" width="934" height="441"></p>
 
 <p>In the next screen, you may find it useful to add termination protection
 and check that it&#8217;s selected a micro instance.</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/rb-setup-01.png" width="934" height="451"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/rb-setup-01.png" width="934" height="451"></p>
 
 <p>Next, set up an new security group for it. You <strong>can&#8217;t</strong> change the security
 group later (although you can add and remove ports in the group), so make
@@ -1589,25 +1589,25 @@ existing one. Make sure <code>SSH</code> and <code>HTTP</code> ports are open an
 If in doubt, you can make the ports accessible from any address for the moment
 by specifying a source of <code>0.0.0.0/0</code>.</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/rb-setup-02.png" width="934" height="465"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/rb-setup-02.png" width="934" height="465"></p>
 
 <p>That&#8217;s the basic instance set up. Click &#8220;Save details&#8221; and then you should
 see the launching screen:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/rb-setup-03.png" width="934" height="443"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/rb-setup-03.png" width="934" height="443"></p>
 
 <p>Close it. Now create the volume to use for data. Expand the &#8220;Elastic Block Store&#8221;
 menu at the left side if it isn&#8217;t already and select Volumes. Click the
 &#8220;Create Volume&#8221; button and make it about 1 GiB or so, depending on the
 size of the repositories you&#8217;ll store on it:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/rb-setup-05.png" width="530" height="216"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/rb-setup-05.png" width="530" height="216"></p>
 
 <p>Now all that remains to do is to attach it to the instance you just launched.
 Select the new volume and click &#8220;Attach Volume&#8221; and attach it to your fresh
 instance:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/rb-setup-06.png" width="530" height="269"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/rb-setup-06.png" width="530" height="269"></p>
 
 <p>That&#8217;s the basic setup done. Now on to installing bytes.</p>
 
@@ -2005,10 +2005,10 @@ you see rolling in.</p>
   
   <entry>
     <title type="html"><![CDATA[SparrowBones]]></title>
-    <link href="http://noiseandheat.com/blog/2011/11/sparrowbones/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/11/sparrowbones/"/>
     <updated>2011-11-22T23:39:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/11/sparrowbones</id>
-    <content type="html"><![CDATA[<p><img class="right" src="http://noiseandheat.com/images/SparrowBones_thumb.png" width="200" height="130"></p>
+    <id>http://noiseandheat.github.com/blog/2011/11/sparrowbones</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://noiseandheat.github.com/images/SparrowBones_thumb.png" width="200" height="130"></p>
 
 <p><strong>UPDATE</strong>: <a href="http://gamua.com/blog/2012/03/sparrow-1-3/">Sparrow 1.3</a> has now
 been released and it includes an updated and significantly enhanced
@@ -2065,31 +2065,31 @@ mail to people it&#8217;s great for that too.</p>
 
 <p>Choose the right one:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/00_sb_choose.png" width="730" height="493"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/00_sb_choose.png" width="730" height="493"></p>
 
 <p>Fill in some blanks and choose which device family to aim for. <strong>IMPORTANT</strong>:
 Uncheck &#8220;Use Automatic Reference Counting&#8221; (Sparrow doesn&#8217;t work with that
 yet). I also uncheck &#8220;Use Storyboard&#8221; because I haven&#8217;t learned how to use
 those:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/01_sb_name_stuff.png" width="730" height="493"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/01_sb_name_stuff.png" width="730" height="493"></p>
 
 <p>Next, we have to fix that red Sparrow.xcodeproj reference. Select it and press
 Alt-Cmd-1 to show the inspector:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/02_sb_select_sparrow.png" width="859" height="321"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/02_sb_select_sparrow.png" width="859" height="321"></p>
 
 <p>Then change it to be relative to your linked Sparrow Framework source.
 <strong>NOTE</strong>: the link name may be different for you – it depends on what you
 entered when setting it up (if you haven&#8217;t set a link to the source up, <a href="http://www.sparrow-framework.org/help/gettingstarted/">do that now</a> before
 continuing):</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/03_sb_adjust_link.png" width="260" height="228"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/03_sb_adjust_link.png" width="260" height="228"></p>
 
 <p>If you look back at the Project navigator you should see Sparrow.xcodeproj as
 an <strong>expandable</strong> project:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/04_sb_linked_properly.png" width="260" height="64"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/04_sb_linked_properly.png" width="260" height="64"></p>
 
 <p>This is <strong>important</strong>. If it doesn&#8217;t have the arrow, you will have to <strong>quit</strong>
 Xcode and then re-launch it and open the project. Sometimes Xcode is a bit
@@ -2102,16 +2102,16 @@ the project navigator, <strong>2)</strong> select your game target in the editor
 <strong>3)</strong> go to the Build Phases section, <strong>4)</strong> expand the target dependencies
 and click the plus.</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/05_sb_add_dep.png" width="817" height="275"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/05_sb_add_dep.png" width="817" height="275"></p>
 
 <p>In the window that appears, select the Sparrow target:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/06_sb_choos_dep.png" width="402" height="462"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/06_sb_choos_dep.png" width="402" height="462"></p>
 
 <p>Select Add. If my instructions worked, you should now have Sparrow as a
 dependency:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/07_sb_dep_added.png" width="591" height="159"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/07_sb_dep_added.png" width="591" height="159"></p>
 
 <p>That&#8217;s it! Simple once you know how. You should now be able to run the project
 in one of the simulator targets and you will some see Exciting Boxes on the
@@ -2123,16 +2123,16 @@ screen. Awesome. Well done you!</p>
 the Frameworks in the frameworks folder to your <code>&lt;AppName&gt;Tests</code> target,
 otherwise you will get lots of Mach-O linker errors:</p>
 
-<p><img class="center" src="http://noiseandheat.com/images/08_sb_unit_test.png" width="874" height="528"></p>
+<p><img class="center" src="http://noiseandheat.github.com/images/08_sb_unit_test.png" width="874" height="528"></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[No Vodka Tampons, we're Scottish]]></title>
-    <link href="http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
     <updated>2011-11-14T21:35:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
-    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Elements_of_a_tampon_with_applicator.jpg"><img class="right" src="http://noiseandheat.com/images/whisky_tampon.png" width="200" height="130"></a></p>
+    <id>http://noiseandheat.github.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Elements_of_a_tampon_with_applicator.jpg"><img class="right" src="http://noiseandheat.github.com/images/whisky_tampon.png" width="200" height="130"></a></p>
 
 <p>So I&#8217;ve been thinking about this, and pending further evidence I&#8217;m going to
 assume that the story about vodka soaked tampons (see
@@ -2179,10 +2179,10 @@ with a nice <a href="http://www.thebalvenie.com/en-%0Agb/ourRange_currentRange_s
   
   <entry>
     <title type="html"><![CDATA[Shuffling arrays, the Objective-C edition]]></title>
-    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/"/>
     <updated>2011-08-19T14:19:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition</id>
-    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="http://noiseandheat.com/images/thumb-objective-c1.png" width="200" height="130"></a></p>
+    <id>http://noiseandheat.github.com/blog/2011/08/shuffling-arrays-the-objective-c-edition</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="http://noiseandheat.github.com/images/thumb-objective-c1.png" width="200" height="130"></a></p>
 
 <p>Shuffling is just like buses. You sit about being deterministic for years, and
 then all of a sudden, you need some random shuffling on two platforms at once.</p>
@@ -2190,7 +2190,7 @@ then all of a sudden, you need some random shuffling on two platforms at once.</
 <!--more-->
 
 
-<p>As a follow on from my previous post on <a href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/">shuffling AS3 arrays</a>,
+<p>As a follow on from my previous post on <a href="http://noiseandheat.github.com/blog/2011/08/shuffling-arrays/">shuffling AS3 arrays</a>,
 here&#8217;s the same algorithm implemented as a category addition to
 <a href="http://developer.apple.com/library/ios/#documentation/Cocoa/Reference/Foundation/Classes/NSMutableArray_Class/Reference/Reference.html">NSMutableArray</a>
 for all your easy array shuffling needs.</p>
@@ -2198,7 +2198,7 @@ for all your easy array shuffling needs.</p>
 <p>To use it, download the method and header files, add them to your project and
 them simply include the header file wherever you you want to shuffle anNSMutableArray:</p>
 
-<figure class='code'><figcaption><span> (example_shuffle.m)</span> <a href='http://noiseandheat.com/downloads/code/example_shuffle.m'>download</a></figcaption>
+<figure class='code'><figcaption><span> (example_shuffle.m)</span> <a href='http://noiseandheat.github.com/downloads/code/example_shuffle.m'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2273,10 +2273,10 @@ them simply include the header file wherever you you want to shuffle anNSMutable
   
   <entry>
     <title type="html"><![CDATA[Shuffling arrays]]></title>
-    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/08/shuffling-arrays/"/>
     <updated>2011-08-11T17:11:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays</id>
-    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="http://noiseandheat.com/images/thumb1.png" width="200" height="130"></a></p>
+    <id>http://noiseandheat.github.com/blog/2011/08/shuffling-arrays</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="http://noiseandheat.github.com/images/thumb1.png" width="200" height="130"></a></p>
 
 <p>For some reason, there doesn&#8217;t seem to be any sane example of shuffling
 arrays in ActionScript blogland. I discovered this when I was trying to send
@@ -2412,10 +2412,10 @@ of implementing template functions.</p>
   
   <entry>
     <title type="html"><![CDATA[Lion eats Ant, or giving Lion Java GUI programs access to environment variables (phew)]]></title>
-    <link href="http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/"/>
     <updated>2011-07-27T15:02:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew</id>
-    <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/arthur_chapman/3462161644/"><img class="right" src="http://noiseandheat.com/images/thumb1.jpg" width="200" height="130" title="An ant, yesterday" ></a></p>
+    <id>http://noiseandheat.github.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew</id>
+    <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/arthur_chapman/3462161644/"><img class="right" src="http://noiseandheat.github.com/images/thumb1.jpg" width="200" height="130" title="An ant, yesterday" ></a></p>
 
 <p>Upgrading an OS is always fun, especially when you go for a clean install and forget
 about the 40 million really useful applications you need to make your life
@@ -2451,9 +2451,9 @@ tag to dump them to stdout.</p>
   
   <entry>
     <title type="html"><![CDATA[FlexUnit Visual Listener]]></title>
-    <link href="http://noiseandheat.com/blog/2011/07/flexunit-visual-listener/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/07/flexunit-visual-listener/"/>
     <updated>2011-07-18T16:18:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/07/flexunit-visual-listener</id>
+    <id>http://noiseandheat.github.com/blog/2011/07/flexunit-visual-listener</id>
     <content type="html"><![CDATA[<p>Let&#8217;s face it, we all use Flash and AS3 because we like pretty eye candy.
 Otherwise we&#8217;d just use a real language.</p>
 
@@ -2467,7 +2467,7 @@ programming, and I have to go and brick a firmware. I&#8217;m running out of pho
 
 <p>So, in place of trace, I present: Green Dots (a.k.a. <a href="https://github.com/mnem/flexunit_visual_listener">FlexUnit Visual Listener</a>):</p>
 
-<p><a href="https://github.com/mnem/flexunit_visual_listener"><img class="center" src="http://noiseandheat.com/images/2_0_portfolio1.png" width="630" height="420"></a></p>
+<p><a href="https://github.com/mnem/flexunit_visual_listener"><img class="center" src="http://noiseandheat.github.com/images/2_0_portfolio1.png" width="630" height="420"></a></p>
 
 <p>They&#8217;re totally contemporary, work with any dress and are a stylish addition
 to every modern CI system. They even give you some useful error information
@@ -2476,7 +2476,7 @@ clipboard by clicking. Awesome!).</p>
 
 <p>Bonus! It&#8217;s simple to use too. Here&#8217;s an example:</p>
 
-<figure class='code'><figcaption><span> (example_flexunitvisuallistener.as)</span> <a href='http://noiseandheat.com/downloads/code/example_flexunitvisuallistener.as'>download</a></figcaption>
+<figure class='code'><figcaption><span> (example_flexunitvisuallistener.as)</span> <a href='http://noiseandheat.github.com/downloads/code/example_flexunitvisuallistener.as'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: HTML5 | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/html5/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/html5/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Unscientific Browser Speed Test]]></title>
-    <link href="http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/11/unscientific-browser-speed-test/"/>
     <updated>2010-11-04T09:16:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test</id>
+    <id>http://noiseandheat.github.com/blog/2010/11/unscientific-browser-speed-test</id>
     <content type="html"><![CDATA[<p>Out of curiosity, I ran the<a href="http://wip.noiseandheat.com/html5_particles/"> HTML5 particle</a>
 thing I hacked together on a few browsers, and the rough order of performance was:</p>
 
@@ -54,9 +54,9 @@ reading <a href="http://www.phoboslab.org/log/2010/10/impact-for-ios">this blog 
   
   <entry>
     <title type="html"><![CDATA[Pixels, HTML5 canvas style]]></title>
-    <link href="http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/11/pixels-html5-canvas-style/"/>
     <updated>2010-11-04T00:37:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style</id>
+    <id>http://noiseandheat.github.com/blog/2010/11/pixels-html5-canvas-style</id>
     <content type="html"><![CDATA[<p><a href="http://wip.noiseandheat.com/html5_particles/"><img class="right" src="/images/02.png" width="200" height="130"></a></p>
 
 <p>I have finally forced myself to fiddle a little with the

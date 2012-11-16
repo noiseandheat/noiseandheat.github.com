@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Curiosities | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/curiosities/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/curiosities/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[No Vodka Tampons, we're Scottish]]></title>
-    <link href="http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
     <updated>2011-11-14T21:35:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
+    <id>http://noiseandheat.github.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Elements_of_a_tampon_with_applicator.jpg"><img class="right" src="/images/whisky_tampon.png" width="200" height="130"></a></p>
 
 <p>So I've been thinking about this, and pending further evidence I'm going to
@@ -65,9 +65,9 @@ with a nice <a href="http://www.thebalvenie.com/en-%0Agb/ourRange_currentRange_s
   
   <entry>
     <title type="html"><![CDATA[Cracking the Code]]></title>
-    <link href="http://noiseandheat.com/blog/2010/10/cracking-the-code/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/10/cracking-the-code/"/>
     <updated>2010-10-09T23:53:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2010/10/cracking-the-code</id>
+    <id>http://noiseandheat.github.com/blog/2010/10/cracking-the-code</id>
     <content type="html"><![CDATA[<p>Fact o' the day. Google's <a href="http://twitter.com/google/status/1251523388">first ever tweet</a> was:</p>
 
 <p><blockquote><p>I'm<br/>01100110 01100101 01100101 01101100 01101001<br/>01101110 01100111 00100000 01101100 01110101<br/>01100011 01101011 01111001 00001010</p><footer><strong>Google</strong> <cite><a href='http://twitter.com/google/status/1251523388'>First Tweet</a></cite></footer></blockquote></p>
@@ -89,9 +89,9 @@ character sets: <a href="http://binary.noiseandheat.com/?message=I'm%201100110%2
   
   <entry>
     <title type="html"><![CDATA[How many bytes would a petabyte bite if a petabyte could bite bytes?]]></title>
-    <link href="http://noiseandheat.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes/"/>
     <updated>2010-02-23T13:46:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes</id>
+    <id>http://noiseandheat.github.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes</id>
     <content type="html"><![CDATA[<p>The CompactFlash association has just released a <a href="http://www.compactflash.org/pr/100222cf5prs.pdf">new specification</a>
 for future CompactFlash cards. It involves big numbers. 144 petabytes big, to be
 specific. But how big is that really?</p>

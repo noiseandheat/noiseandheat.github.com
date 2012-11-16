@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: /dev/null | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/-dev-null/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/-dev-null/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[No Vodka Tampons, we're Scottish]]></title>
-    <link href="http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
     <updated>2011-11-14T21:35:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
+    <id>http://noiseandheat.github.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Elements_of_a_tampon_with_applicator.jpg"><img class="right" src="/images/whisky_tampon.png" width="200" height="130"></a></p>
 
 <p>So I've been thinking about this, and pending further evidence I'm going to
@@ -65,9 +65,9 @@ with a nice <a href="http://www.thebalvenie.com/en-%0Agb/ourRange_currentRange_s
   
   <entry>
     <title type="html"><![CDATA[Shuffling arrays]]></title>
-    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/08/shuffling-arrays/"/>
     <updated>2011-08-11T17:11:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays</id>
+    <id>http://noiseandheat.github.com/blog/2011/08/shuffling-arrays</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="/images/thumb1.png" width="200" height="130"></a></p>
 
 <p>For some reason, there doesn't seem to be any sane example of shuffling
@@ -204,9 +204,9 @@ of implementing template functions.</p>
   
   <entry>
     <title type="html"><![CDATA[Aaaaaand, the hibernation ends]]></title>
-    <link href="http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/05/aaaaaand-the-hibernation-ends/"/>
     <updated>2010-05-22T22:34:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends</id>
+    <id>http://noiseandheat.github.com/blog/2010/05/aaaaaand-the-hibernation-ends</id>
     <content type="html"><![CDATA[<p><img class="right" src="/images/01.jpg" width="200" height="130"></p>
 
 <p>Well, what a pleasant hiatus that was. Almost 3 months. However, no more! I

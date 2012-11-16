@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: mobile | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/mobile/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/mobile/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Further ruminations on Adobe, Flash and mobile devices.]]></title>
-    <link href="http://noiseandheat.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices/"/>
     <updated>2010-01-04T18:15:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices</id>
+    <id>http://noiseandheat.github.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices</id>
     <content type="html"><![CDATA[<p><img class="right" src="/images/skep-hippo.jpg" width="200" height="130"></p>
 
 <p><em>[This entry

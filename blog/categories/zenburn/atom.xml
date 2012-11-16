@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: zenburn | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/zenburn/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/zenburn/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[fb-zenburnish: A zenburn inspired colour scheme for FlashBuilder 4]]></title>
-    <link href="http://noiseandheat.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4/"/>
     <updated>2010-01-25T01:39:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4</id>
+    <id>http://noiseandheat.github.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4</id>
     <content type="html"><![CDATA[<p>Ok, in order to avoid any real coding at the weekend, I set about messing with
 the colours and settings within FlashBuilder 4 to turn it into something a
 little less searing on the eyeballs. These are the results:</p>

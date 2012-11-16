@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Shuffle | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/shuffle/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/shuffle/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Shuffling arrays, the Objective-C edition]]></title>
-    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/"/>
     <updated>2011-08-19T14:19:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition</id>
+    <id>http://noiseandheat.github.com/blog/2011/08/shuffling-arrays-the-objective-c-edition</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="/images/thumb-objective-c1.png" width="200" height="130"></a></p>
 
 <p>Shuffling is just like buses. You sit about being deterministic for years, and
@@ -106,9 +106,9 @@ them simply include the header file wherever you you want to shuffle anNSMutable
   
   <entry>
     <title type="html"><![CDATA[Shuffling arrays]]></title>
-    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/08/shuffling-arrays/"/>
     <updated>2011-08-11T17:11:00+01:00</updated>
-    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays</id>
+    <id>http://noiseandheat.github.com/blog/2011/08/shuffling-arrays</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="/images/thumb1.png" width="200" height="130"></a></p>
 
 <p>For some reason, there doesn't seem to be any sane example of shuffling

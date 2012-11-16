@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Ludum Dare | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/ludum-dare/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/ludum-dare/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ludum Dare 22: Afterglow]]></title>
-    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-afterglow/"/>
     <updated>2011-12-19T13:57:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow</id>
+    <id>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-afterglow</id>
     <content type="html"><![CDATA[<p>So, <a href="http://www.ludumdare.com/compo/ludum-dare-22/?action=preview&amp;etype=compo">LD22 Compo</a> is over.
 The judgement begins. My entry was <strong>Astronaut Alone</strong>
 (<a href="http://mnem.github.com/LD22_Alone/">play</a>/<a href="http://www.ludumdare.com/compo/ludum-dare-22/?uid=7397">rate</a>)
@@ -166,9 +166,9 @@ coding, with no firm gameplay in mind.</li>
   
   <entry>
     <title type="html"><![CDATA[Ludum Dare 22: A Log of Activity]]></title>
-    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-a-log-of-activity/"/>
     <updated>2011-12-17T09:47:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity</id>
+    <id>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-a-log-of-activity</id>
     <content type="html"><![CDATA[<ul>
 <li>This coming up with game ideas malarky is difficult. Only two ideas
 have appeared.
@@ -251,9 +251,9 @@ competition experience.</li>
   
   <entry>
     <title type="html"><![CDATA[Ludum Dare 22: Alone]]></title>
-    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone/"/>
+    <link href="http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-alone/"/>
     <updated>2011-12-17T07:47:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone</id>
+    <id>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-alone</id>
     <content type="html"><![CDATA[<p>My first venture into the world of programming competitions is beginning with
 Ludum Dare 22. I wonder if I'll have anything finished by the end of it?</p>
 

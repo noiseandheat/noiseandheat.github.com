@@ -2,184 +2,190 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices/
+            http://noiseandheat.github.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4/
+            http://noiseandheat.github.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
-        <loc>http://noiseandheat.com/blog/2010/02/compound-operators-new-and-you/</loc>
+        <loc>http://noiseandheat.github.com/blog/2010/02/compound-operators-new-and-you/</loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2010/02/the-case-of-eclipse-msysgit-and-the-obstinate-dot-files/
-        </loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://noiseandheat.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes/
-        </loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2010/10/cracking-the-code/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2010/12/stigmata/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/02/pretty-git/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://noiseandheat.com/blog/2011/07/simple-clipped-image-for-sparrow-framework/
+            http://noiseandheat.github.com/blog/2010/02/the-case-of-eclipse-msysgit-and-the-obstinate-dot-files/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2011/07/sparrow-framework-appscaffold-not-archiving-correctly-fix/
+            http://noiseandheat.github.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes/
+        </loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2010/05/aaaaaand-the-hibernation-ends/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2010/10/cracking-the-code/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2010/11/pixels-html5-canvas-style/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2010/11/unscientific-browser-speed-test/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2010/12/stigmata/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2011/02/pretty-git/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://noiseandheat.github.com/blog/2011/07/simple-clipped-image-for-sparrow-framework/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2011/07/sparrow-framework-bitmap-fonts-and-not-having-black-text/
-        </loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/07/flexunit-visual-listener/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/
-        </loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/08/shuffling-arrays/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/11/sparrowbones/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/
+            http://noiseandheat.github.com/blog/2011/07/sparrow-framework-appscaffold-not-archiving-correctly-fix/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/
+            http://noiseandheat.github.com/blog/2011/07/sparrow-framework-bitmap-fonts-and-not-having-black-text/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
-        <loc>http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/</loc>
-        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x/</loc>
+        <loc>http://noiseandheat.github.com/blog/2011/07/flexunit-visual-listener/</loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/
+            http://noiseandheat.github.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
-        <loc>http://noiseandheat.com/blog/2012/03/laptop-vs-ipad-screen/</loc>
+        <loc>http://noiseandheat.github.com/blog/2011/08/shuffling-arrays/</loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x/
+            http://noiseandheat.github.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/
+        </loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2011/11/no-vodka-tampons-were-scottish/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2011/11/sparrowbones/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://noiseandheat.github.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/
+        </loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2011/12/os-x-lion-terminal-colours/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-alone/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-a-log-of-activity/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/2011/12/ludum-dare-22-afterglow/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://noiseandheat.github.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
         <loc>
-            http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/
+            http://noiseandheat.github.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/
         </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
-        <loc>http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/</loc>
-        <lastmod>2012-11-16T00:00:54+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/about/</loc>
+        <loc>http://noiseandheat.github.com/blog/2012/01/clang-failed-with-exit-code-1/</loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
-        <loc>http://noiseandheat.com/blog/archives/</loc>
-        <lastmod>2012-11-16T00:00:54+00:00</lastmod>
-    </url>
-    <url>
-        <loc>http://noiseandheat.com/errordocs/403.html</loc>
+        <loc>http://noiseandheat.github.com/blog/2012/02/throttling-bandwidth-on-os-x/</loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
-        <loc>http://noiseandheat.com/errordocs/404.html</loc>
+        <loc>
+            http://noiseandheat.github.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/
+        </loc>
         <lastmod>2012-11-15T20:04:58+00:00</lastmod>
     </url>
     <url>
-        <loc>http://noiseandheat.com/</loc>
-        <lastmod>2012-11-16T00:00:54+00:00</lastmod>
+        <loc>http://noiseandheat.github.com/blog/2012/03/laptop-vs-ipad-screen/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://noiseandheat.github.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x/
+        </loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://noiseandheat.github.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/
+        </loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://noiseandheat.github.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/
+        </loc>
+        <lastmod>2012-11-16T00:08:03+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/about/</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/blog/archives/</loc>
+        <lastmod>2012-11-16T00:08:03+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/errordocs/403.html</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/errordocs/404.html</loc>
+        <lastmod>2012-11-15T20:04:58+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://noiseandheat.github.com/</loc>
+        <lastmod>2012-11-16T00:08:03+00:00</lastmod>
     </url>
 </urlset>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 640kb is enough | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/640kb-is-enough/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/640kb-is-enough/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How many bytes would a petabyte bite if a petabyte could bite bytes?]]></title>
-    <link href="http://noiseandheat.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes/"/>
+    <link href="http://noiseandheat.github.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes/"/>
     <updated>2010-02-23T13:46:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes</id>
+    <id>http://noiseandheat.github.com/blog/2010/02/how-many-bytes-would-a-petabyte-bite-if-a-petabyte-could-bite-bytes</id>
     <content type="html"><![CDATA[<p>The CompactFlash association has just released a <a href="http://www.compactflash.org/pr/100222cf5prs.pdf">new specification</a>
 for future CompactFlash cards. It involves big numbers. 144 petabytes big, to be
 specific. But how big is that really?</p>

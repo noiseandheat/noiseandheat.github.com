@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: flash | Noise & Heat]]></title>
-  <link href="http://noiseandheat.com/blog/categories/flash/atom.xml" rel="self"/>
-  <link href="http://noiseandheat.com/"/>
-  <updated>2012-11-16T00:01:02+00:00</updated>
-  <id>http://noiseandheat.com/</id>
+  <link href="http://noiseandheat.github.com/blog/categories/flash/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.github.com/"/>
+  <updated>2012-11-16T00:08:28+00:00</updated>
+  <id>http://noiseandheat.github.com/</id>
   <author>
     <name><![CDATA[David Wagner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Chrome and PPAPI Flash Audio Syncing Bug]]></title>
-    <link href="http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/"/>
+    <link href="http://noiseandheat.github.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/"/>
     <updated>2012-11-15T21:05:00+00:00</updated>
-    <id>http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug</id>
+    <id>http://noiseandheat.github.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug</id>
     <content type="html"><![CDATA[<p>In a somewhat Microsoftian move, Google decided to change the standard browser plugin architecture called <a href="http://en.wikipedia.org/wiki/NPAPI">NPAPI</a> for Chrome and bundle a custom port of Flash which uses it. Sadly, this has lead to some differences for that version of Flash and, unfortunately, new bugs.</p>
 
 <!--more-->
@@ -75,7 +75,7 @@
 
 <h2>Example Source</h2>
 
-<p>Lest you think I've code anything especially insane, you can grab all the sources for the test movie:</p>
+<p>Lest you think I've coded anything especially insane, you can grab all the sources for the test movie:</p>
 
 <ul>
 <li><a href="https://gist.github.com/4077864">https://gist.github.com/4077864</a></li>
