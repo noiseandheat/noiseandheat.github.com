@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: procrastination | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/procrastination/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Aaaaaand, the hibernation ends]]></title>
+    <link href="http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends/"/>
+    <updated>2010-05-22T22:34:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/01.jpg" width="200" height="130"></p>
+
+<p>Well, what a pleasant hiatus that was. Almost 3 months. However, no more! I
+shall get back to blogging random useless technical details about various
+things. I know you missed me really.</p>
+
+<!--more-->
+
+
+<p>So, what's happening next? Well, firstly, I'm temporarily turning to the Dark
+Side and getting a Nexus One. This shiny new toy should be in my sweaty paws
+within the week. I'm thoroughly looking forward to breaking it. I may even try
+some Flash programming on it, although I'm far more interested in the <a href="http://developer.android.com/sdk/ndk/index.html">Android NDK</a> at the moment. Since I
+have no creative bones, I want to see how well it lends itself to running
+<a href="http://www.box2d.org/">Box2D</a> (I know it's already been ported to NDK, but
+what's the point of Open Source if you can't rewrite the wheel every couple of
+weeks?).</p>
+
+<p>After that, I may actually get around to finishing the shabby little
+accelerated computation engine thingy I was writing for
+<a href="http://www.adobe.com/devnet/pixelbender/">PixelBender</a> and
+<a href="http://www.adobe.com/devnet/flash/">Flash</a>.</p>
+
+<p>Maybe by mentioning these things somewhere, I'll actually get around to
+finishing them…</p>
+
+<p>Firstly, however, I'll have to tinker with Eclipse. I really don't like white
+backgrounds and black text in a code editor. Plus, I like procrastinating and
+putting off actual productive work.</p>
+
+<p>While you are waiting for all those terribly exciting projects to appear, why
+not go an learn guitar? You'll have time. Try
+<a href="http://justinguitar.com/">http://justinguitar.com/</a> for nice course.</p>
+]]></content>
+  </entry>
+  
+</feed>

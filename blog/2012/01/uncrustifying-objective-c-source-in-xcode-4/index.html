@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Uncrustifying Objective-C Source in Xcode 4 - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="K&amp;R. Allman. BSD. Crazy Whitesmiths. No, it&#8217;s not a nu-punk-alt-country rock
+band, but a selection of common (well, sort of) code indent &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Uncrustifying Objective-C Source in Xcode 4</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-19T23:42:00+00:00" pubdate data-updated="true">Prickle Prickle, 19 of Chaos 3178 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>K&amp;R. Allman. BSD. Crazy Whitesmiths. No, it&#8217;s not a nu-punk-alt-country rock
+band, but a selection of common (well, sort of) <a href="http://en.wikipedia.org/wiki/Indent_style">code indent styles</a>.
+Much blood has been spilled arguing over the merits of each.</p>
+
+<p>I&#8217;m not brave enough to venture into that battlefield, but I can at least
+point the weary foot soldier towards the tent of General <a href="http://uncrustify.sourceforge.net/">Uncrustify</a> and
+his Marvellous Xcode Contraption.</p>
+
+<!--more-->
+
+
+<h2>Xcode Scripting</h2>
+
+<p>Previous versions of Xcode allowed fairly powerful scripting. Sadly that
+feature has gone. It has been replaced by <a href="http://developer.apple.com/library/mac/#recipes/xcode_help-alerts_preferences/Recipe.html">Behaviors</a>
+instead. While they aren&#8217;t quite as flexible, they can be used to run a shell
+script from wherever your project has been saved.</p>
+
+<p>First download the wrapper script I created for <code>uncrustify</code>. You can either
+save the script from your browser by visiting the
+<a href="https://raw.github.com/gist/1641451/nah_xcode_uncrustify.rb">gist page</a>, or you can clone the gist with <code>git</code>:</p>
+
+<pre><code>$ git clone git://gist.github.com/1641451.git nah_xcode_uncrustify
+</code></pre>
+
+<p>If you download the script from your browser, don&#8217;t forget to make it
+executable:</p>
+
+<pre><code>$ chmod a+x nah_xcode_uncrustify.rb
+</code></pre>
+
+<p>Have a quick look over the script to make sure I&#8217;m not doing anything evil,
+like tarring all your source and emailing it to my swiss github account. Next,
+make sure you have <code>uncrustify</code> installed. If you have the nifty package
+manager <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, then installing is as simple as:</p>
+
+<pre><code>$ brew install uncrustify
+</code></pre>
+
+<p>If you have another package manager installed such as <a href="http://www.macports.org/">MacPorts</a>, then you
+can probably use that to install <code>uncrustify</code>. Otherwise you&#8217;ll have to build it from
+source and put the executable in your <code>/usr/bin</code> folder. See
+<a href="https://github.com/bengardner/uncrustify">https://github.com/bengardner/uncrustify</a> for more
+details.</p>
+
+<p>Now add a new Behavior to Xcode. From the Xcode menu, select
+&#8221;<strong>Edit Behaviors…</strong>&#8221;:</p>
+
+<p><img class="center" src="/images/uncrustify_select_behaviors.png" width="432" height="250"></p>
+
+<p>Click the <strong>+</strong> icon in the list to add a new Behavior, give it a name and
+scroll to the &#8221;<strong>Run</strong>&#8221; script check box. Tick the check box and then select
+&#8221;<strong>Choose script…</strong>&#8221; from the drop down list next to it:</p>
+
+<p><img class="center" src="/images/uncrustify_select_script.png" width="750" height="528"></p>
+
+<p>Navigate to wherever you have the <code>nah_xcode_uncrustify.rb</code> script and select
+it.</p>
+
+<p>Optionally, you can assign a keyboard shortcut to the Behavior by double
+clicking on the command symbol next to the Behavior name. In the screen above
+I&#8217;ve assigned <em>alt-shift-f</em> to the Behavior.</p>
+
+<p>Now for a test run. Open an Objective-C project. <strong>Make sure you have it
+safely under version control</strong>. This is <em>very</em> important because <code>uncrustify</code>
+has been set to run without creating a backup of the source files. If you
+don&#8217;t have your source under version control and you hate what it does to your
+files, then there&#8217;s no going back.</p>
+
+<p>Save all the open files by pressing <em>alt-command-s</em> (the script modifies the
+files on disk, you need to save first) and be sure to stage any new source
+file changes or whatever the equivalent is in the VCS you are using. Now run
+<code>uncrustify</code> either by selecting the Behavior you just created from the
+Behaviors menu, or using the keyboard shortcut you assigned.</p>
+
+<p>Depending on the size of the project it may take a few moments to run. When
+it&#8217;s finished, you should see that the source controlled files are marked as
+modified and any open ones should reload with nice uncrusted spacing.</p>
+
+<p>If you&#8217;re really eager to have formatted code, you can edit the &#8221;<strong>Build
+starts</strong>&#8221; Behavior in Xcode and tell it to run <code>nah_xcode_uncrustify.rb</code> before
+each build.</p>
+
+<h2>I Hate Your Uncrusting Config, How Do I Fix It?</h2>
+
+<p>The first time the script is run, it creates a file called
+<code>.nah_xcode_uncrustify.cfg</code> in your home folder. To change or tweak how
+<code>nah_xcode_uncrustify.rb</code> tells <code>uncrustify</code> to format your source, simply
+edit that config file.</p>
+
+<p><strong>NOTE</strong>: the config file starts with a <code>.</code> indicating it is hidden, so by
+default Finder won&#8217;t show it. You can either open it from Terminal or else set
+Finder to show hidden files (<a href="http://apple.stackexchange.com/questions/5870/how-to-show-hidden-files-and-folders-in-finder">how to</a>).</p>
+
+<p>The config file is fairly well documented. If it all goes hideously wrong
+during editing, you can always delete <code>.nah_xcode_uncrustify.cfg</code> from your
+home folder then re-reun the uncrustifying Behavior. A new default config
+file will be generated.</p>
+
+<h2>UniversalIndentGUI</h2>
+
+<p>If tweaking text config files isn&#8217;t your thing, you can use a great utility
+called <a href="http://universalindent.sourceforge.net/">UniversalIndentGUI</a> to modify the config file. It allows you to play with
+values and preview the changes on the currently loaded source file.</p>
+
+<p>To use it, simply download the OS X version from the <a href="http://universalindent.sourceforge.net/">UniversalIndentGUI</a>
+homepage, chuck it in your Applications folder, and then when you run it,
+select <code>uncrustify</code> as the code formatter:</p>
+
+<p><img class="center" src="/images/uncrustify_uig.png" width="285" height="193"></p>
+
+<p>You can use the &#8221;<strong>Live Indent Preview</strong>&#8221; check box to toggle between the
+original file and the settings you&#8217;ve selected.</p>
+
+<p>If you want to use the default config from the script as a starting point, you
+have to tell <code>uncrustify</code> to modify it a bit first. The following command
+should do the trick:</p>
+
+<pre><code>$ uncrustify -c ~/.nah_xcode_uncrustify.cfg --universalindent &gt; \
+    ~/uigui_nah_xcode_uncrustify.ini
+</code></pre>
+
+<p>That will create or <strong>overwrite</strong> a file in your home directory called
+<code>uigui_nah_xcode_uncrustify.ini</code>. Import that into <a href="http://universalindent.sourceforge.net/">UniversalIndentGUI</a> and
+fiddle with it as much as you want.</p>
+
+<p>Whether you start from scratch or tweak the default config created by the
+script, you will have to save it to your home folder as a file called
+<code>.nah_xcode_uncrustify.cfg</code>. When you do, the app will ask you if you want to
+save a file starting with <code>.</code> (you do) and if you want to replace the existing
+<code>.nah_xcode_uncrustify.cfg</code> (which you also want to do).</p>
+
+<p>As with manual editing, if it all goes wrong you can delete
+<code>.nah_xcode_uncrustify.cfg</code> from your home folder then re-reun the
+uncrustifying Behavior to recreate the default config.</p>
+
+<h2>Script Miscellanea</h2>
+
+<p><code>nah_xcode_uncrustify.rb</code> has peculiarities.</p>
+
+<p>It only tries to format C, C++, Objective-C, Objective-C++ and header files
+(<code>*.h</code>).</p>
+
+<p>What the script considers to be the main source folder depends on the name of
+the project. If the project is called <code>Bob</code>, then the main source folder is
+assumed to be called <code>Bob</code>, and is inside the same folder containing
+<code>Bob.xcodeproj</code>. This allows you to place third party submodules outside of
+that folder, preventing the script from reformatting them. This is especially
+important for <code>git</code> users as modifying <code>git submodule</code> folders can cause
+issues for other people trying to checkout the code.</p>
+
+<p>The script tries to be clever about the language type of header files.
+Objective-C, Objective-C++, C and C++ all happily use <code>*.h</code> files as header
+files. The script will search for a source file with the same name as the
+header file and use that extension as the language setting for the header. At
+the moment, it searches the main source folder for the associated source file.
+If it can&#8217;t find one it treats it as an Objective-C header file on the
+assumption that it&#8217;s probably a protocol.</p>
+
+<p>The default formatting for C and C++ files may be a bit shonky and
+inconsistent compared to Objective-C files. I spend most of my time in
+Objective-C land these days, so didn&#8217;t have many test files handy.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-19T23:42:00+00:00" pubdate data-updated="true">Prickle Prickle, 19 of Chaos 3178 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>Code</a>, <a class='category' href='/blog/categories/ocd/'>OCD</a>, <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/uncrustify/'>uncrustify</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/" title="Previous Post: VPN with Amazon EC2 or Saving Your phone from Promiscuity">&laquo; VPN with Amazon EC2 or Saving Your phone from Promiscuity</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/01/clang-failed-with-exit-code-1/" title="Next Post: clang failed with exit code 1">clang failed with exit code 1 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/';
+        var disqus_url = 'http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

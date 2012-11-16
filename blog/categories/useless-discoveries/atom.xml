@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: useless discoveries | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/useless-discoveries/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Compound operators, new and You.]]></title>
+    <link href="http://noiseandheat.com/blog/2010/02/compound-operators-new-and-you/"/>
+    <updated>2010-02-03T22:31:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/02/compound-operators-new-and-you</id>
+    <content type="html"><![CDATA[<p>Pop quiz time!</p>
+
+<p>What appears on stage with the following code:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="kd">public</span> <span class="kd">function </span><span class="nf">newChild</span><span class="o">()</span> <span class="o">:</span><span class="kt">void</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">addChild</span><span class="o">(</span><span class="k">new</span> <span class="kt">CircleSprite</span><span class="o">()).</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">50</span><span class="o">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!--more-->
+
+
+<p>This is what appears:</p>
+
+<p><img class="center" src="/images/newex1.png" width="256" height="256"></p>
+
+<p>Of course, all you clever observant folks will have noticed that that the
+circle's x coordinate is being set using a compound operator, <code>+=</code>. That's the
+culprit in this unusual case.</p>
+
+<p>Now, putting aside any crazy reasons for wanting to write code like that in
+the first place, what's actually going on here? Well, one way to find that out
+is by shrinking ourselves down and entering <strong>Inner (ABC) Space</strong>! <em>(SPACE…
+SPAce… space…)</em></p>
+
+<p>Yep, it's time to get roll up our sleeves and get <em>oh</em>, so dirty rooting
+around in the ActionScript Bytecode (herein known as ABC to spare my
+keyboard). It's not going to be pretty, and I'll probably misinterpret some of
+it but, just like a good orbital nuking, it's the only way to be sure. Also,
+like an orbital nuking, it's a little bit over the top, but I wanted an excuse
+to start becoming a little more au fait with ABC because, well, because I'm a
+geek and I like knowing how things work.</p>
+
+<p>So, here are those lines once more, but in a format closer to what the Flash
+player VM sees:</p>
+
+<p><code>
+function :CompoundOperatorsAndNew:::newChild()::void
+maxStack:3 localCount:1 initScopeDepth:9 maxScopeDepth:10
+getlocal0
+pushscope
+findpropstrict  :addChild
+findpropstrict  :CircleSprite
+constructprop   :CircleSprite (0)
+callproperty    :addChild (1)
+findpropstrict  :addChild
+findpropstrict  :CircleSprite
+constructprop   :CircleSprite (0)
+callproperty    :addChild (1)
+getproperty     :x
+pushbyte        50
+add
+setproperty     :x
+returnvoid
+0 Extras
+0 Traits Entries
+</code></p>
+
+<p>Line groups <strong>7-8</strong> and <strong>11-12</strong> are the ones which cause the problem. 2 circle classes
+are being created with the lines <code>constructprop :CircleSprite (0)</code>, and both
+are being added as children with <code>callproperty :addChild (1)</code>.</p>
+
+<p>Before we muse on why Flash compiled the ActionScript at the top of the
+article into this ABC, let's have a closer look at the bytecode and try and
+work out what it is doing.</p>
+
+<p>In general bytecode, like assembler, is pretty straightforward. There's just
+an awful lot of it to trek through. So don't be intimidated.</p>
+
+<p>One thing to be aware of however are the values on the stack. The stack is
+just a last in - first out list of items which operands (the word before the
+colon in the ABC listing) have access to. Different operands affect different
+numbers of items on the stack. The <a href="http://www.adobe.com/devnet/actionscript/articles/avm2overview.pdf">AVM 2 Overview</a>
+document Adobe provide will tell you exactly how many, and what it'll do to
+them.</p>
+
+<p>Ok, let's take them a line at a time. I'll stick in comments to the right of
+the lines showing the contents of the stack before and after the line is
+executed, like this: <code>// [stack contents before line] =&gt; [stack contents after
+line]</code>.</p>
+
+<pre><code>function :CompoundOperatorsAndNew:::newChild()::void
+maxStack:3 localCount:1 initScopeDepth:9 maxScopeDepth:10
+</code></pre>
+
+<p>Ok, we're going to ignore this bit. All it's doing is setting up the stack and
+a few other bits so the code in the function can start to execute in a sane
+fashion. The most important thing here is <code>localCount</code> which tells us how many
+arguments are in the registers having been passed to the function. You may
+notice there are no arguments, but localCount is 1. Well, that's because the
+instance of the object that the method was called on is always passed as the
+first argument. That's what the <code>this</code> keyword refers to. The compiler
+passes it for you automatically.</p>
+
+<pre><code>getlocal0 // [empty] =&gt; this
+</code></pre>
+
+<p>Grabs the item in register 0 and puts it on the stack. As mentioned above, the
+<code>this</code> object is in register 0, so that is what is put on the stack.</p>
+
+<pre><code>pushscope // this =&gt; [empty]
+</code></pre>
+
+<p>Moves <code>this</code> onto the scope stack. The scope stack holds the objects to be
+searched when certain items and properties are requested. You can think of
+this little code flourish as what allows you to refer to a variable or method
+in the current instance of the class, more or less.</p>
+
+<pre><code>findpropstrict :addChild // [empty] =&gt; this
+</code></pre>
+
+<p>This line searches the objects in the scope stack for a property called
+<code>addChild</code>, and puts it on the stack. In this case, since the class we're in
+inherits from <code>DisplayObjectContainer</code>, it's instance is pushed onto the
+stack.</p>
+
+<pre><code>findpropstrict :CircleSprite // this =&gt; this, class CircleSprite
+</code></pre>
+
+<p>Here the class definition for <code>CircleSprite</code> is being searched for.</p>
+
+<pre><code>constructprop :CircleSprite (0) // this, class CircleSprite =&gt; this, circle0
+</code></pre>
+
+<p>This grabs the class definition which was found for <code>CircleSprite</code> and
+constructs a new object from it and places it on the stack. I've numbered the
+instance, just so things are clearer later on. The number in brackets after
+the class name indicates how many arguments to pop off the stack and pass to
+the class constructor as arguments - in this case, there are none.</p>
+
+<pre><code>callproperty :addChild (1) // this, circle0 =&gt; circle0
+</code></pre>
+
+<p>Here, addChild is called on the object found by <code>findpropstrict :addChild</code>
+above. As you can see, the call has <code>(1)</code> argument - in this case the
+<code>circle0</code> instance. <code>circle0</code> appears on the stack afterwards because it is
+returned from <code>addChild</code>.</p>
+
+<p>Just in case you are wondering, the number of arguments specified are popped
+off the stack and put into registers before the property, <code>addChild</code> is
+called. That's why addChild is called on <code>this</code> rather than <code>circle0</code>.</p>
+
+<pre><code>findpropstrict :addChild // circle0 =&gt; circle0, this
+</code></pre>
+
+<p>Behaves exactly as described earlier. Also, this is where the confusion
+starts.</p>
+
+<pre><code>findpropstrict :CircleSprite // circle0, this =&gt; circle0, this, class CircleSprite
+</code></pre>
+
+<p>Again, the same as before.</p>
+
+<pre><code>constructprop :CircleSprite (0) // circle0, this, class CircleSprite =&gt; circle0, this, circle1
+</code></pre>
+
+<p>Ditto.</p>
+
+<p>This is why we have 2 circles. Note, I've called this instance <code>circle1</code> in
+order to differentiate it from the previously constructed instance.
+Internally, CircleSprite counts it's instances, so <code>circle0</code> matches the
+circle marked 0 on the screen, and <code>circle1</code> matches the circle marked 1.</p>
+
+<pre><code>callproperty :addChild (1) // circle0, this, circle1 =&gt; circle0, circle1
+</code></pre>
+
+<p>Looking familiar? Good! That means you're paying attention...</p>
+
+<p>Remember, <code>addChild</code> returns what was passed to it, so that's why <code>circle1</code> is
+back on the stack.</p>
+
+<pre><code>getproperty :x // circle0, circle1 =&gt; circle0, 0
+</code></pre>
+
+<p>This line is reading the value of <code>x</code> from <code>circle1</code>, which will be 0. It's
+shoved on to the stack.</p>
+
+<pre><code>pushbyte 50 // circle0, 0 =&gt; circle0, 0, 50
+</code></pre>
+
+<p>Pushes are pretty straightforward - it's pushing the literal value onto the
+stack. It's interesting to note here that this code is pushing a byte, rather
+than an int or a number - the compiler seems to choose the "narrowest"
+possible type for a literal.</p>
+
+<pre><code>add // circle0, 0, 50 =&gt; circle0, 50
+</code></pre>
+
+<p>Does exactly what it says on the tin, which is to add things. In this case,
+the two most recent items on the stack are added, and the result is pushed
+back onto the stack.</p>
+
+<pre><code>setproperty :x // circle0, 50 =&gt; [empty]
+</code></pre>
+
+<p>Here, x is set to the value which is popped from the stack, and it's set on
+the object that's popped next. So, in this case, circle0.x is set to 50 -
+hence the movie having circle 0 to the right of circle 1.</p>
+
+<pre><code>returnvoid // [empty] =&gt; [empty]
+</code></pre>
+
+<p>It, er, returns void...</p>
+
+<p>So there you have it. Your first dive into ABC. <em>prod</em>. Are you still awake?
+Honestly, this stuff is interesting. Really.</p>
+
+<p>One nice thing about looking at ABC is that you can see which idioms compile
+to more terse ABC code. As a <strong>very</strong> general rule of thumb, the terser the
+code, the faster it will run. This is not a law though - you still have to
+profile things. Unfortunately, Adobe don't provide any normalised speed of
+execution for each operand, so it is hard to get a good grasp of what operand
+sequence is fastest, except by experience.</p>
+
+<p>Hopefully, I'll be taking a bit more of a look at what ABC is output by the
+flex compiler over the next few months. I may even get around comparing the
+quality of the output to that of <a href="http://haxe.org/">Haxe</a>. If I'm feeling
+particularly daring, I may even write some bytecode. I know, the party never
+stops around me...</p>
+
+<p><em>[Those of you who actually make it this far may have noticed that I haven't
+actually answered the "why" of my initial problem. I've left that as an
+exercise for the reader. Or, more honestly, I'm still thinking about it...]</em></p>
+]]></content>
+  </entry>
+  
+</feed>

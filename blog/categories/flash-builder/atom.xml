@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Flash Builder | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/flash-builder/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[fb-zenburnish: A zenburn inspired colour scheme for FlashBuilder 4]]></title>
+    <link href="http://noiseandheat.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4/"/>
+    <updated>2010-01-25T01:39:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/01/fb-zenburnish-a-zenburn-inspired-colour-scheme-for-flashbuilder-4</id>
+    <content type="html"><![CDATA[<p>Ok, in order to avoid any real coding at the weekend, I set about messing with
+the colours and settings within FlashBuilder 4 to turn it into something a
+little less searing on the eyeballs. These are the results:</p>
+
+<p><a href="http://www.flickr.com/photos/praxinoscope/4302359622/sizes/o/"><img src="http://farm5.static.flickr.com/4069/4302359622_c1020a3992_t.jpg"></a>
+<a href="http://www.flickr.com/photos/praxinoscope/4302359802/sizes/o/"><img src="http://farm5.static.flickr.com/4049/4302359802_a5cae87de9_t.jpg"></a>
+<a href="http://www.flickr.com/photos/praxinoscope/4301611631/sizes/o/"><img src="http://farm5.static.flickr.com/4023/4301611631_e00165fc35_t.jpg"></a></p>
+
+<!--more-->
+
+
+<p>Certainly more soothing on my eyeballs anyway. You can grab the theme from:</p>
+
+<ul>
+<li><a href="http://github.com/mnem/fb-zenburnish">http://github.com/mnem/fb-zenburnish</a></li>
+</ul>
+
+
+<p>There are instructions for installation in the README file, but for the sake
+of padding out an entry to make it seem like I wrote more, here they are in
+full:</p>
+
+<ol>
+<li>Launch FlashBuilder.</li>
+<li>Choose File → Export → Other.</li>
+<li>Open General and select Preferences.</li>
+<li>Click next, select "Export all" and "Browse…" to save a backup of your current preferences somewhere.</li>
+<li>Keep that backup safe in case this all goes titsup.</li>
+<li>Choose File → Import → Other.</li>
+<li>Open General and select Preferences.</li>
+<li>Browse to where you've downloaded fb-zenburnish.epf and select it. Make sure "Import all" is selected, ignore any warnings and hit "Finish".</li>
+<li>Panic, as your colours look crazy-ass.</li>
+<li>Choose File → Restart to reload Eclipse.</li>
+<li>Exhale gently and let the sublime colours wash, soothingly, through your eyeballs, caressing your optic nerves, and then engaging in a group hug with your brain. Well, I like it anyway. I don't hold with this modern nonsense of having a white background for everything. I'm a programmer, not a surface dweller.</li>
+</ol>
+
+
+<p>In case you are interested, the original (and best, of course) zenburn for vim
+theme is here:</p>
+
+<ul>
+<li><a href="http://slinky.imukuppi.org/zenburnpage/">http://slinky.imukuppi.org/zenburnpage/</a></li>
+</ul>
+
+
+<p>P.S. I highly recommend downloading
+<a href="http://www.levien.com/type/myfonts/inconsolata.html">Inconsolata</a> to use a
+programming font. It's beautiful, and practical. I generally use <a href="http://www.ms-studio.com/FontSales/anonymouspro.html">Anonymous Pro</a>
+for texty programming stuff, but that doesn't seem to work very well in Eclipse. I may
+switch all my editors to <a href="http://www.levien.com/type/myfonts/inconsolata.html">Inconsolata</a>
+though, now I know it exists.</p>
+]]></content>
+  </entry>
+  
+</feed>

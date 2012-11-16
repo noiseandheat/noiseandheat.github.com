@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pixels, HTML5 canvas style - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="I have finally forced myself to fiddle a little with the
+canvas element
+that&#8217;s part of the HTML5 spec. It has some pretty groovy facilities, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Pixels, HTML5 Canvas Style</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T00:37:00+00:00" pubdate data-updated="true">Pungenday, 16 of The Aftermath 3176 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://wip.noiseandheat.com/html5_particles/"><img class="right" src="/images/02.png" width="200" height="130"></a></p>
+
+<p>I have finally forced myself to fiddle a little with the
+<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html">canvas element</a>
+that&#8217;s part of the HTML5 spec. It has some pretty groovy facilities, but I&#8217;m
+still playing around getting a feel for what it can do well and what it does
+badly. So far, it seems reasonable at primitive writing operations, easily
+handling 6,000 opaque filled rectangle draws at 30 frames per second:</p>
+
+<ul>
+<li><a href="http://wip.noiseandheat.com/html5_particles/">http://wip.noiseandheat.com/html5_particles/</a></li>
+</ul>
+
+
+<!--more-->
+
+
+<p>This drops a bit (as you would expect) when you add semi-transparency to
+things - hit the &#8220;blur&#8221; checkbox to try it. Sadly, it&#8217;s totally pants on my
+iPhone. I rather suspect the <a href="http://wip.noiseandheat.com/particles/">Flash particle test</a>
+I knocked up will somewhat outperform the current canvas version I have on mobile.</p>
+
+<p>Hoewever - early days. I cobbled this together in an hour with some hasty
+skimming over the canvas stuff. Doubtless there are many things I&#8217;ve missed
+which may improve the performance. I&#8217;ll plug away at it for a bit to see where
+it goes.</p>
+
+<p>The source code for it all is <a href="https://github.com/mnem/noiseandheat_web/tree/master/subdomains/wip/content/html5_particles/">available on github</a>, or just
+view source on the page and look at the linked JS files.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T00:37:00+00:00" pubdate data-updated="true">Pungenday, 16 of The Aftermath 3176 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/laboratory/'>Laboratory</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/10/cracking-the-code/" title="Previous Post: Cracking the Code">&laquo; Cracking the Code</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/11/unscientific-browser-speed-test/" title="Next Post: Unscientific Browser Speed Test">Unscientific Browser Speed Test &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style/';
+        var disqus_url = 'http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

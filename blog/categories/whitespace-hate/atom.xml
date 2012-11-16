@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: whitespace hate | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/whitespace-hate/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[clang failed with exit code 1]]></title>
+    <link href="http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/"/>
+    <updated>2012-01-30T15:23:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1</id>
+    <content type="html"><![CDATA[<p><blockquote><p>Apple Mach-O Linker Error<br/>Command /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang failed with exit code 1</p><footer><strong>Xcode 4</strong> <cite>Bringing the Pain</cite></footer></blockquote></p>
+
+<p>Experiencing <code>clang</code> failing with no other error information?</p>
+
+<!--more-->
+
+
+<p>If so, then check the scheme name you are building. If it has a space in it,
+that's probably the issue. This had me tearing my hair out for about an hour.</p>
+
+<p>If you run the full command which Xcode is using, you can see in a terminal
+what's causing the failure:</p>
+
+<pre><code>$ export IPHONEOS_DEPLOYMENT_TARGET=4.3
+$ export PATH="/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+$ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk "-L/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/Flurry -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/TestFlightSDK "-F/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -filelist "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/IntermediateBuildFilesPath/Cartouche.build/Release-iphoneos/Matching Set TestFlight.build/Objects-normal/armv7/Matching Set TF.LinkFileList" -dead_strip /Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a -ObjC -all_load -lz -fobjc-arc -miphoneos-version-min=4.3 -framework Twitter -framework Accounts -framework MessageUI -framework UIKit -framework Foundation -framework CoreGraphics -framework AudioToolbox -framework AVFoundation -framework OpenAL -framework OpenGLES -framework QuartzCore -lFlurryAnalytics -lTestFlight -o "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/InstallationBuildProductsLocation/Applications/Matching Set TF.app/Matching Set TF"
+
+clang: error: no such file or directory: '/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH'
+clang: error: no such file or directory: 'Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a'
+</code></pre>
+
+<p><img class="right" src="/images/xcode_whitespace.png" width="128" height="128" title="The Culprit" >
+You can see fairly clearly that <code>clang</code> is failing to find a directory because
+of the space in the scheme name, "<strong>NAH Distribution</strong>". If you dig through
+the command text, it appears that Xcode doesn't use quotes for the library
+passed to the <code>-dead_strip</code> command. This may be peculiar to projects with
+sub-projects.</p>
+
+<p>Whitespace problems in 3178. Oh dear.</p>
+]]></content>
+  </entry>
+  
+</feed>

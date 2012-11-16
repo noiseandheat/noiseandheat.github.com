@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Eigen, GLM and CML: math lib performance on iOS - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="At the moment I&#8217;m playing around with writing a cross platform game library, because that&#8217;s what all the cool kids are doing. One of the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Eigen, GLM and CML: Math Lib Performance on iOS</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T21:12:00+01:00" pubdate data-updated="true">Sweetmorn, 47 of Bureaucracy 3178 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>At the moment I&#8217;m playing around with writing a cross platform game library, because that&#8217;s what all the cool kids are doing. One of the parts I&#8217;m not particularly looking forward to is writing a math library for the rendering. Fortunately, far greater programmers than I have done so already. In fact, many greater programmers have. Three seem quite popular: <a href="http://cmldev.net/">CML</a>, <a href="http://eigen.tuxfamily.org/">Eigen</a> and <a href="http://glm.g-truc.net/">GLM</a>.</p>
+
+<!--more-->
+
+
+<p>Being lazy I searched around to find out which one seemed fastest or easiest to use with mobile, and I found a very useful post on the three common ones at <a href="http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/">http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/</a>. Unfortunately, the tests had been run only on desktop and Android, so I&#8217;ve forked the repository and added an iOS runner for the tests. You can find it at:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/Math-Library-Test/tree/ios-test">https://github.com/mnem/Math-Library-Test/tree/ios-test</a></li>
+</ul>
+
+
+<p>I also added a branch with the current latest source code for each of the libraries:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/Math-Library-Test/tree/update-mathlibs-to-latest-version">https://github.com/mnem/Math-Library-Test/tree/update-mathlibs-to-latest-version</a></li>
+</ul>
+
+
+<p>A full description of the tests can be seen in the source code, or you can read through the <a href="http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/">original article by Martin</a>.</p>
+
+<p>Here are the results for running it on my iPhone 4 with the original library versions:</p>
+
+<pre><code>                        iOS release build
+Eigen additions         2515
+Eigen multiplications   6915
+
+GLM additions           3549
+GLM multiplications     7347
+
+CML additions           3004
+CML multiplications     11511
+
+(Timings in milliseconds. Smaller is better.)
+</code></pre>
+
+<p>And once more with the latest library versions:</p>
+
+<pre><code>                        iOS release build
+Eigen additions         2161
+Eigen multiplications   6721
+
+GLM additions           3340
+GLM multiplications     5865
+
+CML additions           2964
+CML multiplications     11112
+
+(Timings in milliseconds. Smaller is better.)
+</code></pre>
+
+<p>I haven&#8217;t fiddled with compile settings beyond using a release build, so it&#8217;s quite likely the performance can be improved.</p>
+
+<p>The results for the <a href="http://cmldev.net/">CML</a> multiplications are suspiciously slow, so I wonder if something odd is going on there, but overall it seems to come down to <a href="http://eigen.tuxfamily.org/">Eigen</a> or <a href="http://glm.g-truc.net/">GLM</a>.</p>
+
+<p>I think, for the moment, I&#8217;ll use <a href="http://glm.g-truc.net/">GLM</a> for a couple of reasons: it&#8217;s geared towards OpenGL use rather than being a generic linear algebra library, and it has more straightforward MIT licensing.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T21:12:00+01:00" pubdate data-updated="true">Sweetmorn, 47 of Bureaucracy 3178 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cml/'>CML</a>, <a class='category' href='/blog/categories/eigen/'>Eigen</a>, <a class='category' href='/blog/categories/glm/'>GLM</a>, <a class='category' href='/blog/categories/development/'>development</a>, <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/libraries/'>libraries</a>, <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/09/easy-install-and-broken-setuptools-on-os-x/" title="Previous Post: easy_install and broken setuptools on OS X">&laquo; easy_install and broken setuptools on OS X</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/" title="Next Post: Chrome and PPAPI Flash Audio Syncing Bug">Chrome and PPAPI Flash Audio Syncing Bug &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/';
+        var disqus_url = 'http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

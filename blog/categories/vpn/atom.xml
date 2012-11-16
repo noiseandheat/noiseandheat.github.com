@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: VPN | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/vpn/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[VPN with Amazon EC2 or Saving Your phone from Promiscuity]]></title>
+    <link href="http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/"/>
+    <updated>2012-01-06T10:02:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity</id>
+    <content type="html"><![CDATA[<p>Modern mobile devices are a wonderful, especially when combined with some handy
+public WiFi hotspot. Unfortunately ne'er-do-wells abound so if you aren't
+careful using public hotspots, people can poke around with your data
+packets and steal fun details like <a href="http://codebutler.com/firesheep">usernames and passwords</a>.
+What is a mobile internet addict to do?</p>
+
+<p>Simple! Setup up your own <a href="http://en.wikipedia.org/wiki/Virtual_private_network">VPN</a>.
+Here's how to set one up on Amazon EC2, suitable for use with most smartphones
+and laptops.</p>
+
+<!--more-->
+
+
+<h2>Pre-requisites</h2>
+
+<p>Similar to my <a href="/blog/2011/11/installing-reviewboard-on-amazon-ec2/">Reviewboard setup guide</a>
+this one assumes that you have an AWS EC2 account, and that you are
+comfortable with creating instances and <code>ssh</code>'ing into them.</p>
+
+<p>I'm assuming you are installing this on an <a href="http://aws.amazon.com/amazon-linux-ami/">Amazon Linux AMI</a>
+EC2 instance, but it will probably work with other Linux distributions.
+If you're lucky, all you will need to do is substitute that distribution's
+package manager command in place of <code>yum</code>. For example, <code>apt-get</code>.</p>
+
+<p>The resulting VPN supports PPTP connections which, while not the most secure,
+are probably the most widely supported. Android, iOS, Linux, Windows 7
+and Mac OS X all come with PPTP VPN clients.</p>
+
+<h2>What You'll End Up With</h2>
+
+<ul>
+<li>1 (one) VPN PPTP daemon (<a href="http://poptop.sourceforge.net/">Poptop</a>) running on the server</li>
+<li>n (many) VPN user accounts, as desired</li>
+<li>1 (one) more secure way to access the internet</li>
+</ul>
+
+
+<p>Optionally, you will also have a script which allows you to easily add new
+VPN accounts.</p>
+
+<h2>Installing and configuring PPTPD</h2>
+
+<p>Install all the stuff for the PPP daemon (PPTP uses this) and some
+development tools for compiling Poptop. As usual, you don't type (and don't copy)
+the <code>$</code> symbol at the start of the line, I just use that to indicate the command
+prompt, but you can include the <code>\</code> line splitting characters when copying
+and pasting:</p>
+
+<pre><code>$ sudo yum --assumeyes install \
+    ppp \
+    ppp-devel \
+    make \
+    gcc \
+    gcc-c++ \
+    openssl-devel \
+    ntsysv
+</code></pre>
+
+<p>Fetch and extract Poptop:</p>
+
+<pre><code>$ mkdir ~/pptpd-install
+$ cd ~/pptpd-install
+$ curl -s http://kent.dl.sourceforge.net/project/poptop/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz | tar -xvz
+</code></pre>
+
+<p>Configure Poptop to use the <code>/usr</code> directory when it's installed. I did this
+to get around a few issues with paths in the default configuration (alternatively
+I could have edited those, but I'm lazy):</p>
+
+<pre><code>$ cd pptpd-1.3.4
+$ ./configure --prefix=/usr --exec-prefix=/usr
+</code></pre>
+
+<p>Next we want to patch the <code>patchlevel.h</code> file so that wtmp logging works. It's
+a bit of a hassle, but I think it's worth it because you can the use standard
+wtmp reading commands such as <code>last venger</code> to see a list of when and where
+VPN user venger connected. Handy if you ever suspect someone has been
+misusing your account.</p>
+
+<p>This crazy command gets the current <code>pppd</code> version and uses <code>sed</code> to substitute
+that version in the <code>plugins/patchlevel.h</code> file:</p>
+
+<pre><code>$ PPPD_VERSION=$(pppd -v 2&gt;&amp;1 | grep -E '^.*version.*$' | gawk '{print $3}'); \
+    sed -ie 's/\(.*VERSION.*"\)\(.*\)\(".*\)/\1'$PPPD_VERSION'\3/' \
+    plugins/patchlevel.h
+</code></pre>
+
+<p>Now make and install Poptop:</p>
+
+<pre><code>$ sudo make install
+</code></pre>
+
+<p>Add an <code>init</code> script so that we can set it to start automatically later:</p>
+
+<pre><code>$ sudo cp pptpd.init /etc/init.d/pptpd
+$ sudo chmod 755 /etc/init.d/pptpd
+</code></pre>
+
+<p>Copy the basic configuration file for <code>pptpd</code> and specify the local IP address
+range to be used for connected clients. <strong>NOTE</strong>: you cannot have more users
+connected <strong>simultaneously</strong> than the range specified here, which covers 100
+IP addresses. The range you give it must be from the
+<a href="http://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces">private IP address</a>
+block, and must not conflict with other addresses on that machine or the LAN
+to which it's connected or Bad Things may happen.</p>
+
+<pre><code>$ sudo cp samples/pptpd.conf /etc/pptpd.conf
+$ echo -e "localip 192.168.69.254\nremoteip 192.168.69.1-101" \
+    | sudo tee --append /etc/pptpd.conf
+</code></pre>
+
+<p>Now copy the sample PPP options for PPTP connections and modify it a little
+to specify a few useful things.</p>
+
+<p>The first <code>echo</code>'d line sets <a href="http://code.google.com/speed/public-dns/">Google's public DNS</a>
+servers as the DNS servers used to resolve web addresses when you are using the VPN
+connection. If you don't want to use <a href="http://code.google.com/speed/public-dns/">Google's public DNS</a>
+servers, then you could use the public DNS servers provided by <a href="http://www.opendns.com/">OpenDNS</a>
+(<code>208.67.222.222</code> and <code>208.67.220.220</code>), or find your own alternatives.</p>
+
+<p>The second <code>echo</code>'d line adjusts the <a href="http://en.wikipedia.org/wiki/Maximum_transmission_unit">MTU</a>
+and <a href="http://tools.ietf.org/html/rfc4638#section-5.1">MRU</a>. A side effect of the
+way VPN wraps data may cause data packets to exceed 1500 octets, causing frequent
+disconnects for some. Setting this to 1400 should avoid that. It's likely
+you can get away with using 1492 but that was causing me some issues with my
+connection, so 1400 is playing it very safe:</p>
+
+<pre><code>$ sudo cp samples/options.pptpd /etc/ppp/options.pptpd
+$ echo -e "\n# Google DNS\nms-dns 8.8.8.8\nms-dns 8.8.4.4\n" \
+    | sudo tee --append /etc/ppp/options.pptpd
+$ echo -e "\n# Make MTU/MRU a little smaller than default\nmru 1400\nmtu 1400" \
+    | sudo tee --append /etc/ppp/options.pptpd
+</code></pre>
+
+<h2>Configuring NAT and Fixing Your EC2 Firewall</h2>
+
+<p>That's it for the basic PPTP configuration, but now you have to modify your
+<code>iptables</code> rules and kernel settings so that your instance knows to forward
+data to the correct client when connected via VPN.</p>
+
+<p>First, adjust the <code>iptables</code> rules and save them so it all works after
+reboot:</p>
+
+<pre><code>$ sudo iptables -t nat -A POSTROUTING -s 192.168.69.0/24 -j MASQUERADE
+$ sudo service iptables save
+</code></pre>
+
+<p>And now make sure your kernel knows that you want to use <a href="http://en.wikipedia.org/wiki/Network_address_translation">NAT</a>.
+The <code>sed</code> command here is modifying your <code>sysctl.conf</code> so that your system
+remembers to enable NAT on reboot:</p>
+
+<pre><code>$ sudo sysctl net.ipv4.ip_forward=1
+$ sudo sed -i -r 's/(net.ipv4.ip_forward)(.*)0$/\1\21/' /etc/sysctl.conf
+</code></pre>
+
+<p>In order to connect to your EC2 instance from the outside world, you will
+have to open up the correct port, 1723, in the security group. The easiest
+way to do this is from the <a href="https://console.aws.amazon.com/ec2/">Amazon AWS EC2 web console</a>.</p>
+
+<p>Log in to your <a href="https://console.aws.amazon.com/ec2/">AWS</a> account, go to the
+EC2 tab, select the Security Groups section and then select the security group
+for the instance you have installed the VPN on:</p>
+
+<p><img class="center" src="/images/vpn_select_security_group.png" width="793" height="479"></p>
+
+<p>Now add a custom TCP rule for port 1723 to make it available to everyone. If you
+want to limit which IP address ranges can connect to your VPN, use the
+appropriate <a href="http://en.wikipedia.org/wiki/CIDR_notation">CIDR</a> source
+specifier. I want to access it from unknown public IP addresses so I'm
+setting it to accept connections from all IP address, <code>0.0.0.0/0</code>:</p>
+
+<p><img class="center" src="/images/vpn_add_to_security_group.png" width="793" height="479"></p>
+
+<p>Also add a custom UDP rule with the same details. I'm not entirely certain
+that VPN connections support UDP, but what the hell. <strong>NOTE</strong>: Don't forget
+to click <strong>Apply Rule Changes</strong> near the bottom of the inbound rule pane
+before leaving the page. I often miss that.</p>
+
+<h2>Starting Everything Up</h2>
+
+<p>Now lets make sure all the services we just set up are started, and that they
+restart when the instance is rebooted:</p>
+
+<pre><code>$ sudo chkconfig iptables on
+$ sudo chkconfig pptpd on
+$ sudo service iptables restart
+$ sudo service pptpd stop     # Should fail, but just in case...
+$ sudo service pptpd start
+</code></pre>
+
+<h2>Adding Users</h2>
+
+<p>All that's left to do now is to add a VPN user. I prefer to add a
+VPN user for each device which uses VPN. If the device is ever
+stolen or lost, having a different user for each allows me to
+block access for that device by removing the user entry.</p>
+
+<p>To add a user, you must append a user entry to the <code>/etc/ppp/chap-secrets</code>
+file with the correct format. The format it expects is defined as:</p>
+
+<pre><code>[username] [vpn_service_name] [password] [allowed_ip_addresses]
+</code></pre>
+
+<p>You can quickly add a user with the following verbose command. Remember
+to change <code>USERNAME</code> to your desired username. The section starting <code>dd</code> in
+the <code>echo</code> string generates a random password for the user which will be
+shown at the end. I recommend treating this as a once only password – just
+copy or email the password to the device and paste the password into your VPN
+client setup and tell it to remember the password. If you ever think it's
+compromised, just delete the user or generate a new password. Avoid using
+the same password for multiple users. Don't forget to eat the email you
+sent with the password. Eat your vegetables.</p>
+
+<pre><code>echo -e "\nUSERNAME pptpd $(dd if=/dev/urandom count=1 2&gt; /dev/null | sha1sum | cut -c-32) *\n" \
+    | sudo tee --append /etc/ppp/chap-secrets
+</code></pre>
+
+<p>To delete a user, simply remove the line with their name from <code>/etc/ppp/chap-secrets</code>
+using your favourite text editor running as root. <strong>Pro Tip</strong>: Real Beings use
+<code>vim</code>.</p>
+
+<p>Using that command to add each user is a bit of a faff, so I've written a
+script to make adding users easier. It will also check if a user already
+exists before adding a new one and just display the password instead. Here's
+a sample session where I enter the same user twice:</p>
+
+<pre><code>$ sudo ./nah_vpn_add_user.sh venger
+
+  Creating VPN user in '/etc/ppp/chap-secrets'
+
+              username: venger
+              password: 5fac76dfc049ea0f6e7b50c0641cc8c8
+      VPN service name: pptpd
+
+$ sudo ./nah_vpn_add_user.sh venger
+
+  ERROR: User already seems to exist in '/etc/ppp/chap-secrets'
+
+      username: venger
+      password: 5fac76dfc049ea0f6e7b50c0641cc8c8
+</code></pre>
+
+<p>Here's the script as a gist on github if you want to use it. As with every
+script a stranger gives you, and especially since I'm making you <code>sudo</code> this script,
+examine it to make sure I'm not doing anything evil to your system
+(I'm not, but I would say that):</p>
+
+<p><div><script src='https://gist.github.com/1626638.js?file='></script>
+<noscript><pre><code>#!/bin/bash
+#######################################
+# Simple script to add VPN users to your chap-secrets file. For details
+# on setting up a VPN on EC2, see:
+#
+#   http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/
+#
+#
+# (c) Copyright 2011 David Wagner.
+#
+# Complain/commend: http://noiseandheat.com/
+#
+#
+# Licensed under the MIT license:
+#
+#     http://www.opensource.org/licenses/mit-license.php
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &quot;Software&quot;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+#######################################
+# FUNCTIONS AND GLOBALS
+#######################################
+THIS_SCRIPT=`basename $0`
+CHAP_SECRETS=/etc/ppp/chap-secrets
+USERNAME=&quot;&quot;
+VPN_NAME=&quot;pptpd&quot;
+PASSWORD=&quot;&quot;
+
+DIGEST_CMD=/usr/bin/sha1sum
+DIGEST_CMD_ALTERNATIVE=/usr/bin/shasum
+
+function show_usage {
+cat &lt;&lt;USAGE_END
+
+  Simple script to add VPN users, based on the setup described at:
+
+    http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/
+
+  Usage
+  =====
+
+    $THIS_SCRIPT vpn_user_name [vpn_service_name]
+
+  or
+
+    $THIS_SCRIPT vpn_user_name vpn_service_name password
+
+      vpn_user_name     The name of the VPN user to create
+      vpn_service_name  The name of the VPN service. Defaults to pptpd
+      password          Autogenerated if you use the first form of the command.
+
+  It is recommended that you use the first form so that a secure password
+  is automatically generated for the user.
+
+USAGE_END
+}
+
+function check_can_access_chap_secrets {
+	if [ ! -e &quot;$CHAP_SECRETS&quot; ]
+	then
+		echo &quot;&quot;
+		echo &quot;  ERROR: Cannot find chaps secrets file at '$CHAP_SECRETS'&quot;
+		echo &quot;&quot;
+		echo &quot;  Edit the CHAP_SECRETS variable at the top of $THIS_SCRIPT to&quot;
+		echo &quot;  use a different location.&quot;
+		exit 1
+	fi
+
+	if [ ! -r &quot;$CHAP_SECRETS&quot; ]
+	then
+		echo &quot;&quot;
+		echo &quot;  ERROR: Cannot read chaps secrets file at '$CHAP_SECRETS'&quot;
+		echo &quot;&quot;
+		echo &quot;  For security, the file can only be accessed by root. Please&quot;
+		echo &quot;  use sudo to invoke this script so the file can be read.&quot;
+		echo &quot;  DO NOT make $CHAP_SECRETS world accessible.&quot;
+		exit 1
+	fi
+
+	if [ ! -w &quot;$CHAP_SECRETS&quot; ]
+	then
+		echo &quot;&quot;
+		echo &quot;  ERROR: Cannot modify chaps secrets file at '$CHAP_SECRETS'&quot;
+		echo &quot;&quot;
+		echo &quot;  For security, the file can only be accessed by root. Please&quot;
+		echo &quot;  use sudo to invoke this script so the file can be read.&quot;
+		echo &quot;  DO NOT make $CHAP_SECRETS world accessible.&quot;
+		exit 1
+	fi
+}
+
+function gather_username_and_service_name {
+	if [ -n &quot;$1&quot; ]
+	then
+		USERNAME=`echo &quot;$1&quot; | sed 's/ /_/g'`
+	else
+		show_usage
+		exit 1
+	fi
+
+
+	if [ -n &quot;$2&quot; ]
+	then
+		VPN_NAME=$2
+	fi
+}
+
+function check_user_does_not_already_exist {
+	MATCHES=`sudo grep -cE &quot;^$USERNAME\b&quot; $CHAP_SECRETS`
+	if [ &quot;0&quot; != &quot;$MATCHES&quot; ]
+	then
+		MATCH=`sudo grep -E &quot;^$USERNAME\b&quot; $CHAP_SECRETS`
+		set $MATCH
+		echo &quot;&quot;
+		echo &quot;  ERROR: User already seems to exist in '$CHAP_SECRETS'&quot;
+		echo &quot;&quot;
+		echo &quot;      username: $1&quot;
+		echo &quot;      password: $3&quot;
+		echo &quot;&quot;
+		exit 1
+	fi
+}
+
+function generate_password {
+	if [ -n &quot;$1&quot; ]
+	then
+		PASSWORD=$1
+	else
+		if [ ! -e $DIGEST_CMD ]
+		then
+			DIGEST_CMD=$DIGEST_CMD_ALTERNATIVE
+			if [ ! -e $DIGEST_CMD ]
+			then
+				echo &quot;&quot;
+				echo &quot;  ERROR: could not find $DIGEST_CMD or $DIGEST_CMD_ALTERNATIVE&quot;
+				echo &quot;  so I can't generate a password for the new user. If you want&quot;
+				echo &quot;  to set your own digest command for password generation, edit&quot;
+				echo &quot;  the DIGEST_CMD variable at the top of $THIS_SCRIPT.&quot;
+				echo &quot;&quot;
+				echo &quot;  You many also have to hack about with the PASSWORD generation&quot;
+				echo &quot;  command in the generate_password function.&quot;
+				echo &quot;&quot;
+				exit 1
+			fi
+		fi
+		PASSWORD=`dd if=/dev/urandom count=1 2&gt; /dev/null | $DIGEST_CMD | cut -c-32`
+	fi
+}
+
+function create_user {
+	echo &quot;&quot;
+	echo &quot;  Creating VPN user in '$CHAP_SECRETS'&quot;
+	echo &quot;&quot;
+	echo &quot;              username: $USERNAME&quot;
+	echo &quot;              password: $PASSWORD&quot;
+	echo &quot;      VPN service name: $VPN_NAME&quot;
+	echo -e &quot;\n$USERNAME $VPN_NAME $PASSWORD *\n&quot; &gt;&gt; $CHAP_SECRETS
+}
+
+#######################################
+# MAIN
+#######################################
+
+gather_username_and_service_name $1 $2
+
+check_can_access_chap_secrets
+
+check_user_does_not_already_exist
+
+generate_password $3
+
+create_user $USERNAME $VPN_NAME $PASSWORD $CHAP_SECRETS
+</code></pre></noscript></div>
+</p>
+
+<p>You can download it to your machine and make it executable by typing:</p>
+
+<pre><code>$ curl https://raw.github.com/gist/1626638 -o nah_vpn_add_user.sh
+$ chmod a+x nah_vpn_add_user.sh
+</code></pre>
+
+<p>And then add users to your hearts content. Running the script with no parameters
+will output some help. The script will only add users – deletion is still
+manual as described above (delete the user's entry in <code>/etc/ppp/chap-secrets</code>).</p>
+
+<h2>Setting Up The Device Client</h2>
+
+<p>This guide is already far too long, so here are some links to other guides
+about setting up your client or clients. The main points to remember when
+following these guides are:</p>
+
+<ul>
+<li><strong>Protocol</strong>: Only use PPTP</li>
+<li><strong>Server Address</strong>: The public address or public IP of the EC2 Instance.
+This can change each time you boot, so you may want to assign an Elastic IP
+address to the instance or perhaps use <a href="http://aws.amazon.com/route53/">Route 53</a>.</li>
+<li><strong>Username</strong>: The username used when you created the user above.</li>
+<li><strong>Password</strong>: The generated password displayed when you created the user above.</li>
+<li><strong>Encryption Level</strong>: Should work as 128 bit or maximum, but you can try
+auto.</li>
+</ul>
+
+
+<p> The guides (I don't endorse any here and haven't used any of the VPN services who's
+ guides I've linked here, but it's handy information):</p>
+
+<ul>
+<li><a href="http://www.bestvpnservice.com/blog/how-to-setup-vpn-on-iphone-4">iPhone guide on bestvpnservice.com</a></li>
+<li><a href="http://www.techrepublic.com/blog/smartphones/connect-to-a-pptp-vpn-from-your-android-phone/2145">Android guide on TechRepublic</a></li>
+<li><a href="http://wiki.witopia.net/wiki/Main_Page#Setting_up:_PPTP_VPN_Service_Setup">PPTP VPN Client Guides on Witopia</a></li>
+<li><a href="http://strongvpn.com/setup.shtml">StrongVPN support guides</a></li>
+</ul>
+
+
+<h2>Checking the Connection</h2>
+
+<p>Once you have your client configured, connect to your new VPN and visit:</p>
+
+<ul>
+<li><a href="http://whatismyipaddress.com/">http://whatismyipaddress.com/</a></li>
+</ul>
+
+
+<p>If all is well you should be able to see the site and it should say that
+your ISP is Amazon. Well done! You have a shiny new VPN to play with.</p>
+
+<h2>Points of Interest</h2>
+
+<p>It's not just when you are using public hotspots that VPNs are useful. It will
+prevent, for example, your ISP inspecting what services you use or what
+websites you visit. Before you start merrily torrenting every <em>legal</em> thing
+in existence though, remember you're paying for the bandwidth passing through
+your EC2 server. Also remember that while your ISP can't see what addresses
+you visit, Amazon can.</p>
+
+<p>Additionally, your VPN machine's public IP address will be what the world
+sees. So if you set up a VPN machine at one of Amazon's US datacenters then
+sites you visit will think you are a visitor from America. Or if you set one
+up in the EU, it will appear as though you come from Ireland.</p>
+
+<p>Also, if anyone's crazy enough to pass <a href="http://en.wikipedia.org/wiki/Stop_Online_Piracy_Act">SOPA</a>
+style regulations in your country, using a VPN in a datacenter outside your
+country may help, assuming Amazon, Google and OpenDNS aren't affected directly
+by the legislation.</p>
+
+<p>Have fun.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Lazy One Liners: 'git rm' all deleted files - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="[UPDATE] My git skills are weak. You can achieve this much more simply by typing: git add -A. Still, knowing about the --porcelain option is useful. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Lazy One Liners: 'Git Rm' All Deleted Files</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time datetime="2012-02-16T21:51:00+00:00" pubdate data-updated="true">Boomtime, 47 of Chaos 3178 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>[UPDATE]</strong> <em>My <code>git</code> skills are weak. You can achieve this much more simply by typing: <code>git add -A</code>. Still, knowing about the <code>--porcelain</code> option is useful. Honest.</em></p>
+
+<p>Deleted three hundred and seventy two files and forget to use <code>git rm</code>?
+This one liner will do it for you, if you run it from your repository
+root:</p>
+
+<pre><code>git status --porcelain | awk '/^.D .*$/ {print $2}' | xargs git rm
+</code></pre>
+
+<!--more-->
+
+
+<p>The <code>--porcelain</code> command is great for batch manipulations of your
+staged and unstaged files. Just replace the <code>D</code> in <code>/^.D .*$/</code> with the
+status letter for the sort of files you want to perform a batch
+operation on, and then replace the <code>git rm</code> at the end of the command
+with whatever you want to do to them. The filename will be passed at
+the end of the <code>git</code> command.</p>
+
+<p>When you change the letter, where you place the <strong>dots</strong> are important.
+<code>.D</code> is used for unstaged deleted files, whereas <code>D</code> (no dot before)
+indicates a staged deleted file. Those 2 columns can have many
+character combinations, so you may have to play with the <code>awk</code> matching
+string a little to filter what you want. To test the pattern safely, you
+can use:</p>
+
+<pre><code>git status --porcelain | awk '/^.D .*$/'
+</code></pre>
+
+<p>This will print any matching lines. If there&#8217;s no output, the filter
+doesn&#8217;t match anything.</p>
+
+<p>You can find more information about the status letters in the man
+page for <a href="http://schacon.github.com/git/git-status.html">git-status</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time datetime="2012-09-01T10:44:00+01:00" class="updated">Updated Prickle Prickle, 25 of Bureaucracy 3178 YOLD [2012-09-01 10:44]</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/lols/'>lols</a>, <a class='category' href='/blog/categories/nix/'>nix</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/02/throttling-bandwidth-on-os-x/" title="Previous Post: Throttling bandwidth on OS X">&laquo; Throttling bandwidth on OS X</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/03/laptop-vs-ipad-screen/" title="Next Post: Laptop vs iPad screen">Laptop vs iPad screen &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/';
+        var disqus_url = 'http://noiseandheat.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

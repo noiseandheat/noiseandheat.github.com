@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Shuffling arrays, the Objective-C edition - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="Shuffling is just like buses. You sit about being deterministic for years, and
+then all of a sudden, you need some random shuffling on two platforms &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Shuffling Arrays, the Objective-C Edition</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-19T14:19:00+01:00" pubdate data-updated="true">Sweetmorn, 12 of Bureaucracy 3177 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="/images/thumb-objective-c1.png" width="200" height="130"></a></p>
+
+<p>Shuffling is just like buses. You sit about being deterministic for years, and
+then all of a sudden, you need some random shuffling on two platforms at once.</p>
+
+<!--more-->
+
+
+<p>As a follow on from my previous post on <a href="/blog/2011/08/shuffling-arrays/">shuffling AS3 arrays</a>,
+here&#8217;s the same algorithm implemented as a category addition to
+<a href="http://developer.apple.com/library/ios/#documentation/Cocoa/Reference/Foundation/Classes/NSMutableArray_Class/Reference/Reference.html">NSMutableArray</a>
+for all your easy array shuffling needs.</p>
+
+<p>To use it, download the method and header files, add them to your project and
+them simply include the header file wherever you you want to shuffle anNSMutableArray:</p>
+
+<figure class='code'><figcaption><span> (example_shuffle.m)</span> <a href='/downloads/code/example_shuffle.m'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp"> #import &quot;NSMutableArray+Shuffle.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSMutableArray</span><span class="o">*</span><span class="p">)</span><span class="nf">myAwesomeFunction</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSMutableArray</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithObjects:</span> <span class="s">@&quot;Fred&quot;</span><span class="p">,</span> <span class="s">@&quot;Bob&quot;</span><span class="p">,</span> <span class="s">@&quot;Alice&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">array</span> <span class="n">shuffle</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">array</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Grab it while it&#8217;s hot from github:</p>
+
+<div><script src='https://gist.github.com/1156719.js?file='></script>
+<noscript><pre><code>/**
+ * NSMutableArray+Shuffle.h
+ *
+ * (c) Copyright 2011 David Wagner.
+ *
+ * Complain/commend: http://noiseandheat.com/
+ *
+ *
+ * Licensed under the MIT license:
+ * 
+ *     http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+#import &lt;Foundation/Foundation.h&gt;
+
+@interface NSMutableArray (NSMutableArray_Shuffle)
+
+/**
+ * Shuffle the array elements in place.
+ */
+- (void)shuffle;
+
+@end
+</code></pre></noscript></div>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-19T14:19:00+01:00" pubdate data-updated="true">Sweetmorn, 12 of Bureaucracy 3177 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/open-source/'>Open Source</a>, <a class='category' href='/blog/categories/random/'>Random</a>, <a class='category' href='/blog/categories/shuffle/'>Shuffle</a>, <a class='category' href='/blog/categories/software-development/'>Software Development</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/08/shuffling-arrays/" title="Previous Post: Shuffling arrays">&laquo; Shuffling arrays</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/11/no-vodka-tampons-were-scottish/" title="Next Post: No Vodka Tampons, we're Scottish">No Vodka Tampons, we're Scottish &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/';
+        var disqus_url = 'http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

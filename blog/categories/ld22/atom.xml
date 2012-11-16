@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: LD22 | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/ld22/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ludum Dare 22: Afterglow]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/"/>
+    <updated>2011-12-19T13:57:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow</id>
+    <content type="html"><![CDATA[<p>So, <a href="http://www.ludumdare.com/compo/ludum-dare-22/?action=preview&amp;etype=compo">LD22 Compo</a> is over.
+The judgement begins. My entry was <strong>Astronaut Alone</strong>
+(<a href="http://mnem.github.com/LD22_Alone/">play</a>/<a href="http://www.ludumdare.com/compo/ludum-dare-22/?uid=7397">rate</a>)
+which ended up being, basically, a rubbish asteroids clone. It was great fun to create though.</p>
+
+<!--more-->
+
+
+<p>Next time, I'll be more prepared… Maybe.</p>
+
+<p>In the meantime, here are some lists of things.</p>
+
+<h2>Things that worked well this time</h2>
+
+<ul>
+<li>Tablets totally rock. <em>Graphics</em> tablets. I used LD as an excuse to buy myself
+one. They can be found for <a href="http://amzn.to/uYUZUL">just over a tenner</a> (<a href="http://thedarkmaster.wordpress.com/2010/10/22/trust-flex-design-tablet-on-mac-osx-how-to-make-it-work/">OS X drivers</a>)
+and it made creating graphics a lot faster. I can't believe I've not tried one before.</li>
+<li>Content generators are really fun to play with (<a href="http://thirdcog.eu/apps/cfxr">cfxr</a>, <a href="http://www.drpetter.se/project_sfxr.html">sfxr</a>, <a href="http://www.ludumdare.com/compo/2011/12/13/if-you-find-it-hard-to-make-music-read-this/">Autotracker-Bu</a>).
+I think I may spend some spare time creating a few for different purposes.</li>
+<li>The tight deadline forced me to handle time surprisingly well. Immediacy
+is a great axe for culling long tasks.</li>
+<li>I drew an astronaut. It didn't look entirely shit. This makes me happy.</li>
+<li>Whisky helps.</li>
+</ul>
+
+
+<h2>Things to do next time</h2>
+
+<ul>
+<li>Prototype more on paper/other non functional medium.</li>
+<li>Don't try to optimise anything.</li>
+<li>If a coding problem is taking more than an hour, put a hack in.</li>
+<li>Play with general concepts before the compo just to have things in mind.
+This probably just extends to the fact I should be doing more playful/experimental
+coding, with no firm gameplay in mind.</li>
+<li>Drink more whisky.</li>
+</ul>
+
+
+<h2>Game to do list with some things done</h2>
+
+<ul>
+<li>Necessary:
+
+<ul>
+<li><del>Drifting asteroids</del></li>
+<li><del>Wrap around</del></li>
+<li><del>Destroy asteroid</del></li>
+<li><del>Mine remainders</del></li>
+<li><del>Convert graphics to entities so they can collide</del></li>
+<li><del>Asteroid indicator</del></li>
+<li><del>intro</del></li>
+<li><del>win</del></li>
+<li><del>instructions</del></li>
+<li><del>audio in game</del></li>
+</ul>
+</li>
+<li>Graphics:
+
+<ul>
+<li><del>Astronaut</del></li>
+<li><del>Asteroids</del></li>
+</ul>
+</li>
+<li>Fluff:
+
+<ul>
+<li>Smooth wrapping</li>
+<li>Star trails</li>
+<li><del>Asteroid damage</del></li>
+<li>Asteroid death</li>
+<li><del>Asteroid colouring</del></li>
+</ul>
+</li>
+<li>Refactoring:
+
+<ul>
+<li><del>Pool managers don't need to give themselves to entities - use the names.</del></li>
+<li>Pool managers can probably share a base class - or perhaps the SimpleObjectPool can do more work</li>
+<li>Refactor text class</li>
+</ul>
+</li>
+<li>Bugs:
+
+<ul>
+<li>Asteroids can spawn on you</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Tools I used this time</h2>
+
+<p>In no particular order, pretty much every tool I touched:</p>
+
+<ul>
+<li>Sublime Text 2 (<a href="http://www.sublimetext.com/">http://www.sublimetext.com/</a>)</li>
+<li>Buildr-AS3 / Buildr (<a href="https://github.com/devboy/buildr_as3">https://github.com/devboy/buildr_as3</a>/<a href="http://buildr.apache.org/">http://buildr.apache.org/</a>)</li>
+<li>Flashpunk (<a href="http://flashpunk.net/">http://flashpunk.net/</a>)</li>
+<li>FDT (<a href="http://fdt.powerflasher.com/">http://fdt.powerflasher.com/</a>)</li>
+<li>FlexSDK (<a href="http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK">http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK</a>)</li>
+<li>lame (<a href="http://lame.sourceforge.net/">http://lame.sourceforge.net/</a>)</li>
+<li>Homebrew (<a href="http://mxcl.github.com/homebrew/">http://mxcl.github.com/homebrew/</a>)</li>
+<li>Bash (<a href="http://www.gnu.org/s/bash/">http://www.gnu.org/s/bash/</a>)</li>
+<li>Vim (<a href="http://www.vim.org/">http://www.vim.org/</a>)</li>
+<li>Pixelmator (<a href="http://www.pixelmator.com/">http://www.pixelmator.com/</a>)</li>
+<li>SketchBook Pro (<a href="http://usa.autodesk.com/adsk/servlet/pc/index?id=6848332&amp;siteID=123112">http://usa.autodesk.com/adsk/servlet/pc/index?id=6848332&amp;siteID=123112</a>)</li>
+<li>Bamboo tablet (<a href="http://www.wacom.eu/index2.asp?pid=294&amp;spid=1">http://www.wacom.eu/index2.asp?pid=294&amp;spid=1</a>)</li>
+<li>cfxr (<a href="http://thirdcog.eu/apps/cfxr">http://thirdcog.eu/apps/cfxr</a>)</li>
+<li>git (<a href="http://git-scm.com/">http://git-scm.com/</a>)</li>
+<li>MacBook Pro 13 inch (<a href="http://www.apple.com/macbookpro/specs-13inch.html">http://www.apple.com/macbookpro/specs-13inch.html</a>)</li>
+<li>Lion (<a href="http://www.apple.com/macbookpro/osx.html">http://www.apple.com/macbookpro/osx.html</a>)</li>
+</ul>
+
+
+<h2>Food and Drink sequence:</h2>
+
+<ol>
+<li>Coffee</li>
+<li>Scrambled egg and tattie scone</li>
+<li>Coffee</li>
+<li>Coffee</li>
+<li>Chocolate mini roll thing</li>
+<li>Coffee</li>
+<li>Tangerine</li>
+<li>Dry frosties</li>
+<li>Tiny lindt chocolate things</li>
+<li>Aubergine bake</li>
+<li>Red wine</li>
+<li>Whisky</li>
+<li>Toasted cheese</li>
+<li>Coffee</li>
+<li>Scrambled egg</li>
+<li>Coffee</li>
+<li>Darjeeling tea</li>
+<li>Tablet</li>
+<li>Banana</li>
+<li>Stir fry</li>
+<li>Many freshly baked flapjacks</li>
+<li>Whisky</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ludum Dare 22: A Log of Activity]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity/"/>
+    <updated>2011-12-17T09:47:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity</id>
+    <content type="html"><![CDATA[<ul>
+<li>This coming up with game ideas malarky is difficult. Only two ideas
+have appeared.
+<!-- more -->
+
+<ul>
+<li>Space Drifter:
+
+<ul>
+<li>Alone in a biosuit, drifting in space.</li>
+<li>Asteroids-esque?</li>
+</ul>
+</li>
+<li>Build a Friend:
+
+<ul>
+<li>You are so lonely, you decide to build a friend.</li>
+<li>Collect body parts.</li>
+<li>Zap them to life.</li>
+<li>Perhaps they always die, leaving you alone again?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Leaving my mind to mull it over while I make some breakfast and tidy the
+kitchen. I'm so domesticated.</li>
+<li>Build a Friend feels more fun, but I can't work out a game
+mechanic which is any more exciting than a Story Driven
+Platformer. I don't think I'm clever enough to invent a decent story in
+the time remaining. Space Drifter it is.</li>
+<li>Possible features:
+
+<ul>
+<li>Starfields!</li>
+<li>Fuel management? Destroy/mine asteroids to get more suit fuel.</li>
+<li>Goal: build an escape vehicle
+
+<ul>
+<li>Where do parts come from? Land on small planets? Fight a boss/solve
+a puzzle?</li>
+</ul>
+</li>
+<li>If only I had a <a href="http://en.wikipedia.org/wiki/Theremin">Theremin</a> for
+making music. I'll buy one for next time.</li>
+</ul>
+</li>
+<li>Rather than work on gameplay, I think I'll write Yet Another Starfield.</li>
+<li>Using a 16:9 ratio because space is widescreen.</li>
+<li>Just spent far too long making a simple starfield because I don't really
+know much about FlashPunk. Next time, use a framework I know, or write
+one as I go along.</li>
+<li>Can never decide whether collection variables should be pluralised or not...</li>
+<li>Man, I suck at graphics.</li>
+<li><em>1309</em>: Basic mouse movement and starfield implemented. Just seeing things move
+around on screen is giving me some ideas about the game mechanics, which
+is nice. Also, I'm going to start time stamping these entries.</li>
+<li><em>1834</em>: Added lasers and some parallax. Tweaking is more fun than productive
+work sometimes. Dinner approaches.</li>
+<li><em>2145</em>: Getting into detail now. Slower than I hoped. Time to break out
+the whisky. Realised I made some stupid mistakes earlier, and spent
+possibly pointless time writing a simple pooling class.</li>
+<li><em>2259</em>: Ok, FlashPunk rocks.</li>
+<li><em>0249</em>: Man, there's a lot left to do.</li>
+<li><em>0903</em>: Woke up realising this game idea is a bit shit really. Damn. Not
+enough time to change my mind now.</li>
+<li><em>1108</em>: Updated some of the placeholder art. It appears I can almost draw an
+astronaut.</li>
+<li><em>1946</em>: Rats. Spent far to much time trying to make one background effect
+nice, and now there's so little time. Have to chuck some pointless
+fluff together.</li>
+<li>Well that was a hastily cobbled together finish. Time to have a whisky
+and get some sleep. Disappointed with the game, but happy with the
+competition experience.</li>
+</ul>
+
+
+<p>Entry: <a href="http://www.ludumdare.com/compo/ludum-dare-22/?uid=7397">Astronaut Alone</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ludum Dare 22: Alone]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone/"/>
+    <updated>2011-12-17T07:47:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone</id>
+    <content type="html"><![CDATA[<p>My first venture into the world of programming competitions is beginning with
+Ludum Dare 22. I wonder if I'll have anything finished by the end of it?</p>
+
+<!-- more -->
+
+
+<p>Despite my plan to stay awake after the theme announcement, I decided to get
+a few hours sleep and instead tasked my subconscious self with coming up
+with a good idea based around the theme. Much to my disappointment my
+subconscious decided to sleep too, so now I have to quickly come up with a
+game idea.</p>
+
+<p>Let's see what happens while I create a skeleton game and make some tasty
+breakfast.</p>
+
+<p>Music to get in the mood: Tom Waits, Alice.</p>
+]]></content>
+  </entry>
+  
+</feed>

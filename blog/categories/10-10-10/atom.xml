@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 10/10/10 | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/10-10-10/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cracking the Code]]></title>
+    <link href="http://noiseandheat.com/blog/2010/10/cracking-the-code/"/>
+    <updated>2010-10-09T23:53:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2010/10/cracking-the-code</id>
+    <content type="html"><![CDATA[<p>Fact o' the day. Google's <a href="http://twitter.com/google/status/1251523388">first ever tweet</a> was:</p>
+
+<p><blockquote><p>I'm<br/>01100110 01100101 01100101 01101100 01101001<br/>01101110 01100111 00100000 01101100 01110101<br/>01100011 01101011 01111001 00001010</p><footer><strong>Google</strong> <cite><a href='http://twitter.com/google/status/1251523388'>First Tweet</a></cite></footer></blockquote></p>
+
+<!--more-->
+
+
+<p>Which brings me to a little plaything I was asked to make for <a href="http://binaryday.co.uk/">Binary Day (10/10/10)</a>.
+It turns messages into binary and vice versa. You can even tweet them which
+leads me to believe that Google used the tool from the future just to make
+that tweet. Very cunning of them.</p>
+
+<p>For a quick translation their message, have a look at the <a href="http://binaryday.co.uk/?message=I'm%200110011001100101011001010110110001101001011011100110011100100000011011000111010101100011011010110111100100101110">binary day tool</a>!</p>
+
+<p><em>[P.S. I'm hosting an alternative version at N&amp;H which will handle international
+character sets: <a href="http://binary.noiseandheat.com/?message=I'm%201100110%201100101%201100101%201101100%201101001%201101110%201100111%20100000%201101100%201110101%201100011%201101011%201111001%20101110%20">http://binary.noiseandheat.com/</a>. Join the fun worldwide!]</em></p>
+]]></content>
+  </entry>
+  
+</feed>

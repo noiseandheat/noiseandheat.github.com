@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Vim | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OS X Lion Terminal Colours]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours/"/>
+    <updated>2011-12-03T21:25:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours</id>
+    <content type="html"><![CDATA[<p><a href="http://www.vim.org/scripts/script.php?script_id=1349"><img class="right" src="/images/terminal_colours.png" width="200" height="130"></a></p>
+
+<p>OS X is awesome for command line stuff, that's why <a href="http://xkcd.com/378/">real programmers</a>
+love it. But some of the defaults Apple have used make me sad. Where are all
+the colours? I <em>demand</em> my <code>ls</code> command be pretty and colourful! Why is Vim
+so bland? While we're at it, can't ping lick my eyeballs more?</p>
+
+<!--more-->
+
+
+<p>Good news: yes, they can! I've stuck some tips together so I can remind
+myself what to do when I inevitably reinstall my system for some pointless
+reason, and for any new Mac users out there. It is near peak commercial
+season after all, and I'm sure you've been good little boys and girls.</p>
+
+<p>Let's start with the simple things.</p>
+
+<h2>Making <code>ls</code> and <code>grep</code> Colourful</h2>
+
+<p>Add these lines to your <code>.bash_profile</code> file which is in your home directory:</p>
+
+<p>``` bash ~/.bash_profile</p>
+
+<h1>Tell ls to be colourful</h1>
+
+<p>export CLICOLOR=1</p>
+
+<h1>Tell grep to highlight matches</h1>
+
+<p>export GREP_OPTIONS='--color=auto'
+```</p>
+
+<p>Now when you use <code>ls</code>, folders and executables will appear in different
+colours from normal files, and when you use grep to find text in files, the
+matches will be highlighted.</p>
+
+<p>You can change the colours used by <code>ls</code> via the <code>LSCOLORS</code> environment
+variable. For example:</p>
+
+<p>``` bash ~/.bash_profile</p>
+
+<h1>Tell ls to be colourful</h1>
+
+<p>export CLICOLOR=1
+export LSCOLORS=Exfxcxdxbxegedabagacad</p>
+
+<h1>Tell grep to highlight matches</h1>
+
+<p>export GREP_OPTIONS='--color=auto'
+```</p>
+
+<p>Here's a handy website you can use to define your <code>LSCOLORS</code> scheme:
+<a href="http://geoff.greer.fm/lscolors/">http://geoff.greer.fm/lscolors/</a>. It also
+generates <code>LS_COLORS</code> definitions, useful if you're a Linux user. One thing
+to note, though, is that the colours you will see in your terminal depend on
+the particular theme you are using. Which brings me to my next tip.</p>
+
+<h2>Using A Better Terminal Theme</h2>
+
+<p>If you haven't changed the default terminal theme you must still be gazing
+in to the snowy wasteland that is the default. This is insane. Programmers
+are incompatible with white backgrounds. Er, except in blogs. <em>*cough*</em></p>
+
+<p>Changing the terminal theme is marginally trickier than it should be. Here's
+how you do it:</p>
+
+<ol>
+<li>Go to <code>Terminal</code> &rarr; <code>Preferences…</code></li>
+<li>Select the <code>Settings</code> group.</li>
+<li>Pick something nice that doesn't sear your retinas.</li>
+<li>At the bottom of the list box, click <code>Default</code> so that new terminals will
+open with the selected colour scheme.</li>
+</ol>
+
+
+<p>Anything other than the default is a good start, but there are better themes out there than those bundled
+with Lion. At the moment, my colour scheme of choice is <a href="http://ethanschoonover.com/solarized">Solarized</a>.
+You can get a <a href="http://ethanschoonover.com/solarized">Solarized</a> scheme for
+OS X's Terminal from here:</p>
+
+<ul>
+<li><a href="https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized">https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized</a></li>
+</ul>
+
+
+<p>If you are running <strong>Lion</strong>, <strong>ignore</strong> the README at the site. All you have to do to
+install the theme is to open the <code>*.terminal</code> file. That should be enough to
+make it appear in the themes list in the preferences dialog, where you can set
+it as default.</p>
+
+<p><a href="http://ethanschoonover.com/solarized">Solarized</a> is a great general purpose theme and there are settings for many
+text environments - I use it in Xcode, <a href="http://www.sublimetext.com/2">Sublime Text 2</a>,
+<a href="http://www.eclipsecolorthemes.org/?list=all&amp;q=solarized">Eclipse</a> and even
+<a href="http://www.vim.org/">Vim</a>.</p>
+
+<p>Which, niftily, brings me on to my next section.</p>
+
+<h2>Making Vim Pretty</h2>
+
+<p>Much as I've rallied against <a href="http://www.vim.org/">Vim</a> over the years, <a href="https://twitter.com/vizio360">Vizio360</a>
+and <a href="https://twitter.com/Rev_Kachowski">Rev. Kachowski</a> have now drugged me
+sufficiently to admit that it's pretty damn nice really. If you can handle
+memorising &pi; to 300 digits, then you should be fine with <a href="http://www.vim.org/">Vim</a>
+shortcuts. On the other hand if you're like me, you may want to use a
+<a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">cheatsheet</a>.</p>
+
+<p>However, we aren't here to learn, we're here to colourise. So, in order
+to make Vim a bit more colourful on OS X, copy the example <code>vimrc</code> file
+to your home directory:</p>
+
+<pre><code>cp /usr/share/vim/vim73/vimrc_example.vim ~/.vimrc
+</code></pre>
+
+<p>Now you can enjoy pretty colours in Vim. If you want to add <a href="http://ethanschoonover.com/solarized">Solarized</a>
+as your colour theme in Vim, I recommend installing the rather fantastic
+<a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a> in your .vimrc (<a href="https://github.com/tpope/vim-pathogen/blob/master/README.markdown">instructions</a>) and
+then follow the instructions for "Option 2" in <a href="http://ethanschoonover.com/solarized/vim-colors-solarized">vim-colors-solarized README</a>.</p>
+
+<h2>Making Nano Pretty</h2>
+
+<p>If Nano is your Terminal text editor weapon of choice, then you can
+enable syntax colouring by uncommenting the syntax files referenced in
+<code>/etc/nanorc</code>. First, open it for editing:</p>
+
+<pre><code>sudo nano /etc/nanorc
+</code></pre>
+
+<p>Move to the bottom of the file and then remove the <code>#</code> character
+at the beginning of the lines which include other <code>*.nanorc</code> files. For
+example, change:</p>
+
+<p>``` bash /etc/nanorc</p>
+
+<h2>Nanorc files</h2>
+
+<h1>include "/usr/local/share/nano/nanorc.nanorc"</h1>
+
+<p>```</p>
+
+<p>To:</p>
+
+<p>``` bash /etc/nanorc</p>
+
+<h2>Nanorc files</h2>
+
+<p>include "/usr/local/share/nano/nanorc.nanorc"
+```</p>
+
+<h2>Further Eyeball Licking via Homebrew</h2>
+
+<p>For the next tip, I recommend using <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+as the method of installation. If you aren't using <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+yet, you probably should be. It's by far the <a href="http://mozidesign.com/2011/03/15/dinosaurs/">Most Awesome</a> package manager
+available for OS X. So go install it:</p>
+
+<ul>
+<li><a href="https://github.com/mxcl/homebrew/wiki/installation">https://github.com/mxcl/homebrew/wiki/installation</a></li>
+</ul>
+
+
+<p>Installed? Good. Let us continue.</p>
+
+<h2>Generic Colouriser</h2>
+
+<p><a href="http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt">Generic Colouriser</a>
+is a great utility which can be used for colourising many different types of
+output and log files. If you installed <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+, installing grc is as simple as typing:</p>
+
+<pre><code>brew install grc
+</code></pre>
+
+<p><strong>NOTE</strong>: If you followed the first tip and created a <code>.bash_profile</code>,
+rather than appending the command to load grc to your <code>.bashrc</code>,
+you want to append it to your <code>.bash_profile</code> file instead:</p>
+
+<pre><code>echo 'source "`brew --prefix grc`/etc/grc.bashrc"' &gt;&gt; ~/.bash_profile
+</code></pre>
+
+<p>If you are confused as to why, it's because the logic Bash uses for loading
+these files is non-obvious. For a good description of the load sequence, read
+<a href="http://www.thegeekstuff.com/2008/10/execution-sequence-for-bash_profile-bashrc-bash_login-profile-and-bash_logout/">Execution sequence for .bash_profile, .bashrc, .bash_login, .profile and .bash_logout</a>
+by Ramesh Natarajan.</p>
+
+<p>After you have added that line to your <code>.bash_profile</code>, either start a new
+session, or reload the profile:</p>
+
+<pre><code>source ~/.bash_profile
+</code></pre>
+
+<p>Now when you use certain commands such as traceroute, the output should be
+colourised:</p>
+
+<p><img class="center" src="/images/traceroute-grc.png" width="622" height="422"></p>
+
+<p>Or you can call <code>tail</code> and <code>head</code> using grc to colourise log output:</p>
+
+<p><img class="center" src="/images/head-grc.png" width="512" height="156"></p>
+
+<h2>That's all Folks!</h2>
+
+<p>Well, that's all I have for now. If anyone has any other good ones,
+stick them in a comment below.</p>
+]]></content>
+  </entry>
+  
+</feed>

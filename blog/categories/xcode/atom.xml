@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Xcode | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/xcode/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[clang failed with exit code 1]]></title>
+    <link href="http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/"/>
+    <updated>2012-01-30T15:23:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1</id>
+    <content type="html"><![CDATA[<p><blockquote><p>Apple Mach-O Linker Error<br/>Command /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang failed with exit code 1</p><footer><strong>Xcode 4</strong> <cite>Bringing the Pain</cite></footer></blockquote></p>
+
+<p>Experiencing <code>clang</code> failing with no other error information?</p>
+
+<!--more-->
+
+
+<p>If so, then check the scheme name you are building. If it has a space in it,
+that's probably the issue. This had me tearing my hair out for about an hour.</p>
+
+<p>If you run the full command which Xcode is using, you can see in a terminal
+what's causing the failure:</p>
+
+<pre><code>$ export IPHONEOS_DEPLOYMENT_TARGET=4.3
+$ export PATH="/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+$ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk "-L/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/Flurry -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/TestFlightSDK "-F/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -filelist "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/IntermediateBuildFilesPath/Cartouche.build/Release-iphoneos/Matching Set TestFlight.build/Objects-normal/armv7/Matching Set TF.LinkFileList" -dead_strip /Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a -ObjC -all_load -lz -fobjc-arc -miphoneos-version-min=4.3 -framework Twitter -framework Accounts -framework MessageUI -framework UIKit -framework Foundation -framework CoreGraphics -framework AudioToolbox -framework AVFoundation -framework OpenAL -framework OpenGLES -framework QuartzCore -lFlurryAnalytics -lTestFlight -o "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/InstallationBuildProductsLocation/Applications/Matching Set TF.app/Matching Set TF"
+
+clang: error: no such file or directory: '/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH'
+clang: error: no such file or directory: 'Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a'
+</code></pre>
+
+<p><img class="right" src="/images/xcode_whitespace.png" width="128" height="128" title="The Culprit" >
+You can see fairly clearly that <code>clang</code> is failing to find a directory because
+of the space in the scheme name, "<strong>NAH Distribution</strong>". If you dig through
+the command text, it appears that Xcode doesn't use quotes for the library
+passed to the <code>-dead_strip</code> command. This may be peculiar to projects with
+sub-projects.</p>
+
+<p>Whitespace problems in 3178. Oh dear.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SparrowBones]]></title>
+    <link href="http://noiseandheat.com/blog/2011/11/sparrowbones/"/>
+    <updated>2011-11-22T23:39:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/11/sparrowbones</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/SparrowBones_thumb.png" width="200" height="130"></p>
+
+<p><strong>UPDATE</strong>: <a href="http://gamua.com/blog/2012/03/sparrow-1-3/">Sparrow 1.3</a> has now
+been released and it includes an updated and significantly enhanced
+AppScaffold project which makes most of the reasons to use SparrowBones
+redundant. I recommend you use the official AppScaffold project as a starting
+point now, rather than SparrowBones.</p>
+
+<hr />
+
+<p><a href="http://www.sparrow-framework.org/">Sparrow-Framework</a> is pretty awesome for
+quickly chucking together iOS games. But wouldn't it be nicer if there was a
+handy Xcode 4 template to start from?</p>
+
+<!--more-->
+
+
+<p>Your wish is my command! Presenting <strong>SparrowBones</strong>, a beautiful handcrafted
+Xcode 4 template:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/SparrowBones">https://github.com/mnem/SparrowBones</a></li>
+</ul>
+
+
+<p>It's fairly simple and slightly hacky. Unlike the AppScaffold, which comes
+with Sparrow-Framework, it supports automatic rotation (because I always hold
+my iPhone the wrong way) and unit testing (because I'm crazy like that). The
+<a href="https://github.com/mnem/SparrowBones/blob/master/README.md">README.md</a> file
+in the project should guide you through the installation.</p>
+
+<p>If you use it, you'll notice 2 template projects in the SparrowBones section -
+<em>"Game with Sparrow source copied"</em> and <em>"Game with Sparrow source linked"</em>.
+The only difference between them is that with the copied source the Sparrow
+Framework source code is copied into your new project. If you choose linked,
+the Sparrow Framework source is connected to your new project through your
+<code>SPARROW_SRC</code> variable in Xcode.</p>
+
+<p>Why 2 templates? Mainly because the Xcode template format is undocumented and
+I haven't quite worked out how to include a linked project easily in a
+template. This means that you have to tweak a few things when you use a linked
+project unfortunately. But never fear! This post has a handy guide to getting
+it working a little further down.</p>
+
+<p>Although it's recommended that you use the template with the linked Sparrow
+source (because it's a lot easier to update Sparrow-Framework that way), you
+may actually want to have a project with the Sparrow source copied. For
+example, if you are doing some hardcore hacking of the source this is a good
+option, or if you want to create a self contained project you can archive and
+mail to people it's great for that too.</p>
+
+<p>On with the guide!</p>
+
+<h2>Setting up linked source SparrowBones projects</h2>
+
+<p>Choose the right one:</p>
+
+<p><img class="center" src="/images/00_sb_choose.png" width="730" height="493"></p>
+
+<p>Fill in some blanks and choose which device family to aim for. <strong>IMPORTANT</strong>:
+Uncheck "Use Automatic Reference Counting" (Sparrow doesn't work with that
+yet). I also uncheck "Use Storyboard" because I haven't learned how to use
+those:</p>
+
+<p><img class="center" src="/images/01_sb_name_stuff.png" width="730" height="493"></p>
+
+<p>Next, we have to fix that red Sparrow.xcodeproj reference. Select it and press
+Alt-Cmd-1 to show the inspector:</p>
+
+<p><img class="center" src="/images/02_sb_select_sparrow.png" width="859" height="321"></p>
+
+<p>Then change it to be relative to your linked Sparrow Framework source.
+<strong>NOTE</strong>: the link name may be different for you – it depends on what you
+entered when setting it up (if you haven't set a link to the source up, <a href="http://www.sparrow-framework.org/help/gettingstarted/">do that now</a> before
+continuing):</p>
+
+<p><img class="center" src="/images/03_sb_adjust_link.png" width="260" height="228"></p>
+
+<p>If you look back at the Project navigator you should see Sparrow.xcodeproj as
+an <strong>expandable</strong> project:</p>
+
+<p><img class="center" src="/images/04_sb_linked_properly.png" width="260" height="64"></p>
+
+<p>This is <strong>important</strong>. If it doesn't have the arrow, you will have to <strong>quit</strong>
+Xcode and then re-launch it and open the project. Sometimes Xcode is a bit
+slow about picking up path changes.</p>
+
+<p>If that all important triangle is next to Sparrow.xcodeproj, you have one more
+thing to do. Xcode needs to know that it has to build Sparrow.xcodeproj as a
+dependency of your game target. Here's how: <strong>1)</strong> Select Sparrow.xcodeproj in
+the project navigator, <strong>2)</strong> select your game target in the editor window,
+<strong>3)</strong> go to the Build Phases section, <strong>4)</strong> expand the target dependencies
+and click the plus.</p>
+
+<p><img class="center" src="/images/05_sb_add_dep.png" width="817" height="275"></p>
+
+<p>In the window that appears, select the Sparrow target:</p>
+
+<p><img class="center" src="/images/06_sb_choos_dep.png" width="402" height="462"></p>
+
+<p>Select Add. If my instructions worked, you should now have Sparrow as a
+dependency:</p>
+
+<p><img class="center" src="/images/07_sb_dep_added.png" width="591" height="159"></p>
+
+<p>That's it! Simple once you know how. You should now be able to run the project
+in one of the simulator targets and you will some see Exciting Boxes on the
+screen. Awesome. Well done you!</p>
+
+<h2>A Note on Unit Tests</h2>
+
+<p>If you want to write unit tests, and I know you do, you will have to add all
+the Frameworks in the frameworks folder to your <code>&lt;AppName&gt;Tests</code> target,
+otherwise you will get lots of Mach-O linker errors:</p>
+
+<p><img class="center" src="/images/08_sb_unit_test.png" width="874" height="528"></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Unscientific Browser Speed Test - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="Out of curiosity, I ran the HTML5 particle
+thing I hacked together on a few browsers, and the rough order of performance was: Chrome: ~83 FPS
+Win 7 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Unscientific Browser Speed Test</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T09:16:00+00:00" pubdate data-updated="true">Pungenday, 16 of The Aftermath 3176 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Out of curiosity, I ran the<a href="http://wip.noiseandheat.com/html5_particles/"> HTML5 particle</a>
+thing I hacked together on a few browsers, and the rough order of performance was:</p>
+
+<p><img class="center" src="http://chart.apis.google.com/chart?chxl=1:|iOS+Safari|Firefox+3|Firefox+4+b6|Internet+Explorer+9|OS+X+Safari|Win+7+Safari|Chrome&chxr=1,0,6&chxt=x,y&chbh=a&chs=512x256&cht=bhs&chco=4D89F9&chd=t:83,82,60,54,43,16,3&chdl=Potential+FPS&chg=10,0&chtt=Browser+Performance" width="512" height="256" title="Browser Performance" ></p>
+
+<!--more-->
+
+
+<ol>
+<li>Chrome: <strong>~83 FPS</strong></li>
+<li>Win 7 Safari: <strong>~82 FPS</strong></li>
+<li>OS X Safari: <strong>~60 FPS</strong></li>
+<li>Internet Explorer 9: <strong>~54 FPS</strong></li>
+<li>Firefox 4 b6: <strong>~43 FPS</strong></li>
+<li>Firefox 3: <strong>~16 FPS</strong></li>
+<li>iOS 4.2 Safari, iPhone 4: <strong>~3 FPS</strong></li>
+</ol>
+
+
+<p>The FPS recorded is the &#8220;Potential FPS&#8221; figure which is calculated by adding
+the average render and update times, and seeing how many of those cycles would
+fit in a second.</p>
+
+<p>It&#8217;s interesting to see how far ahead of the others Chrome and Safari are on
+Windows. The other browsers have some catching up to do for raw pixel pushing
+(give or take my rubbish code).</p>
+
+<p>Even though this is a pretty uncontrolled measure, it&#8217;s a beginning from which
+to work out how to do things better. I&#8217;m really looking forward to try to get
+some degree of useful performance from the mobile versions, especially after
+reading <a href="http://www.phoboslab.org/log/2010/10/impact-for-ios">this blog post</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T09:16:00+00:00" pubdate data-updated="true">Pungenday, 16 of The Aftermath 3176 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/laboratory/'>Laboratory</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/11/pixels-html5-canvas-style/" title="Previous Post: Pixels, HTML5 canvas style">&laquo; Pixels, HTML5 canvas style</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/12/stigmata/" title="Next Post: Stigmata">Stigmata &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test/';
+        var disqus_url = 'http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

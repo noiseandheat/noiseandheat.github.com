@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: adobe | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/adobe/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Further ruminations on Adobe, Flash and mobile devices.]]></title>
+    <link href="http://noiseandheat.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices/"/>
+    <updated>2010-01-04T18:15:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/skep-hippo.jpg" width="200" height="130"></p>
+
+<p><em>[This entry
+was originally going to be a comment on Christopher Caleb's post,
+"<a href="http://www.yeahbutisitflash.com/?p=332">Adobe's Mobile Strategy Fundamentally Flawed?</a>",
+but I have an annoying
+habit of writing rather more than I have to, so I granted this corpulent
+comment a promotion to First Real Post.]</em></p>
+
+<p>Flash on mobile devices. It's an interesting prospect. Of course, it's more
+than a prospect, it already exists to some extent. Adobe's dream is to create
+an engine which allows Flash content to be run on all major platforms, and it
+has set it's sights upon mobile devices because they offer the tantalising
+prospect of being a bit of a cash cow, one way or another.</p>
+
+<!--more-->
+
+
+<p><a href="http://www.yeahbutisitflash.com/?p=332">Christopher's post</a> is a partial
+response to <a href="http://aralbalkan.com/2895">Aral Balkan's post</a>, so you may want
+to have a quick skim over them. They're quite interesting. I'll wait here for
+you. Go on. Just don't forget to come back, y'hear?</p>
+
+<p>Read them? Good. Let us begin...</p>
+
+<p>Flash Lite. Failure? Yes. Success? Yes.</p>
+
+<p>Flash Lite failed in it's grand vision of providing a large, consistent,
+mobile platform on which to view Flash style content. Currently only a handful
+of phone models support the latest (backwardly not very compatible) version of
+Flash Lite, and even amongst those, horrible incompatibility pixies strut
+around presenting their fail feathers.</p>
+
+<p>It succeeded, however, as a necessary first failure in order to work out what
+was probably for a successful cross platform, uh, platform. I'm sure within
+Adobe it spurred many people along paths that needed to trodden in order to
+move toward a reasonable version of Flash on mobile devices. It also succeeded
+in inspiring a small but remarkably dedicated segment of developers and
+designers, giving them a tantalising hint as to what could have been, or
+should have been possible for mobile app creation.</p>
+
+<p>It's time to let it rest in peace though. Flash Lite, as it stands, is dead,
+or perhaps the living dead. Not only is it quite expensive to develop content
+for, there is very little chance you will recoup all of that investment.
+Distribution for developed applications remains a nightmare because it is
+modelled on the old, pre-Apple distribution mechanisms: carrier deals, random
+user stumbling and dusty website warehouses holding applications of unknown
+quality.</p>
+
+<p>The next big failure looming for Adobe is their Flash web plugin for mobile
+devices. Why will it be a failure? Partially because even on my dual core, 64
+bit laptop with 4GB of RAM and a ridiculously huge amount of memory bandwidth,
+the (mis)use of Flash causes a significant proportion of web pages to run far
+slower than they need to. This isn't necessarily the fault of the
+<a href="http://en.wikipedia.org/wiki/Rich_Internet_application">RIA</a>/Flash game you
+came to look at, but when you add all the Flash adverts and other random
+elements into the mix, it is an unpleasant experience. Now try to imagine this
+on a mobile device which can't throw data around very fast, either in terms of
+memory bandwidth or network bandwidth. Then mix in a healthy dose of sucky and
+uncertain device input capabilities, developer assumptions over screen size
+and resolution and pour in some speed-of-development-over-engineering-
+worthiness-of-development and inhale the resulting heady scent of user
+disappointment. It's going to be a mess.</p>
+
+<p>Traditionally, this is where advocates of mobile and desktop convergence drag
+out the old dying horse representing the Speed of Technological Advance. Alas,
+unless desktop technologies stand still (they won't), this argument is
+hobbling along on shaky hooves as it is. Coupled with cold hard physical facts
+to do with heat dispersion versus space, battery life versus cpu power and,
+finally, the harsh pointy stick of cost of manufacture, we can lead the old
+horse gently to the great big glue factory in the sky. Small handheld mobile
+devices will be playing catch up for the currently foreseeable future.</p>
+
+<p>Adobe's last gasp for mobile success rests on other people doing Adobe's work
+for them, and providing nice hooks for a core Flash component on all mobile
+devices. This is likely to yield one or two high profile success stories, but
+will be followed by an awful lot of poorer stories.</p>
+
+<p>Part of the reason is what commercial advantage do OEMs have for ensuring
+excellent compatibility for Adobe's Open Screen project?</p>
+
+<p>Initially, there will be a significant marketing advantage for the first
+devices out to support Flash well. It will be a bullet point which will
+persuade many uncertain buyers to part with their cash. However, this will be
+a short lived advantage. If it is popular, a version will be quickly offered
+on other devices (apart from iPhone of course), summarily added to the
+marketing bullet point list, and then left to rot in good-enough feature hell.
+And lo, the mistakes of version fragmentation shall be repeated once more.</p>
+
+<p>An alternative would be for Adobe to keep the versions for every platform in
+house and ensure the quality itself. However, it's very unlikely they have the
+resources to undertake such an enormous project, and they certainly won't have
+all the access they need to pre-market devices to ensure quality.</p>
+
+<p>A brief diversion here over the responsibilities of OEMs. Many people blame
+OEMs for device fragmentation hurting 3rd party technologies. They are wrong.
+The pusher of the proclaimed cross platform product bears the majority of that
+burden. Said pusher (be it Adobe, be it Sun) is likely to benefit most from
+wide adoption, so they must accept most of the risk. OEMs have already
+invested a huge amount in the design, production and likely marketing of the
+device, so they have already brought enough to the table.</p>
+
+<p>Where was I? Ah yes, version fragmentation. Version fragmentation is bad,
+however hardware fragmentation is worse. Version fragmentation can be
+reasonably dealt with, hardware fragmentation is almost impossible to deal
+with fully. Beyond some sort of certification program run by Adobe to ensure a
+minimum set of capabilities, there isn't a great deal Adobe can offer. This
+will result in the Flash Lite mistake of writing for the largest common
+feature set, which may not be the most enticing feature set.</p>
+
+<p>The problems faced by Adobe here are not new. They were the same problems
+brought to light by Java Mobile (or whatever J2ME is called these days). Sun
+failed to solve them despite coming up with some cunning engineering
+solutions. Adobe so far seems to be hoping that user pressure from desire for
+Flash on mobile will solve some of these issues for them, rather than provide
+any solid technical solutions.</p>
+
+<p>This is was a long, and somewhat Adobe negative entry. However, for the
+record, I like Flash. My job involves creating wonderful things with Flash. It
+is with vim and finesse Flash allows me to do this. Flash has changed the face
+of the Desktop Experience by allowing non computer science people into the
+geek ridden programming club, and it has changed it for the better, in my
+opinion.</p>
+
+<p>However, I have to agree with Aral to a large extent. Adobe are drunk on
+success. This is very dangerous. The clear speed of development advantages
+offered by Flash are diminishing. JavaScript in browsers now provide enough
+scripting power to replace Flash in a great many RIA areas, and unlike Adobe's
+laughable claim that Flash is a de facto standard, JavaScript actually is a de
+facto standard. Flash still reigns supreme in the browser game arena, but even
+here it is under attack from the hugely impressive
+<a href="http://unity3d.com/">Unity3D</a> framework. AIR has no clear challenger, but it
+also has no broad adoption either, despite it's excellent selling points for
+desktop application development. In a future where
+<a href="http://en.wikipedia.org/wiki/Google_Chrome_OS">GoogleOS</a> controls your life
+and your choice of applications, AIR may become irrelevant.</p>
+
+<p>It's a tough future, but I hope Adobe sip some strong coffee, awaken from
+their reverie, and stride confidently through it. It's not too late for them…
+Yet.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,2580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Chrome and PPAPI Flash Audio Syncing Bug]]></title>
+    <link href="http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/"/>
+    <updated>2012-11-15T21:05:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug</id>
+    <content type="html"><![CDATA[<p>In a somewhat Microsoftian move, Google decided to change the standard browser plugin architecture called <a href="http://en.wikipedia.org/wiki/NPAPI">NPAPI</a> for Chrome and bundle a custom port of Flash which uses it. Sadly, this has lead to some differences for that version of Flash and, unfortunately, new bugs.</p>
+
+<!--more-->
+
+
+<p>The bug which is mainly causing me despair at the moment, is that there seems to be a small delay between telling a sound to play and it actually playing. Although small, it is noticeable enough to make the game I&#8217;m working on feel like it&#8217;s a badly dubbed film.</p>
+
+<p><a name="example"></a></p>
+
+<h2>Example</h2>
+
+<p>This is can be illustrated by the following Flash movie. When you move your mouse over the blue rectangle, you should hear a rather jarring BZZZZ noise and simultaneously the square should turn red:</p>
+
+<div id="flash-container" style="text-align: center;">
+  <div class="flash-video" style="width: 564px;height: 414px;background-color: white;">
+    <div id="simpletest" style="width: 550px;height: 400px;">
+      <p>Loading movie&#8230; (or maybe not if you block Flash or don&#8217;t have it installed)</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  function embedFlash() {
+    var flashvars = {};
+    var params = {
+      scale: 'noscale',
+      wmode: 'opaque'
+    };
+
+    swfobject.embedSWF(
+      '/images/sound_test.swf',
+      'simpletest',
+      "550",
+      "400",
+      "11.0.0",
+      null,
+      flashvars,
+      params);
+  };
+  embedFlash();
+</script>
+
+
+<p>On non-Chrome browsers, or if you disable the PPAPI version of Flash in Chrome, this is indeed the case. However, if you try it in Chrome with the PPAPI Flash plugin, there&#8217;s a very short delay after the square turns red before the sound plays. It&#8217;s easier to see and hear when comparing it with another browser using the standard Flash plugin.</p>
+
+<p>Sadly, I can&#8217;t work out any suitable hack to get around this issue, so I&#8217;ve opened a bug on the Chromium project:</p>
+
+<ul>
+<li><a href="http://code.google.com/p/chromium/issues/detail?id=161387">http://code.google.com/p/chromium/issues/detail?id=161387</a></li>
+</ul>
+
+
+<h2>Example Source</h2>
+
+<p>Lest you think I&#8217;ve code anything especially insane, you can grab all the sources for the test movie:</p>
+
+<ul>
+<li><a href="https://gist.github.com/4077864">https://gist.github.com/4077864</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Eigen, GLM and CML: math lib performance on iOS]]></title>
+    <link href="http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/"/>
+    <updated>2012-09-23T21:12:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml&#8211;math-lib-performance-on-ios</id>
+    <content type="html"><![CDATA[<p>At the moment I&#8217;m playing around with writing a cross platform game library, because that&#8217;s what all the cool kids are doing. One of the parts I&#8217;m not particularly looking forward to is writing a math library for the rendering. Fortunately, far greater programmers than I have done so already. In fact, many greater programmers have. Three seem quite popular: <a href="http://cmldev.net/">CML</a>, <a href="http://eigen.tuxfamily.org/">Eigen</a> and <a href="http://glm.g-truc.net/">GLM</a>.</p>
+
+<!--more-->
+
+
+<p>Being lazy I searched around to find out which one seemed fastest or easiest to use with mobile, and I found a very useful post on the three common ones at <a href="http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/">http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/</a>. Unfortunately, the tests had been run only on desktop and Android, so I&#8217;ve forked the repository and added an iOS runner for the tests. You can find it at:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/Math-Library-Test/tree/ios-test">https://github.com/mnem/Math-Library-Test/tree/ios-test</a></li>
+</ul>
+
+
+<p>I also added a branch with the current latest source code for each of the libraries:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/Math-Library-Test/tree/update-mathlibs-to-latest-version">https://github.com/mnem/Math-Library-Test/tree/update-mathlibs-to-latest-version</a></li>
+</ul>
+
+
+<p>A full description of the tests can be seen in the source code, or you can read through the <a href="http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/">original article by Martin</a>.</p>
+
+<p>Here are the results for running it on my iPhone 4 with the original library versions:</p>
+
+<pre><code>                        iOS release build
+Eigen additions         2515
+Eigen multiplications   6915
+
+GLM additions           3549
+GLM multiplications     7347
+
+CML additions           3004
+CML multiplications     11511
+
+(Timings in milliseconds. Smaller is better.)
+</code></pre>
+
+<p>And once more with the latest library versions:</p>
+
+<pre><code>                        iOS release build
+Eigen additions         2161
+Eigen multiplications   6721
+
+GLM additions           3340
+GLM multiplications     5865
+
+CML additions           2964
+CML multiplications     11112
+
+(Timings in milliseconds. Smaller is better.)
+</code></pre>
+
+<p>I haven&#8217;t fiddled with compile settings beyond using a release build, so it&#8217;s quite likely the performance can be improved.</p>
+
+<p>The results for the <a href="http://cmldev.net/">CML</a> multiplications are suspiciously slow, so I wonder if something odd is going on there, but overall it seems to come down to <a href="http://eigen.tuxfamily.org/">Eigen</a> or <a href="http://glm.g-truc.net/">GLM</a>.</p>
+
+<p>I think, for the moment, I&#8217;ll use <a href="http://glm.g-truc.net/">GLM</a> for a couple of reasons: it&#8217;s geared towards OpenGL use rather than being a generic linear algebra library, and it has more straightforward MIT licensing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[easy_install and broken setuptools on OS X]]></title>
+    <link href="http://noiseandheat.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x/"/>
+    <updated>2012-09-01T09:32:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2012/09/easy-install-and-broken-setuptools-on-os-x</id>
+    <content type="html"><![CDATA[<p>After upgrading to Mountain Lion, <code>easy_install</code> seemed to be borked. On
+running it, this happened:</p>
+
+<pre><code>$ easy_install Pygments
+Traceback (most recent call last):
+  File "/usr/local/bin/easy_install", line 5, in &lt;module&gt;
+    from pkg_resources import load_entry_point
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/pkg_resources.py", line 2607, in &lt;module&gt;
+    parse_requirements(__requires__), Environment()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/pkg_resources.py", line 565, in resolve
+    raise DistributionNotFound(req)  # XXX put more info here
+pkg_resources.DistributionNotFound: setuptools==0.6c12dev-r85381
+</code></pre>
+
+<!--more-->
+
+
+<p>I cursed <a href="http://www.apple.com">Apple</a> for breaking things again,
+but it turns out it was my fault. Something had installed a version of
+<code>easy_install</code> in <code>/usr/local/bin/</code> which was shadowing the correct one in
+<code>/usr/bin/</code>. Silly me.</p>
+
+<p>The solution? Delete <code>/usr/local/bin/easy_install</code> and all becomes right with
+the world. I also had <code>/usr/local/bin/easy_install-2.7</code> which met a
+similar fate in the fiery jaws of <code>rm</code>. I should probably re-install OS X
+sometime to decrustify it a bit after all the random shite I&#8217;ve inflicted
+on it over the years.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laptop vs iPad screen]]></title>
+    <link href="http://noiseandheat.com/blog/2012/03/laptop-vs-ipad-screen/"/>
+    <updated>2012-03-16T12:01:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/03/laptop-vs-ipad-screen</id>
+    <content type="html"><![CDATA[<p><a href="http://noiseandheat.com/images/laptop_vs_ipad.png"><img class="center" src="http://noiseandheat.com/images/laptop_vs_ipad.png" width="512" height="384"></a></p>
+
+<p>Coding pains.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lazy One Liners: 'git rm' all deleted files]]></title>
+    <link href="http://noiseandheat.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/"/>
+    <updated>2012-02-16T21:51:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/02/lazy-one-liners-`git-rm`-all-deleted-files</id>
+    <content type="html"><![CDATA[<p><strong>[UPDATE]</strong> <em>My <code>git</code> skills are weak. You can achieve this much more simply by typing: <code>git add -A</code>. Still, knowing about the <code>--porcelain</code> option is useful. Honest.</em></p>
+
+<p>Deleted three hundred and seventy two files and forget to use <code>git rm</code>?
+This one liner will do it for you, if you run it from your repository
+root:</p>
+
+<pre><code>git status --porcelain | awk '/^.D .*$/ {print $2}' | xargs git rm
+</code></pre>
+
+<!--more-->
+
+
+<p>The <code>--porcelain</code> command is great for batch manipulations of your
+staged and unstaged files. Just replace the <code>D</code> in <code>/^.D .*$/</code> with the
+status letter for the sort of files you want to perform a batch
+operation on, and then replace the <code>git rm</code> at the end of the command
+with whatever you want to do to them. The filename will be passed at
+the end of the <code>git</code> command.</p>
+
+<p>When you change the letter, where you place the <strong>dots</strong> are important.
+<code>.D</code> is used for unstaged deleted files, whereas <code>D</code> (no dot before)
+indicates a staged deleted file. Those 2 columns can have many
+character combinations, so you may have to play with the <code>awk</code> matching
+string a little to filter what you want. To test the pattern safely, you
+can use:</p>
+
+<pre><code>git status --porcelain | awk '/^.D .*$/'
+</code></pre>
+
+<p>This will print any matching lines. If there&#8217;s no output, the filter
+doesn&#8217;t match anything.</p>
+
+<p>You can find more information about the status letters in the man
+page for <a href="http://schacon.github.com/git/git-status.html">git-status</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Throttling bandwidth on OS X]]></title>
+    <link href="http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x/"/>
+    <updated>2012-02-03T22:35:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x</id>
+    <content type="html"><![CDATA[<p>Recently I started pushing a repository to GitHub only to find out it
+was a couple of GB in size. Due to my <a href="http://www.virginmedia.com/">ISPs</a> network
+connection being made of soiled tissue paper, dead earwigs and lost
+hope, it quickly saturated it. This interrupted watching
+<a href="https://en.wikipedia.org/wiki/Breaking_Bad">Breaking Bad</a> on <a href="http://www.netflix.com/">Netflix</a>. Clearly something had to be done.</p>
+
+<p>Enter <code>ipfw</code>.</p>
+
+<!--more-->
+
+
+<p><code>ipfw</code> is more generally thought of as a utility for managing firewall
+rules on OS X, but it&#8217;s also great for shaping traffic. Doing that is a
+simple two step process: create an <code>ipfw pipe</code> for a data flow and then
+configure how big that pipe is.</p>
+
+<p>First, create a pipe which matches a flow of data. A pipe is a
+combination of source address, destination address and optional matching
+patterns. In my case I wanted to affect outgoing traffic to port 22
+which is used by <code>ssh</code>, the program <code>git</code> generally talks to servers
+with:</p>
+
+<pre><code>$ sudo ipfw add pipe 1 ip from any to any out dst-port 22
+</code></pre>
+
+<p>I&#8217;ve been a bit lazy here by using <code>any</code> for the IP address fields. I
+know that only my connection to github will be using <code>dst-port 22</code>. The
+<code>from</code> IP address and <code>to</code> IP address may be written as a specifc IP, or
+ a range of IPs using <a href="http://en.wikipedia.org/wiki/CIDR_notation">CIDR notation</a>, instead of the <code>any</code> wildcard.
+ I&#8217;ve specifically set the rule to only match <code>out</code> going traffic. If
+ you want to control the flow of data in both directions, you would
+ generally create an <code>in</code> pipe and an <code>out</code> pipe separately</p>
+
+<p>Note that I&#8217;ve named this pipe <strong>1</strong>. This number is used to uniquely
+identify the pipe when carrying out other operations on it. If you
+create more than one pipe, be sure to use unique numbers for each one.</p>
+
+<p>Next, we have to configure the pipe to control the data flow:</p>
+
+<pre><code>$ sudo ipfw pipe 1 config bw 75KBytes/s
+</code></pre>
+
+<p>The <code>bw</code> setting ensures that data passing through pipe 1 is
+transferring at most 75 KBytes per second. You can set this to whatever
+value is suitable for your connection.</p>
+
+<p>If you want, you can check what connections are being affected:</p>
+
+<pre><code>$ sudo ipfw pipe list
+00001: 600.000 Kbit/s    0 ms   50 sl. 1 queues (1 buckets) droptail
+    mask: 0x00 0x00000000/0x0000 -&gt; 0x00000000/0x0000
+BKT Prot ___Source IP/port____ ____Dest. IP/port____ Tot_pkt/bytes Pkt/Byte Drp
+  0 tcp    192.168.0.100/61291  207.97.227.239/22     685   991700 31 43792   0
+</code></pre>
+
+<p>Finally, don&#8217;t forget to remove the pipe when you no longer need to
+limit the data transfer rate:</p>
+
+<pre><code>$ sudo ipfw pipe delete 1
+</code></pre>
+
+<p>There are many other options in <code>ipfw</code> for shaping traffic, including
+commands for dropping a certain percentage of packets (great for testing
+game networking code), and you can limit the bandwidth to very small
+rates which is handy for seeing how slow connections experience websites
+you create. Check out the
+<a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man8/ipfw.8.html">man page</a>
+for more details.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[clang failed with exit code 1]]></title>
+    <link href="http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/"/>
+    <updated>2012-01-30T15:23:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1</id>
+    <content type="html"><![CDATA[<blockquote><p>Apple Mach-O Linker Error<br/>Command /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang failed with exit code 1</p><footer><strong>Xcode 4</strong> <cite>Bringing the Pain</cite></footer></blockquote>
+
+
+<p>Experiencing <code>clang</code> failing with no other error information?</p>
+
+<!--more-->
+
+
+<p>If so, then check the scheme name you are building. If it has a space in it,
+that&#8217;s probably the issue. This had me tearing my hair out for about an hour.</p>
+
+<p>If you run the full command which Xcode is using, you can see in a terminal
+what&#8217;s causing the failure:</p>
+
+<pre><code>$ export IPHONEOS_DEPLOYMENT_TARGET=4.3
+$ export PATH="/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+$ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk "-L/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/Flurry -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/TestFlightSDK "-F/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -filelist "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/IntermediateBuildFilesPath/Cartouche.build/Release-iphoneos/Matching Set TestFlight.build/Objects-normal/armv7/Matching Set TF.LinkFileList" -dead_strip /Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a -ObjC -all_load -lz -fobjc-arc -miphoneos-version-min=4.3 -framework Twitter -framework Accounts -framework MessageUI -framework UIKit -framework Foundation -framework CoreGraphics -framework AudioToolbox -framework AVFoundation -framework OpenAL -framework OpenGLES -framework QuartzCore -lFlurryAnalytics -lTestFlight -o "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/InstallationBuildProductsLocation/Applications/Matching Set TF.app/Matching Set TF"
+
+clang: error: no such file or directory: '/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH'
+clang: error: no such file or directory: 'Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a'
+</code></pre>
+
+<p><img class="right" src="http://noiseandheat.com/images/xcode_whitespace.png" width="128" height="128" title="The Culprit" >
+You can see fairly clearly that <code>clang</code> is failing to find a directory because
+of the space in the scheme name, &#8221;<strong>NAH Distribution</strong>&#8221;. If you dig through
+the command text, it appears that Xcode doesn&#8217;t use quotes for the library
+passed to the <code>-dead_strip</code> command. This may be peculiar to projects with
+sub-projects.</p>
+
+<p>Whitespace problems in 3178. Oh dear.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Uncrustifying Objective-C Source in Xcode 4]]></title>
+    <link href="http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/"/>
+    <updated>2012-01-19T23:42:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4</id>
+    <content type="html"><![CDATA[<p>K&amp;R. Allman. BSD. Crazy Whitesmiths. No, it&#8217;s not a nu-punk-alt-country rock
+band, but a selection of common (well, sort of) <a href="http://en.wikipedia.org/wiki/Indent_style">code indent styles</a>.
+Much blood has been spilled arguing over the merits of each.</p>
+
+<p>I&#8217;m not brave enough to venture into that battlefield, but I can at least
+point the weary foot soldier towards the tent of General <a href="http://uncrustify.sourceforge.net/">Uncrustify</a> and
+his Marvellous Xcode Contraption.</p>
+
+<!--more-->
+
+
+<h2>Xcode Scripting</h2>
+
+<p>Previous versions of Xcode allowed fairly powerful scripting. Sadly that
+feature has gone. It has been replaced by <a href="http://developer.apple.com/library/mac/#recipes/xcode_help-alerts_preferences/Recipe.html">Behaviors</a>
+instead. While they aren&#8217;t quite as flexible, they can be used to run a shell
+script from wherever your project has been saved.</p>
+
+<p>First download the wrapper script I created for <code>uncrustify</code>. You can either
+save the script from your browser by visiting the
+<a href="https://raw.github.com/gist/1641451/nah_xcode_uncrustify.rb">gist page</a>, or you can clone the gist with <code>git</code>:</p>
+
+<pre><code>$ git clone git://gist.github.com/1641451.git nah_xcode_uncrustify
+</code></pre>
+
+<p>If you download the script from your browser, don&#8217;t forget to make it
+executable:</p>
+
+<pre><code>$ chmod a+x nah_xcode_uncrustify.rb
+</code></pre>
+
+<p>Have a quick look over the script to make sure I&#8217;m not doing anything evil,
+like tarring all your source and emailing it to my swiss github account. Next,
+make sure you have <code>uncrustify</code> installed. If you have the nifty package
+manager <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, then installing is as simple as:</p>
+
+<pre><code>$ brew install uncrustify
+</code></pre>
+
+<p>If you have another package manager installed such as <a href="http://www.macports.org/">MacPorts</a>, then you
+can probably use that to install <code>uncrustify</code>. Otherwise you&#8217;ll have to build it from
+source and put the executable in your <code>/usr/bin</code> folder. See
+<a href="https://github.com/bengardner/uncrustify">https://github.com/bengardner/uncrustify</a> for more
+details.</p>
+
+<p>Now add a new Behavior to Xcode. From the Xcode menu, select
+&#8221;<strong>Edit Behaviors…</strong>&#8221;:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/uncrustify_select_behaviors.png" width="432" height="250"></p>
+
+<p>Click the <strong>+</strong> icon in the list to add a new Behavior, give it a name and
+scroll to the &#8221;<strong>Run</strong>&#8221; script check box. Tick the check box and then select
+&#8221;<strong>Choose script…</strong>&#8221; from the drop down list next to it:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/uncrustify_select_script.png" width="750" height="528"></p>
+
+<p>Navigate to wherever you have the <code>nah_xcode_uncrustify.rb</code> script and select
+it.</p>
+
+<p>Optionally, you can assign a keyboard shortcut to the Behavior by double
+clicking on the command symbol next to the Behavior name. In the screen above
+I&#8217;ve assigned <em>alt-shift-f</em> to the Behavior.</p>
+
+<p>Now for a test run. Open an Objective-C project. <strong>Make sure you have it
+safely under version control</strong>. This is <em>very</em> important because <code>uncrustify</code>
+has been set to run without creating a backup of the source files. If you
+don&#8217;t have your source under version control and you hate what it does to your
+files, then there&#8217;s no going back.</p>
+
+<p>Save all the open files by pressing <em>alt-command-s</em> (the script modifies the
+files on disk, you need to save first) and be sure to stage any new source
+file changes or whatever the equivalent is in the VCS you are using. Now run
+<code>uncrustify</code> either by selecting the Behavior you just created from the
+Behaviors menu, or using the keyboard shortcut you assigned.</p>
+
+<p>Depending on the size of the project it may take a few moments to run. When
+it&#8217;s finished, you should see that the source controlled files are marked as
+modified and any open ones should reload with nice uncrusted spacing.</p>
+
+<p>If you&#8217;re really eager to have formatted code, you can edit the &#8221;<strong>Build
+starts</strong>&#8221; Behavior in Xcode and tell it to run <code>nah_xcode_uncrustify.rb</code> before
+each build.</p>
+
+<h2>I Hate Your Uncrusting Config, How Do I Fix It?</h2>
+
+<p>The first time the script is run, it creates a file called
+<code>.nah_xcode_uncrustify.cfg</code> in your home folder. To change or tweak how
+<code>nah_xcode_uncrustify.rb</code> tells <code>uncrustify</code> to format your source, simply
+edit that config file.</p>
+
+<p><strong>NOTE</strong>: the config file starts with a <code>.</code> indicating it is hidden, so by
+default Finder won&#8217;t show it. You can either open it from Terminal or else set
+Finder to show hidden files (<a href="http://apple.stackexchange.com/questions/5870/how-to-show-hidden-files-and-folders-in-finder">how to</a>).</p>
+
+<p>The config file is fairly well documented. If it all goes hideously wrong
+during editing, you can always delete <code>.nah_xcode_uncrustify.cfg</code> from your
+home folder then re-reun the uncrustifying Behavior. A new default config
+file will be generated.</p>
+
+<h2>UniversalIndentGUI</h2>
+
+<p>If tweaking text config files isn&#8217;t your thing, you can use a great utility
+called <a href="http://universalindent.sourceforge.net/">UniversalIndentGUI</a> to modify the config file. It allows you to play with
+values and preview the changes on the currently loaded source file.</p>
+
+<p>To use it, simply download the OS X version from the <a href="http://universalindent.sourceforge.net/">UniversalIndentGUI</a>
+homepage, chuck it in your Applications folder, and then when you run it,
+select <code>uncrustify</code> as the code formatter:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/uncrustify_uig.png" width="285" height="193"></p>
+
+<p>You can use the &#8221;<strong>Live Indent Preview</strong>&#8221; check box to toggle between the
+original file and the settings you&#8217;ve selected.</p>
+
+<p>If you want to use the default config from the script as a starting point, you
+have to tell <code>uncrustify</code> to modify it a bit first. The following command
+should do the trick:</p>
+
+<pre><code>$ uncrustify -c ~/.nah_xcode_uncrustify.cfg --universalindent &gt; \
+    ~/uigui_nah_xcode_uncrustify.ini
+</code></pre>
+
+<p>That will create or <strong>overwrite</strong> a file in your home directory called
+<code>uigui_nah_xcode_uncrustify.ini</code>. Import that into <a href="http://universalindent.sourceforge.net/">UniversalIndentGUI</a> and
+fiddle with it as much as you want.</p>
+
+<p>Whether you start from scratch or tweak the default config created by the
+script, you will have to save it to your home folder as a file called
+<code>.nah_xcode_uncrustify.cfg</code>. When you do, the app will ask you if you want to
+save a file starting with <code>.</code> (you do) and if you want to replace the existing
+<code>.nah_xcode_uncrustify.cfg</code> (which you also want to do).</p>
+
+<p>As with manual editing, if it all goes wrong you can delete
+<code>.nah_xcode_uncrustify.cfg</code> from your home folder then re-reun the
+uncrustifying Behavior to recreate the default config.</p>
+
+<h2>Script Miscellanea</h2>
+
+<p><code>nah_xcode_uncrustify.rb</code> has peculiarities.</p>
+
+<p>It only tries to format C, C++, Objective-C, Objective-C++ and header files
+(<code>*.h</code>).</p>
+
+<p>What the script considers to be the main source folder depends on the name of
+the project. If the project is called <code>Bob</code>, then the main source folder is
+assumed to be called <code>Bob</code>, and is inside the same folder containing
+<code>Bob.xcodeproj</code>. This allows you to place third party submodules outside of
+that folder, preventing the script from reformatting them. This is especially
+important for <code>git</code> users as modifying <code>git submodule</code> folders can cause
+issues for other people trying to checkout the code.</p>
+
+<p>The script tries to be clever about the language type of header files.
+Objective-C, Objective-C++, C and C++ all happily use <code>*.h</code> files as header
+files. The script will search for a source file with the same name as the
+header file and use that extension as the language setting for the header. At
+the moment, it searches the main source folder for the associated source file.
+If it can&#8217;t find one it treats it as an Objective-C header file on the
+assumption that it&#8217;s probably a protocol.</p>
+
+<p>The default formatting for C and C++ files may be a bit shonky and
+inconsistent compared to Objective-C files. I spend most of my time in
+Objective-C land these days, so didn&#8217;t have many test files handy.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[VPN with Amazon EC2 or Saving Your phone from Promiscuity]]></title>
+    <link href="http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/"/>
+    <updated>2012-01-06T10:02:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity</id>
+    <content type="html"><![CDATA[<p>Modern mobile devices are a wonderful, especially when combined with some handy
+public WiFi hotspot. Unfortunately ne&#8217;er-do-wells abound so if you aren&#8217;t
+careful using public hotspots, people can poke around with your data
+packets and steal fun details like <a href="http://codebutler.com/firesheep">usernames and passwords</a>.
+What is a mobile internet addict to do?</p>
+
+<p>Simple! Setup up your own <a href="http://en.wikipedia.org/wiki/Virtual_private_network">VPN</a>.
+Here&#8217;s how to set one up on Amazon EC2, suitable for use with most smartphones
+and laptops.</p>
+
+<!--more-->
+
+
+<h2>Pre-requisites</h2>
+
+<p>Similar to my <a href="http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/">Reviewboard setup guide</a>
+this one assumes that you have an AWS EC2 account, and that you are
+comfortable with creating instances and <code>ssh</code>&#8216;ing into them.</p>
+
+<p>I&#8217;m assuming you are installing this on an <a href="http://aws.amazon.com/amazon-linux-ami/">Amazon Linux AMI</a>
+EC2 instance, but it will probably work with other Linux distributions.
+If you&#8217;re lucky, all you will need to do is substitute that distribution&#8217;s
+package manager command in place of <code>yum</code>. For example, <code>apt-get</code>.</p>
+
+<p>The resulting VPN supports PPTP connections which, while not the most secure,
+are probably the most widely supported. Android, iOS, Linux, Windows 7
+and Mac OS X all come with PPTP VPN clients.</p>
+
+<h2>What You&#8217;ll End Up With</h2>
+
+<ul>
+<li>1 (one) VPN PPTP daemon (<a href="http://poptop.sourceforge.net/">Poptop</a>) running on the server</li>
+<li>n (many) VPN user accounts, as desired</li>
+<li>1 (one) more secure way to access the internet</li>
+</ul>
+
+
+<p>Optionally, you will also have a script which allows you to easily add new
+VPN accounts.</p>
+
+<h2>Installing and configuring PPTPD</h2>
+
+<p>Install all the stuff for the PPP daemon (PPTP uses this) and some
+development tools for compiling Poptop. As usual, you don&#8217;t type (and don&#8217;t copy)
+the <code>$</code> symbol at the start of the line, I just use that to indicate the command
+prompt, but you can include the <code>\</code> line splitting characters when copying
+and pasting:</p>
+
+<pre><code>$ sudo yum --assumeyes install \
+    ppp \
+    ppp-devel \
+    make \
+    gcc \
+    gcc-c++ \
+    openssl-devel \
+    ntsysv
+</code></pre>
+
+<p>Fetch and extract Poptop:</p>
+
+<pre><code>$ mkdir ~/pptpd-install
+$ cd ~/pptpd-install
+$ curl -s http://kent.dl.sourceforge.net/project/poptop/pptpd/pptpd-1.3.4/pptpd-1.3.4.tar.gz | tar -xvz
+</code></pre>
+
+<p>Configure Poptop to use the <code>/usr</code> directory when it&#8217;s installed. I did this
+to get around a few issues with paths in the default configuration (alternatively
+I could have edited those, but I&#8217;m lazy):</p>
+
+<pre><code>$ cd pptpd-1.3.4
+$ ./configure --prefix=/usr --exec-prefix=/usr
+</code></pre>
+
+<p>Next we want to patch the <code>patchlevel.h</code> file so that wtmp logging works. It&#8217;s
+a bit of a hassle, but I think it&#8217;s worth it because you can the use standard
+wtmp reading commands such as <code>last venger</code> to see a list of when and where
+VPN user venger connected. Handy if you ever suspect someone has been
+misusing your account.</p>
+
+<p>This crazy command gets the current <code>pppd</code> version and uses <code>sed</code> to substitute
+that version in the <code>plugins/patchlevel.h</code> file:</p>
+
+<pre><code>$ PPPD_VERSION=$(pppd -v 2&gt;&amp;1 | grep -E '^.*version.*$' | gawk '{print $3}'); \
+    sed -ie 's/\(.*VERSION.*"\)\(.*\)\(".*\)/\1'$PPPD_VERSION'\3/' \
+    plugins/patchlevel.h
+</code></pre>
+
+<p>Now make and install Poptop:</p>
+
+<pre><code>$ sudo make install
+</code></pre>
+
+<p>Add an <code>init</code> script so that we can set it to start automatically later:</p>
+
+<pre><code>$ sudo cp pptpd.init /etc/init.d/pptpd
+$ sudo chmod 755 /etc/init.d/pptpd
+</code></pre>
+
+<p>Copy the basic configuration file for <code>pptpd</code> and specify the local IP address
+range to be used for connected clients. <strong>NOTE</strong>: you cannot have more users
+connected <strong>simultaneously</strong> than the range specified here, which covers 100
+IP addresses. The range you give it must be from the
+<a href="http://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces">private IP address</a>
+block, and must not conflict with other addresses on that machine or the LAN
+to which it&#8217;s connected or Bad Things may happen.</p>
+
+<pre><code>$ sudo cp samples/pptpd.conf /etc/pptpd.conf
+$ echo -e "localip 192.168.69.254\nremoteip 192.168.69.1-101" \
+    | sudo tee --append /etc/pptpd.conf
+</code></pre>
+
+<p>Now copy the sample PPP options for PPTP connections and modify it a little
+to specify a few useful things.</p>
+
+<p>The first <code>echo</code>&#8216;d line sets <a href="http://code.google.com/speed/public-dns/">Google&#8217;s public DNS</a>
+servers as the DNS servers used to resolve web addresses when you are using the VPN
+connection. If you don&#8217;t want to use <a href="http://code.google.com/speed/public-dns/">Google&#8217;s public DNS</a>
+servers, then you could use the public DNS servers provided by <a href="http://www.opendns.com/">OpenDNS</a>
+(<code>208.67.222.222</code> and <code>208.67.220.220</code>), or find your own alternatives.</p>
+
+<p>The second <code>echo</code>&#8216;d line adjusts the <a href="http://en.wikipedia.org/wiki/Maximum_transmission_unit">MTU</a>
+and <a href="http://tools.ietf.org/html/rfc4638#section-5.1">MRU</a>. A side effect of the
+way VPN wraps data may cause data packets to exceed 1500 octets, causing frequent
+disconnects for some. Setting this to 1400 should avoid that. It&#8217;s likely
+you can get away with using 1492 but that was causing me some issues with my
+connection, so 1400 is playing it very safe:</p>
+
+<pre><code>$ sudo cp samples/options.pptpd /etc/ppp/options.pptpd
+$ echo -e "\n# Google DNS\nms-dns 8.8.8.8\nms-dns 8.8.4.4\n" \
+    | sudo tee --append /etc/ppp/options.pptpd
+$ echo -e "\n# Make MTU/MRU a little smaller than default\nmru 1400\nmtu 1400" \
+    | sudo tee --append /etc/ppp/options.pptpd
+</code></pre>
+
+<h2>Configuring NAT and Fixing Your EC2 Firewall</h2>
+
+<p>That&#8217;s it for the basic PPTP configuration, but now you have to modify your
+<code>iptables</code> rules and kernel settings so that your instance knows to forward
+data to the correct client when connected via VPN.</p>
+
+<p>First, adjust the <code>iptables</code> rules and save them so it all works after
+reboot:</p>
+
+<pre><code>$ sudo iptables -t nat -A POSTROUTING -s 192.168.69.0/24 -j MASQUERADE
+$ sudo service iptables save
+</code></pre>
+
+<p>And now make sure your kernel knows that you want to use <a href="http://en.wikipedia.org/wiki/Network_address_translation">NAT</a>.
+The <code>sed</code> command here is modifying your <code>sysctl.conf</code> so that your system
+remembers to enable NAT on reboot:</p>
+
+<pre><code>$ sudo sysctl net.ipv4.ip_forward=1
+$ sudo sed -i -r 's/(net.ipv4.ip_forward)(.*)0$/\1\21/' /etc/sysctl.conf
+</code></pre>
+
+<p>In order to connect to your EC2 instance from the outside world, you will
+have to open up the correct port, 1723, in the security group. The easiest
+way to do this is from the <a href="https://console.aws.amazon.com/ec2/">Amazon AWS EC2 web console</a>.</p>
+
+<p>Log in to your <a href="https://console.aws.amazon.com/ec2/">AWS</a> account, go to the
+EC2 tab, select the Security Groups section and then select the security group
+for the instance you have installed the VPN on:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/vpn_select_security_group.png" width="793" height="479"></p>
+
+<p>Now add a custom TCP rule for port 1723 to make it available to everyone. If you
+want to limit which IP address ranges can connect to your VPN, use the
+appropriate <a href="http://en.wikipedia.org/wiki/CIDR_notation">CIDR</a> source
+specifier. I want to access it from unknown public IP addresses so I&#8217;m
+setting it to accept connections from all IP address, <code>0.0.0.0/0</code>:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/vpn_add_to_security_group.png" width="793" height="479"></p>
+
+<p>Also add a custom UDP rule with the same details. I&#8217;m not entirely certain
+that VPN connections support UDP, but what the hell. <strong>NOTE</strong>: Don&#8217;t forget
+to click <strong>Apply Rule Changes</strong> near the bottom of the inbound rule pane
+before leaving the page. I often miss that.</p>
+
+<h2>Starting Everything Up</h2>
+
+<p>Now lets make sure all the services we just set up are started, and that they
+restart when the instance is rebooted:</p>
+
+<pre><code>$ sudo chkconfig iptables on
+$ sudo chkconfig pptpd on
+$ sudo service iptables restart
+$ sudo service pptpd stop     # Should fail, but just in case...
+$ sudo service pptpd start
+</code></pre>
+
+<h2>Adding Users</h2>
+
+<p>All that&#8217;s left to do now is to add a VPN user. I prefer to add a
+VPN user for each device which uses VPN. If the device is ever
+stolen or lost, having a different user for each allows me to
+block access for that device by removing the user entry.</p>
+
+<p>To add a user, you must append a user entry to the <code>/etc/ppp/chap-secrets</code>
+file with the correct format. The format it expects is defined as:</p>
+
+<pre><code>[username] [vpn_service_name] [password] [allowed_ip_addresses]
+</code></pre>
+
+<p>You can quickly add a user with the following verbose command. Remember
+to change <code>USERNAME</code> to your desired username. The section starting <code>dd</code> in
+the <code>echo</code> string generates a random password for the user which will be
+shown at the end. I recommend treating this as a once only password – just
+copy or email the password to the device and paste the password into your VPN
+client setup and tell it to remember the password. If you ever think it&#8217;s
+compromised, just delete the user or generate a new password. Avoid using
+the same password for multiple users. Don&#8217;t forget to eat the email you
+sent with the password. Eat your vegetables.</p>
+
+<pre><code>echo -e "\nUSERNAME pptpd $(dd if=/dev/urandom count=1 2&gt; /dev/null | sha1sum | cut -c-32) *\n" \
+    | sudo tee --append /etc/ppp/chap-secrets
+</code></pre>
+
+<p>To delete a user, simply remove the line with their name from <code>/etc/ppp/chap-secrets</code>
+using your favourite text editor running as root. <strong>Pro Tip</strong>: Real Beings use
+<code>vim</code>.</p>
+
+<p>Using that command to add each user is a bit of a faff, so I&#8217;ve written a
+script to make adding users easier. It will also check if a user already
+exists before adding a new one and just display the password instead. Here&#8217;s
+a sample session where I enter the same user twice:</p>
+
+<pre><code>$ sudo ./nah_vpn_add_user.sh venger
+
+  Creating VPN user in '/etc/ppp/chap-secrets'
+
+              username: venger
+              password: 5fac76dfc049ea0f6e7b50c0641cc8c8
+      VPN service name: pptpd
+
+$ sudo ./nah_vpn_add_user.sh venger
+
+  ERROR: User already seems to exist in '/etc/ppp/chap-secrets'
+
+      username: venger
+      password: 5fac76dfc049ea0f6e7b50c0641cc8c8
+</code></pre>
+
+<p>Here&#8217;s the script as a gist on github if you want to use it. As with every
+script a stranger gives you, and especially since I&#8217;m making you <code>sudo</code> this script,
+examine it to make sure I&#8217;m not doing anything evil to your system
+(I&#8217;m not, but I would say that):</p>
+
+<div><script src='https://gist.github.com/1626638.js?file='></script>
+<noscript><pre><code>#!/bin/bash
+#######################################
+# Simple script to add VPN users to your chap-secrets file. For details
+# on setting up a VPN on EC2, see:
+#
+#   http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/
+#
+#
+# (c) Copyright 2011 David Wagner.
+#
+# Complain/commend: http://noiseandheat.com/
+#
+#
+# Licensed under the MIT license:
+#
+#     http://www.opensource.org/licenses/mit-license.php
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &quot;Software&quot;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+#######################################
+# FUNCTIONS AND GLOBALS
+#######################################
+THIS_SCRIPT=`basename $0`
+CHAP_SECRETS=/etc/ppp/chap-secrets
+USERNAME=&quot;&quot;
+VPN_NAME=&quot;pptpd&quot;
+PASSWORD=&quot;&quot;
+
+DIGEST_CMD=/usr/bin/sha1sum
+DIGEST_CMD_ALTERNATIVE=/usr/bin/shasum
+
+function show_usage {
+cat &lt;&lt;USAGE_END
+
+  Simple script to add VPN users, based on the setup described at:
+
+    http://noiseandheat.com/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/
+
+  Usage
+  =====
+
+    $THIS_SCRIPT vpn_user_name [vpn_service_name]
+
+  or
+
+    $THIS_SCRIPT vpn_user_name vpn_service_name password
+
+      vpn_user_name     The name of the VPN user to create
+      vpn_service_name  The name of the VPN service. Defaults to pptpd
+      password          Autogenerated if you use the first form of the command.
+
+  It is recommended that you use the first form so that a secure password
+  is automatically generated for the user.
+
+USAGE_END
+}
+
+function check_can_access_chap_secrets {
+    if [ ! -e &quot;$CHAP_SECRETS&quot; ]
+    then
+        echo &quot;&quot;
+        echo &quot;  ERROR: Cannot find chaps secrets file at '$CHAP_SECRETS'&quot;
+        echo &quot;&quot;
+        echo &quot;  Edit the CHAP_SECRETS variable at the top of $THIS_SCRIPT to&quot;
+        echo &quot;  use a different location.&quot;
+        exit 1
+    fi
+
+    if [ ! -r &quot;$CHAP_SECRETS&quot; ]
+    then
+        echo &quot;&quot;
+        echo &quot;  ERROR: Cannot read chaps secrets file at '$CHAP_SECRETS'&quot;
+        echo &quot;&quot;
+        echo &quot;  For security, the file can only be accessed by root. Please&quot;
+        echo &quot;  use sudo to invoke this script so the file can be read.&quot;
+        echo &quot;  DO NOT make $CHAP_SECRETS world accessible.&quot;
+        exit 1
+    fi
+
+    if [ ! -w &quot;$CHAP_SECRETS&quot; ]
+    then
+        echo &quot;&quot;
+        echo &quot;  ERROR: Cannot modify chaps secrets file at '$CHAP_SECRETS'&quot;
+        echo &quot;&quot;
+        echo &quot;  For security, the file can only be accessed by root. Please&quot;
+        echo &quot;  use sudo to invoke this script so the file can be read.&quot;
+        echo &quot;  DO NOT make $CHAP_SECRETS world accessible.&quot;
+        exit 1
+    fi
+}
+
+function gather_username_and_service_name {
+    if [ -n &quot;$1&quot; ]
+    then
+        USERNAME=`echo &quot;$1&quot; | sed 's/ /_/g'`
+    else
+        show_usage
+        exit 1
+    fi
+
+
+    if [ -n &quot;$2&quot; ]
+    then
+        VPN_NAME=$2
+    fi
+}
+
+function check_user_does_not_already_exist {
+    MATCHES=`sudo grep -cE &quot;^$USERNAME\b&quot; $CHAP_SECRETS`
+    if [ &quot;0&quot; != &quot;$MATCHES&quot; ]
+    then
+        MATCH=`sudo grep -E &quot;^$USERNAME\b&quot; $CHAP_SECRETS`
+        set $MATCH
+        echo &quot;&quot;
+        echo &quot;  ERROR: User already seems to exist in '$CHAP_SECRETS'&quot;
+        echo &quot;&quot;
+        echo &quot;      username: $1&quot;
+        echo &quot;      password: $3&quot;
+        echo &quot;&quot;
+        exit 1
+    fi
+}
+
+function generate_password {
+    if [ -n &quot;$1&quot; ]
+    then
+        PASSWORD=$1
+    else
+        if [ ! -e $DIGEST_CMD ]
+        then
+            DIGEST_CMD=$DIGEST_CMD_ALTERNATIVE
+            if [ ! -e $DIGEST_CMD ]
+            then
+                echo &quot;&quot;
+                echo &quot;  ERROR: could not find $DIGEST_CMD or $DIGEST_CMD_ALTERNATIVE&quot;
+                echo &quot;  so I can't generate a password for the new user. If you want&quot;
+                echo &quot;  to set your own digest command for password generation, edit&quot;
+                echo &quot;  the DIGEST_CMD variable at the top of $THIS_SCRIPT.&quot;
+                echo &quot;&quot;
+                echo &quot;  You many also have to hack about with the PASSWORD generation&quot;
+                echo &quot;  command in the generate_password function.&quot;
+                echo &quot;&quot;
+                exit 1
+            fi
+        fi
+        PASSWORD=`dd if=/dev/urandom count=1 2&gt; /dev/null | $DIGEST_CMD | cut -c-32`
+    fi
+}
+
+function create_user {
+    echo &quot;&quot;
+    echo &quot;  Creating VPN user in '$CHAP_SECRETS'&quot;
+    echo &quot;&quot;
+    echo &quot;              username: $USERNAME&quot;
+    echo &quot;              password: $PASSWORD&quot;
+    echo &quot;      VPN service name: $VPN_NAME&quot;
+    echo -e &quot;\n$USERNAME $VPN_NAME $PASSWORD *\n&quot; &gt;&gt; $CHAP_SECRETS
+}
+
+#######################################
+# MAIN
+#######################################
+
+gather_username_and_service_name $1 $2
+
+check_can_access_chap_secrets
+
+check_user_does_not_already_exist
+
+generate_password $3
+
+create_user $USERNAME $VPN_NAME $PASSWORD $CHAP_SECRETS
+</code></pre></noscript></div>
+
+
+<p>You can download it to your machine and make it executable by typing:</p>
+
+<pre><code>$ curl https://raw.github.com/gist/1626638 -o nah_vpn_add_user.sh
+$ chmod a+x nah_vpn_add_user.sh
+</code></pre>
+
+<p>And then add users to your hearts content. Running the script with no parameters
+will output some help. The script will only add users – deletion is still
+manual as described above (delete the user&#8217;s entry in <code>/etc/ppp/chap-secrets</code>).</p>
+
+<h2>Setting Up The Device Client</h2>
+
+<p>This guide is already far too long, so here are some links to other guides
+about setting up your client or clients. The main points to remember when
+following these guides are:</p>
+
+<ul>
+<li><strong>Protocol</strong>: Only use PPTP</li>
+<li><strong>Server Address</strong>: The public address or public IP of the EC2 Instance.
+This can change each time you boot, so you may want to assign an Elastic IP
+address to the instance or perhaps use <a href="http://aws.amazon.com/route53/">Route 53</a>.</li>
+<li><strong>Username</strong>: The username used when you created the user above.</li>
+<li><strong>Password</strong>: The generated password displayed when you created the user above.</li>
+<li><strong>Encryption Level</strong>: Should work as 128 bit or maximum, but you can try
+auto.</li>
+</ul>
+
+
+<p> The guides (I don&#8217;t endorse any here and haven&#8217;t used any of the VPN services who&#8217;s
+ guides I&#8217;ve linked here, but it&#8217;s handy information):</p>
+
+<ul>
+<li><a href="http://www.bestvpnservice.com/blog/how-to-setup-vpn-on-iphone-4">iPhone guide on bestvpnservice.com</a></li>
+<li><a href="http://www.techrepublic.com/blog/smartphones/connect-to-a-pptp-vpn-from-your-android-phone/2145">Android guide on TechRepublic</a></li>
+<li><a href="http://wiki.witopia.net/wiki/Main_Page#Setting_up:_PPTP_VPN_Service_Setup">PPTP VPN Client Guides on Witopia</a></li>
+<li><a href="http://strongvpn.com/setup.shtml">StrongVPN support guides</a></li>
+</ul>
+
+
+<h2>Checking the Connection</h2>
+
+<p>Once you have your client configured, connect to your new VPN and visit:</p>
+
+<ul>
+<li><a href="http://whatismyipaddress.com/">http://whatismyipaddress.com/</a></li>
+</ul>
+
+
+<p>If all is well you should be able to see the site and it should say that
+your ISP is Amazon. Well done! You have a shiny new VPN to play with.</p>
+
+<h2>Points of Interest</h2>
+
+<p>It&#8217;s not just when you are using public hotspots that VPNs are useful. It will
+prevent, for example, your ISP inspecting what services you use or what
+websites you visit. Before you start merrily torrenting every <em>legal</em> thing
+in existence though, remember you&#8217;re paying for the bandwidth passing through
+your EC2 server. Also remember that while your ISP can&#8217;t see what addresses
+you visit, Amazon can.</p>
+
+<p>Additionally, your VPN machine&#8217;s public IP address will be what the world
+sees. So if you set up a VPN machine at one of Amazon&#8217;s US datacenters then
+sites you visit will think you are a visitor from America. Or if you set one
+up in the EU, it will appear as though you come from Ireland.</p>
+
+<p>Also, if anyone&#8217;s crazy enough to pass <a href="http://en.wikipedia.org/wiki/Stop_Online_Piracy_Act">SOPA</a>
+style regulations in your country, using a VPN in a datacenter outside your
+country may help, assuming Amazon, Google and OpenDNS aren&#8217;t affected directly
+by the legislation.</p>
+
+<p>Have fun.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ludum Dare 22: Afterglow]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/"/>
+    <updated>2011-12-19T13:57:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow</id>
+    <content type="html"><![CDATA[<p>So, <a href="http://www.ludumdare.com/compo/ludum-dare-22/?action=preview&amp;etype=compo">LD22 Compo</a> is over.
+The judgement begins. My entry was <strong>Astronaut Alone</strong>
+(<a href="http://mnem.github.com/LD22_Alone/">play</a>/<a href="http://www.ludumdare.com/compo/ludum-dare-22/?uid=7397">rate</a>)
+which ended up being, basically, a rubbish asteroids clone. It was great fun to create though.</p>
+
+<!--more-->
+
+
+<p>Next time, I&#8217;ll be more prepared… Maybe.</p>
+
+<p>In the meantime, here are some lists of things.</p>
+
+<h2>Things that worked well this time</h2>
+
+<ul>
+<li>Tablets totally rock. <em>Graphics</em> tablets. I used LD as an excuse to buy myself
+one. They can be found for <a href="http://amzn.to/uYUZUL">just over a tenner</a> (<a href="http://thedarkmaster.wordpress.com/2010/10/22/trust-flex-design-tablet-on-mac-osx-how-to-make-it-work/">OS X drivers</a>)
+and it made creating graphics a lot faster. I can&#8217;t believe I&#8217;ve not tried one before.</li>
+<li>Content generators are really fun to play with (<a href="http://thirdcog.eu/apps/cfxr">cfxr</a>, <a href="http://www.drpetter.se/project_sfxr.html">sfxr</a>, <a href="http://www.ludumdare.com/compo/2011/12/13/if-you-find-it-hard-to-make-music-read-this/">Autotracker-Bu</a>).
+I think I may spend some spare time creating a few for different purposes.</li>
+<li>The tight deadline forced me to handle time surprisingly well. Immediacy
+is a great axe for culling long tasks.</li>
+<li>I drew an astronaut. It didn&#8217;t look entirely shit. This makes me happy.</li>
+<li>Whisky helps.</li>
+</ul>
+
+
+<h2>Things to do next time</h2>
+
+<ul>
+<li>Prototype more on paper/other non functional medium.</li>
+<li>Don&#8217;t try to optimise anything.</li>
+<li>If a coding problem is taking more than an hour, put a hack in.</li>
+<li>Play with general concepts before the compo just to have things in mind.
+This probably just extends to the fact I should be doing more playful/experimental
+coding, with no firm gameplay in mind.</li>
+<li>Drink more whisky.</li>
+</ul>
+
+
+<h2>Game to do list with some things done</h2>
+
+<ul>
+<li>Necessary:
+
+<ul>
+<li><del>Drifting asteroids</del></li>
+<li><del>Wrap around</del></li>
+<li><del>Destroy asteroid</del></li>
+<li><del>Mine remainders</del></li>
+<li><del>Convert graphics to entities so they can collide</del></li>
+<li><del>Asteroid indicator</del></li>
+<li><del>intro</del></li>
+<li><del>win</del></li>
+<li><del>instructions</del></li>
+<li><del>audio in game</del></li>
+</ul>
+</li>
+<li>Graphics:
+
+<ul>
+<li><del>Astronaut</del></li>
+<li><del>Asteroids</del></li>
+</ul>
+</li>
+<li>Fluff:
+
+<ul>
+<li>Smooth wrapping</li>
+<li>Star trails</li>
+<li><del>Asteroid damage</del></li>
+<li>Asteroid death</li>
+<li><del>Asteroid colouring</del></li>
+</ul>
+</li>
+<li>Refactoring:
+
+<ul>
+<li><del>Pool managers don&#8217;t need to give themselves to entities - use the names.</del></li>
+<li>Pool managers can probably share a base class - or perhaps the SimpleObjectPool can do more work</li>
+<li>Refactor text class</li>
+</ul>
+</li>
+<li>Bugs:
+
+<ul>
+<li>Asteroids can spawn on you</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Tools I used this time</h2>
+
+<p>In no particular order, pretty much every tool I touched:</p>
+
+<ul>
+<li>Sublime Text 2 (<a href="http://www.sublimetext.com/">http://www.sublimetext.com/</a>)</li>
+<li>Buildr-AS3 / Buildr (<a href="https://github.com/devboy/buildr_as3">https://github.com/devboy/buildr_as3</a>/<a href="http://buildr.apache.org/">http://buildr.apache.org/</a>)</li>
+<li>Flashpunk (<a href="http://flashpunk.net/">http://flashpunk.net/</a>)</li>
+<li>FDT (<a href="http://fdt.powerflasher.com/">http://fdt.powerflasher.com/</a>)</li>
+<li>FlexSDK (<a href="http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK">http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK</a>)</li>
+<li>lame (<a href="http://lame.sourceforge.net/">http://lame.sourceforge.net/</a>)</li>
+<li>Homebrew (<a href="http://mxcl.github.com/homebrew/">http://mxcl.github.com/homebrew/</a>)</li>
+<li>Bash (<a href="http://www.gnu.org/s/bash/">http://www.gnu.org/s/bash/</a>)</li>
+<li>Vim (<a href="http://www.vim.org/">http://www.vim.org/</a>)</li>
+<li>Pixelmator (<a href="http://www.pixelmator.com/">http://www.pixelmator.com/</a>)</li>
+<li>SketchBook Pro (<a href="http://usa.autodesk.com/adsk/servlet/pc/index?id=6848332&amp;siteID=123112">http://usa.autodesk.com/adsk/servlet/pc/index?id=6848332&amp;siteID=123112</a>)</li>
+<li>Bamboo tablet (<a href="http://www.wacom.eu/index2.asp?pid=294&amp;spid=1">http://www.wacom.eu/index2.asp?pid=294&amp;spid=1</a>)</li>
+<li>cfxr (<a href="http://thirdcog.eu/apps/cfxr">http://thirdcog.eu/apps/cfxr</a>)</li>
+<li>git (<a href="http://git-scm.com/">http://git-scm.com/</a>)</li>
+<li>MacBook Pro 13 inch (<a href="http://www.apple.com/macbookpro/specs-13inch.html">http://www.apple.com/macbookpro/specs-13inch.html</a>)</li>
+<li>Lion (<a href="http://www.apple.com/macbookpro/osx.html">http://www.apple.com/macbookpro/osx.html</a>)</li>
+</ul>
+
+
+<h2>Food and Drink sequence:</h2>
+
+<ol>
+<li>Coffee</li>
+<li>Scrambled egg and tattie scone</li>
+<li>Coffee</li>
+<li>Coffee</li>
+<li>Chocolate mini roll thing</li>
+<li>Coffee</li>
+<li>Tangerine</li>
+<li>Dry frosties</li>
+<li>Tiny lindt chocolate things</li>
+<li>Aubergine bake</li>
+<li>Red wine</li>
+<li>Whisky</li>
+<li>Toasted cheese</li>
+<li>Coffee</li>
+<li>Scrambled egg</li>
+<li>Coffee</li>
+<li>Darjeeling tea</li>
+<li>Tablet</li>
+<li>Banana</li>
+<li>Stir fry</li>
+<li>Many freshly baked flapjacks</li>
+<li>Whisky</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ludum Dare 22: A Log of Activity]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity/"/>
+    <updated>2011-12-17T09:47:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-a-log-of-activity</id>
+    <content type="html"><![CDATA[<ul>
+<li>This coming up with game ideas malarky is difficult. Only two ideas
+have appeared.
+<!-- more -->
+
+<ul>
+<li>Space Drifter:
+
+<ul>
+<li>Alone in a biosuit, drifting in space.</li>
+<li>Asteroids-esque?</li>
+</ul>
+</li>
+<li>Build a Friend:
+
+<ul>
+<li>You are so lonely, you decide to build a friend.</li>
+<li>Collect body parts.</li>
+<li>Zap them to life.</li>
+<li>Perhaps they always die, leaving you alone again?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Leaving my mind to mull it over while I make some breakfast and tidy the
+kitchen. I&#8217;m so domesticated.</li>
+<li>Build a Friend feels more fun, but I can&#8217;t work out a game
+mechanic which is any more exciting than a Story Driven
+Platformer. I don&#8217;t think I&#8217;m clever enough to invent a decent story in
+the time remaining. Space Drifter it is.</li>
+<li>Possible features:
+
+<ul>
+<li>Starfields!</li>
+<li>Fuel management? Destroy/mine asteroids to get more suit fuel.</li>
+<li>Goal: build an escape vehicle
+
+<ul>
+<li>Where do parts come from? Land on small planets? Fight a boss/solve
+a puzzle?</li>
+</ul>
+</li>
+<li>If only I had a <a href="http://en.wikipedia.org/wiki/Theremin">Theremin</a> for
+making music. I&#8217;ll buy one for next time.</li>
+</ul>
+</li>
+<li>Rather than work on gameplay, I think I&#8217;ll write Yet Another Starfield.</li>
+<li>Using a 16:9 ratio because space is widescreen.</li>
+<li>Just spent far too long making a simple starfield because I don&#8217;t really
+know much about FlashPunk. Next time, use a framework I know, or write
+one as I go along.</li>
+<li>Can never decide whether collection variables should be pluralised or not&#8230;</li>
+<li>Man, I suck at graphics.</li>
+<li><em>1309</em>: Basic mouse movement and starfield implemented. Just seeing things move
+around on screen is giving me some ideas about the game mechanics, which
+is nice. Also, I&#8217;m going to start time stamping these entries.</li>
+<li><em>1834</em>: Added lasers and some parallax. Tweaking is more fun than productive
+work sometimes. Dinner approaches.</li>
+<li><em>2145</em>: Getting into detail now. Slower than I hoped. Time to break out
+the whisky. Realised I made some stupid mistakes earlier, and spent
+possibly pointless time writing a simple pooling class.</li>
+<li><em>2259</em>: Ok, FlashPunk rocks.</li>
+<li><em>0249</em>: Man, there&#8217;s a lot left to do.</li>
+<li><em>0903</em>: Woke up realising this game idea is a bit shit really. Damn. Not
+enough time to change my mind now.</li>
+<li><em>1108</em>: Updated some of the placeholder art. It appears I can almost draw an
+astronaut.</li>
+<li><em>1946</em>: Rats. Spent far to much time trying to make one background effect
+nice, and now there&#8217;s so little time. Have to chuck some pointless
+fluff together.</li>
+<li>Well that was a hastily cobbled together finish. Time to have a whisky
+and get some sleep. Disappointed with the game, but happy with the
+competition experience.</li>
+</ul>
+
+
+<p>Entry: <a href="http://www.ludumdare.com/compo/ludum-dare-22/?uid=7397">Astronaut Alone</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ludum Dare 22: Alone]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone/"/>
+    <updated>2011-12-17T07:47:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/ludum-dare-22-alone</id>
+    <content type="html"><![CDATA[<p>My first venture into the world of programming competitions is beginning with
+Ludum Dare 22. I wonder if I&#8217;ll have anything finished by the end of it?</p>
+
+<!-- more -->
+
+
+<p>Despite my plan to stay awake after the theme announcement, I decided to get
+a few hours sleep and instead tasked my subconscious self with coming up
+with a good idea based around the theme. Much to my disappointment my
+subconscious decided to sleep too, so now I have to quickly come up with a
+game idea.</p>
+
+<p>Let&#8217;s see what happens while I create a skeleton game and make some tasty
+breakfast.</p>
+
+<p>Music to get in the mood: Tom Waits, Alice.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OS X Lion Terminal Colours]]></title>
+    <link href="http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours/"/>
+    <updated>2011-12-03T21:25:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours</id>
+    <content type="html"><![CDATA[<p><a href="http://www.vim.org/scripts/script.php?script_id=1349"><img class="right" src="http://noiseandheat.com/images/terminal_colours.png" width="200" height="130"></a></p>
+
+<p>OS X is awesome for command line stuff, that&#8217;s why <a href="http://xkcd.com/378/">real programmers</a>
+love it. But some of the defaults Apple have used make me sad. Where are all
+the colours? I <em>demand</em> my <code>ls</code> command be pretty and colourful! Why is Vim
+so bland? While we&#8217;re at it, can&#8217;t ping lick my eyeballs more?</p>
+
+<!--more-->
+
+
+<p>Good news: yes, they can! I&#8217;ve stuck some tips together so I can remind
+myself what to do when I inevitably reinstall my system for some pointless
+reason, and for any new Mac users out there. It is near peak commercial
+season after all, and I&#8217;m sure you&#8217;ve been good little boys and girls.</p>
+
+<p>Let&#8217;s start with the simple things.</p>
+
+<h2>Making <code>ls</code> and <code>grep</code> Colourful</h2>
+
+<p>Add these lines to your <code>.bash_profile</code> file which is in your home directory:</p>
+
+<figure class='code'><figcaption><span>~/.bash_profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Tell ls to be colourful</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">CLICOLOR</span><span class="o">=</span>1
+</span><span class='line'>
+</span><span class='line'><span class="c"># Tell grep to highlight matches</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GREP_OPTIONS</span><span class="o">=</span><span class="s1">&#39;--color=auto&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now when you use <code>ls</code>, folders and executables will appear in different
+colours from normal files, and when you use grep to find text in files, the
+matches will be highlighted.</p>
+
+<p>You can change the colours used by <code>ls</code> via the <code>LSCOLORS</code> environment
+variable. For example:</p>
+
+<figure class='code'><figcaption><span>~/.bash_profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Tell ls to be colourful</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">CLICOLOR</span><span class="o">=</span>1
+</span><span class='line'><span class="nb">export </span><span class="nv">LSCOLORS</span><span class="o">=</span>Exfxcxdxbxegedabagacad
+</span><span class='line'>
+</span><span class='line'><span class="c"># Tell grep to highlight matches</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GREP_OPTIONS</span><span class="o">=</span><span class="s1">&#39;--color=auto&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s a handy website you can use to define your <code>LSCOLORS</code> scheme:
+<a href="http://geoff.greer.fm/lscolors/">http://geoff.greer.fm/lscolors/</a>. It also
+generates <code>LS_COLORS</code> definitions, useful if you&#8217;re a Linux user. One thing
+to note, though, is that the colours you will see in your terminal depend on
+the particular theme you are using. Which brings me to my next tip.</p>
+
+<h2>Using A Better Terminal Theme</h2>
+
+<p>If you haven&#8217;t changed the default terminal theme you must still be gazing
+in to the snowy wasteland that is the default. This is insane. Programmers
+are incompatible with white backgrounds. Er, except in blogs. <em>*cough*</em></p>
+
+<p>Changing the terminal theme is marginally trickier than it should be. Here&#8217;s
+how you do it:</p>
+
+<ol>
+<li>Go to <code>Terminal</code> &rarr; <code>Preferences…</code></li>
+<li>Select the <code>Settings</code> group.</li>
+<li>Pick something nice that doesn&#8217;t sear your retinas.</li>
+<li>At the bottom of the list box, click <code>Default</code> so that new terminals will
+open with the selected colour scheme.</li>
+</ol>
+
+
+<p>Anything other than the default is a good start, but there are better themes out there than those bundled
+with Lion. At the moment, my colour scheme of choice is <a href="http://ethanschoonover.com/solarized">Solarized</a>.
+You can get a <a href="http://ethanschoonover.com/solarized">Solarized</a> scheme for
+OS X&#8217;s Terminal from here:</p>
+
+<ul>
+<li><a href="https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized">https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized</a></li>
+</ul>
+
+
+<p>If you are running <strong>Lion</strong>, <strong>ignore</strong> the README at the site. All you have to do to
+install the theme is to open the <code>*.terminal</code> file. That should be enough to
+make it appear in the themes list in the preferences dialog, where you can set
+it as default.</p>
+
+<p><a href="http://ethanschoonover.com/solarized">Solarized</a> is a great general purpose theme and there are settings for many
+text environments - I use it in Xcode, <a href="http://www.sublimetext.com/2">Sublime Text 2</a>,
+<a href="http://www.eclipsecolorthemes.org/?list=all&amp;q=solarized">Eclipse</a> and even
+<a href="http://www.vim.org/">Vim</a>.</p>
+
+<p>Which, niftily, brings me on to my next section.</p>
+
+<h2>Making Vim Pretty</h2>
+
+<p>Much as I&#8217;ve rallied against <a href="http://www.vim.org/">Vim</a> over the years, <a href="https://twitter.com/vizio360">Vizio360</a>
+and <a href="https://twitter.com/Rev_Kachowski">Rev. Kachowski</a> have now drugged me
+sufficiently to admit that it&#8217;s pretty damn nice really. If you can handle
+memorising &pi; to 300 digits, then you should be fine with <a href="http://www.vim.org/">Vim</a>
+shortcuts. On the other hand if you&#8217;re like me, you may want to use a
+<a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">cheatsheet</a>.</p>
+
+<p>However, we aren&#8217;t here to learn, we&#8217;re here to colourise. So, in order
+to make Vim a bit more colourful on OS X, copy the example <code>vimrc</code> file
+to your home directory:</p>
+
+<pre><code>cp /usr/share/vim/vim73/vimrc_example.vim ~/.vimrc
+</code></pre>
+
+<p>Now you can enjoy pretty colours in Vim. If you want to add <a href="http://ethanschoonover.com/solarized">Solarized</a>
+as your colour theme in Vim, I recommend installing the rather fantastic
+<a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a> in your .vimrc (<a href="https://github.com/tpope/vim-pathogen/blob/master/README.markdown">instructions</a>) and
+then follow the instructions for &#8220;Option 2&#8221; in <a href="http://ethanschoonover.com/solarized/vim-colors-solarized">vim-colors-solarized README</a>.</p>
+
+<h2>Making Nano Pretty</h2>
+
+<p>If Nano is your Terminal text editor weapon of choice, then you can
+enable syntax colouring by uncommenting the syntax files referenced in
+<code>/etc/nanorc</code>. First, open it for editing:</p>
+
+<pre><code>sudo nano /etc/nanorc
+</code></pre>
+
+<p>Move to the bottom of the file and then remove the <code>#</code> character
+at the beginning of the lines which include other <code>*.nanorc</code> files. For
+example, change:</p>
+
+<figure class='code'><figcaption><span>/etc/nanorc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## Nanorc files</span>
+</span><span class='line'><span class="c">#include &quot;/usr/local/share/nano/nanorc.nanorc&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To:</p>
+
+<figure class='code'><figcaption><span>/etc/nanorc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## Nanorc files</span>
+</span><span class='line'>include <span class="s2">&quot;/usr/local/share/nano/nanorc.nanorc&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Further Eyeball Licking via Homebrew</h2>
+
+<p>For the next tip, I recommend using <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+as the method of installation. If you aren&#8217;t using <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+yet, you probably should be. It&#8217;s by far the <a href="http://mozidesign.com/2011/03/15/dinosaurs/">Most Awesome</a> package manager
+available for OS X. So go install it:</p>
+
+<ul>
+<li><a href="https://github.com/mxcl/homebrew/wiki/installation">https://github.com/mxcl/homebrew/wiki/installation</a></li>
+</ul>
+
+
+<p>Installed? Good. Let us continue.</p>
+
+<h2>Generic Colouriser</h2>
+
+<p><a href="http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt">Generic Colouriser</a>
+is a great utility which can be used for colourising many different types of
+output and log files. If you installed <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+, installing grc is as simple as typing:</p>
+
+<pre><code>brew install grc
+</code></pre>
+
+<p><strong>NOTE</strong>: If you followed the first tip and created a <code>.bash_profile</code>,
+rather than appending the command to load grc to your <code>.bashrc</code>,
+you want to append it to your <code>.bash_profile</code> file instead:</p>
+
+<pre><code>echo 'source "`brew --prefix grc`/etc/grc.bashrc"' &gt;&gt; ~/.bash_profile
+</code></pre>
+
+<p>If you are confused as to why, it&#8217;s because the logic Bash uses for loading
+these files is non-obvious. For a good description of the load sequence, read
+<a href="http://www.thegeekstuff.com/2008/10/execution-sequence-for-bash_profile-bashrc-bash_login-profile-and-bash_logout/">Execution sequence for .bash_profile, .bashrc, .bash_login, .profile and .bash_logout</a>
+by Ramesh Natarajan.</p>
+
+<p>After you have added that line to your <code>.bash_profile</code>, either start a new
+session, or reload the profile:</p>
+
+<pre><code>source ~/.bash_profile
+</code></pre>
+
+<p>Now when you use certain commands such as traceroute, the output should be
+colourised:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/traceroute-grc.png" width="622" height="422"></p>
+
+<p>Or you can call <code>tail</code> and <code>head</code> using grc to colourise log output:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/head-grc.png" width="512" height="156"></p>
+
+<h2>That&#8217;s all Folks!</h2>
+
+<p>Well, that&#8217;s all I have for now. If anyone has any other good ones,
+stick them in a comment below.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing ReviewBoard on Amazon EC2]]></title>
+    <link href="http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/"/>
+    <updated>2011-11-30T21:44:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2</id>
+    <content type="html"><![CDATA[<p>Recently at <a href="http://www.huzutech.com/">HuzuTech</a> I updated our installation
+of <a href="http://www.reviewboard.org/">ReviewBoard</a>, which is a great code review
+tool. Rather than just update packages though, I decided to rebuild the
+server for shits and giggles. Herein lies my method, just in case you want
+to set one up yourself.</p>
+
+<!--more-->
+
+
+<h2>Pre-requisites</h2>
+
+<p>This guide assumes that you have an AWS EC2 account set up, and that you are
+comfortable with creating instances and SSH&#8217;ing into them. There are plenty
+of other guides out there to take you through those basics.</p>
+
+<h2>What You&#8217;ll End Up With</h2>
+
+<ul>
+<li>1 (one) EC2 server micro instance running with a 32-bit Amazon Linux AMI</li>
+<li>2 (two) VCS installed on the server: subversion and git</li>
+<li>1 (one) Data Volume containing:
+
+<ul>
+<li>1 (one) ReviewBoard site</li>
+<li>1 (one) PostgreSQL database</li>
+</ul>
+</li>
+<li>1 (one) Glowing feeling of a Job Well Done</li>
+</ul>
+
+
+<p>The precise security configuration and so forth for the instance is likely
+to vary depending on what your preferred policies are.</p>
+
+<h2>Creating The Instance</h2>
+
+<p>Sign in to the EC2 web console and select &#8220;Launch Instance&#8221; for the region
+you prefer. I&#8217;m using US East because it&#8217;s cheap.</p>
+
+<p>The following few screens show the Quick Launch instance wizard thing which
+seems to have just sprung up on the site, but you should be able to work
+out what to do in the normal/classic wizard.</p>
+
+<p>The important points are:</p>
+
+<ul>
+<li>Use a Basic 32-bit Amazon Linux AMI</li>
+<li>Use a micro instance</li>
+</ul>
+
+
+<p>Give your instance a sane name and create and download a new key pair for
+it. You can use an existing pair, but I tend to use a new key pair for each
+image for finer grained access control. Make sure it&#8217;s the 32-bit Amazon
+Linux AMI which you choose.</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/rb-setup-00.png" width="934" height="441"></p>
+
+<p>In the next screen, you may find it useful to add termination protection
+and check that it&#8217;s selected a micro instance.</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/rb-setup-01.png" width="934" height="451"></p>
+
+<p>Next, set up an new security group for it. You <strong>can&#8217;t</strong> change the security
+group later (although you can add and remove ports in the group), so make
+sure you create a new one unless you are <em>certain</em> you want to share an
+existing one. Make sure <code>SSH</code> and <code>HTTP</code> ports are open and accessible from your
+<a href="http://www.google.co.uk/search?q=My+IP+Address">current public IP address</a>.
+If in doubt, you can make the ports accessible from any address for the moment
+by specifying a source of <code>0.0.0.0/0</code>.</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/rb-setup-02.png" width="934" height="465"></p>
+
+<p>That&#8217;s the basic instance set up. Click &#8220;Save details&#8221; and then you should
+see the launching screen:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/rb-setup-03.png" width="934" height="443"></p>
+
+<p>Close it. Now create the volume to use for data. Expand the &#8220;Elastic Block Store&#8221;
+menu at the left side if it isn&#8217;t already and select Volumes. Click the
+&#8220;Create Volume&#8221; button and make it about 1 GiB or so, depending on the
+size of the repositories you&#8217;ll store on it:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/rb-setup-05.png" width="530" height="216"></p>
+
+<p>Now all that remains to do is to attach it to the instance you just launched.
+Select the new volume and click &#8220;Attach Volume&#8221; and attach it to your fresh
+instance:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/rb-setup-06.png" width="530" height="269"></p>
+
+<p>That&#8217;s the basic setup done. Now on to installing bytes.</p>
+
+<h2>Setting Up The Instance and Data Volume</h2>
+
+<p>SSH into your server:</p>
+
+<pre><code>$ ssh -i ~/.ec2/tools-reviewboard.pem ec2-user@ec2-107-22-136-39.compute-1.amazonaws.com
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+See /usr/share/doc/system-release/ for latest release notes.
+There are 14 security update(s) out of 18 total update(s) available
+[ec2-user@ip-10-116-186-53 ~]$
+</code></pre>
+
+<p>The first thing you&#8217;re likely to notice is that the instance requires some
+updates already, so we will install those.</p>
+
+<p><em><strong>NOTE</strong>: for the rest of the
+article, I&#8217;ll just show the commands to run without showing the output, except
+where the output is important or interactive. Also, the <strong>$</strong> at the start of
+a line indicates a command to type - you don&#8217;t type the dollar, but type the rest…</em></p>
+
+<pre><code>$ sudo yum --assumeyes update
+</code></pre>
+
+<p>That should update the basic image to the latest versions of the pre-installed
+packages.</p>
+
+<p>Now, before we go any further, lets set up the data volume. You should
+have already created a new volume and attached it to the ReviewBoard server
+instance. If this is the first time you&#8217;ve used separate data volumes (something
+you should really get into the habit of using), the thing to remember is that
+it&#8217;s sitting as a raw, unformatted block device initially. In order to use
+it, it needs to be partitioned, formatted, and then mounted.</p>
+
+<p>First, format it. I&#8217;m assuming that your device is <code>/dev/xvdf</code>. If it isn&#8217;t,
+adjust the instructions as appropriate. Run fdisk on the device. It&#8217;s
+interactive so the following few steps include the console output for clarity.</p>
+
+<pre><code>$ sudo fdisk /dev/xvdf
+
+Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+Building a new DOS disklabel with disk identifier 0xb6d71f5e.
+Changes will remain in memory only, until you decide to write them.
+After that, of course, the previous content won't be recoverable.
+
+Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+
+WARNING: DOS-compatible mode is deprecated. It's strongly recommended to
+         switch off the mode (command 'c') and change display units to
+         sectors (command 'u').
+
+Command (m for help):
+</code></pre>
+
+<p>Enter <strong>m</strong> in order to show a menu.</p>
+
+<pre><code>Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+
+Command (m for help):
+</code></pre>
+
+<p>Enter <strong>n</strong> to create a new partition.</p>
+
+<pre><code>Command action
+   e   extended
+   p   primary partition (1-4)
+</code></pre>
+
+<p>Enter <strong>p</strong> to create a primary partition.</p>
+
+<pre><code>Partition number (1-4):
+</code></pre>
+
+<p>Enter <strong>1</strong>.</p>
+
+<pre><code>First cylinder (1-261, default 1):
+</code></pre>
+
+<p>Press <strong>enter</strong> to select the default.</p>
+
+<pre><code>Last cylinder, +cylinders or +size{K,M,G} (1-261, default 261):
+</code></pre>
+
+<p>Press <strong>enter</strong> to select the default. The actual value for the default will
+depend on how large a volume you created with the Amazon web console. This
+is a 2 GiB volume.</p>
+
+<pre><code>Command (m for help):
+</code></pre>
+
+<p>Enter <strong>w</strong> to write the changes to the disk. The partition will be created
+and you should see:</p>
+
+<pre><code>The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+</code></pre>
+
+<p>The next step is formatting the partition. Use <code>mkfs</code> to create a new ext4
+partition:</p>
+
+<pre><code>$ sudo mkfs -t ext4 /dev/xvdf
+</code></pre>
+
+<p>Now create an empty folder in <code>/mnt</code> for the partition, and edit <code>/etc/fstab</code>
+to mount it on boot.</p>
+
+<pre><code>$ sudo mkdir /mnt/rb.data
+$ sudo nano /etc/fstab
+</code></pre>
+
+<p>The entry to add to fstab should look like this:</p>
+
+<pre><code>/dev/xvdf     /mnt/rb.data   ext4    defaults    0   0
+</code></pre>
+
+<p>If you chose a different folder, filesystem or have it available on a different
+device, remember to use your values here.</p>
+
+<p>The final task is simply to mount the volume, and then run <code>df</code> to check
+that it has mounted:</p>
+
+<pre><code>$ sudo mount /mnt/rb.data
+$ df -h
+
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/xvda1            7.9G  1.1G  6.8G  14% /
+tmpfs                 302M     0  302M   0% /dev/shm
+/dev/xvdf             2.0G   67M  1.9G   4% /mnt/rb.data
+</code></pre>
+
+<p>If you don&#8217;t see your volume in the <code>Mounted on</code> column, check all the
+previous steps worked.</p>
+
+<h2>Installing Lots Of Stuff</h2>
+
+<p>Now to install all we need for ReviewBoard Cut and paste this full block
+into the command line:</p>
+
+<pre><code>$ sudo yum --assumeyes install \
+    ant \
+    ant-apache-regexp \
+    autoconf \
+    gcc \
+    gcc-c++ \
+    git \
+    httpd \
+    icu \
+    java-1.6.0-openjdk-devel \
+    libicu \
+    libicu-devel \
+    libjpeg \
+    libjpeg-devel \
+    libpng \
+    libpng-devel \
+    lucene \
+    make \
+    memcached \
+    mod_wsgi \
+    patch \
+    postgresql \
+    postgresql-devel \
+    postgresql-server \
+    python-devel \
+    svn \
+    telnet
+</code></pre>
+
+<p>Now to install the python prerequisite packages:</p>
+
+<pre><code>$ sudo easy_install \
+    python-memcached \
+    pycrypto\&gt;=2.4.1 \
+    psycopg2 \
+    django-storages
+</code></pre>
+
+<p>Pyconfig will probably spew out lots of warnings, but it should be OK to
+ignore those.</p>
+
+<p>Next, install ReviewBoard:</p>
+
+<pre><code>$ sudo easy_install ReviewBoard
+</code></pre>
+
+<p>Now you have a choice – install pylucene so that you can have full text
+search in ReviewBoard, or skip it and just move on to setting up the database.</p>
+
+<h2>Installing Pylucene <em>(optional)</em></h2>
+
+<p>Although you don&#8217;t need Pylucene installed, it&#8217;s nice to have it because
+of the search features it adds to ReviewBoard. However, it can be a bit of
+a bugger to install, so although these instructions work for now, if they&#8217;re
+broken by the time you read this, you may want to skip it.</p>
+
+<p>Brave? Then on-wards…</p>
+
+<p>Create a folder to build and install Pylucene from, download and extract
+the archive:</p>
+
+<pre><code>$ mkdir pylucene
+$ cd pylucene
+$ curl apache.mirror.rbftpnetworks.com/lucene/pylucene/pylucene-3.4.0-1-src.tar.gz | tar -xvz
+</code></pre>
+
+<p><code>tar</code> may take a while to extract the large archive being fed to it, but
+once it&#8217;s finished, compile jcc:</p>
+
+<pre><code>$ cd pylucene-3.4.0-1/jcc
+$ sudo env JCC_JDK=/usr/lib/jvm/java-1.6.0-openjdk NO_SHARED=true python setup.py build
+$ sudo env JCC_JDK=/usr/lib/jvm/java-1.6.0-openjdk NO_SHARED=true python setup.py install
+$ cd ..
+</code></pre>
+
+<p>Now to build Pylucene. First you have to edit some values in the Makefile, so
+open that:</p>
+
+<pre><code>$ nano Makefile
+</code></pre>
+
+<p>And then paste these lines at the top of the very top of file, before the
+block comment:</p>
+
+<pre><code>JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk
+PREFIX_PYTHON=/usr
+ANT=ant
+PYTHON=$(PREFIX_PYTHON)/bin/python
+JCC=$(PYTHON) -m -m jcc.__main__
+NUM_FILES=3
+</code></pre>
+
+<p>Now you should be ready to build it:</p>
+
+<pre><code>$ make
+</code></pre>
+
+<p>This can take a long time (30 minutes or so), so go get some tea. After it&#8217;s
+complete you can now install it:</p>
+
+<pre><code>$ sudo make install
+</code></pre>
+
+<p>That&#8217;s Pylucene dealt with. On to the database.</p>
+
+<h2>Creating the ReviewBoard Database</h2>
+
+<p>The database will also reside on the data volume. This setup assumes that
+you only want one PostgreSQL cluster. I&#8217;ve no idea why you&#8217;d want more than
+that, but if you do, you&#8217;re advanced enough to figure out how to make the
+next few steps fit into that configuration yourself.</p>
+
+<p>First, create a folder for the database, and give it to the postgres user:</p>
+
+<pre><code>$ sudo mkdir -p /mnt/rb.data/db/pg
+$ sudo chown postgres:postgres /mnt/rb.data/db/pg
+</code></pre>
+
+<p>And now set that data location in the postgres conf file:</p>
+
+<pre><code>$ echo "PGDATA=/mnt/rb.data/db/pg" | sudo tee /etc/sysconfig/pgsql/postgresql
+</code></pre>
+
+<p>With that sorted, we can now tell PostgreSQL to create the cluster:</p>
+
+<pre><code>$ sudo service postgresql initdb
+</code></pre>
+
+<p>Next, we want to change the database authentication method for connections
+from <code>127.0.0.1</code> in order to allow ReviewBoard to connect. To do this, edit
+<code>/mnt/rb.data/db/pg/pg_hba.conf</code> and change the method used for <code>127.0.0.1/32</code>
+from <code>ident</code> to <code>md5</code>:</p>
+
+<pre><code>$ sudo nano /mnt/rb.data/db/pg/pg_hba.conf
+</code></pre>
+
+<p>Near the bottom of the file, change the line <code>host    all         all         127.0.0.1/32          ident</code>
+to <code>host    all         all         127.0.0.1/32          md5</code>.</p>
+
+<p>All that&#8217;s left is to start it and then create the empty ReviewBoard database:</p>
+
+<pre><code>$ sudo service postgresql start
+$ sudo su postgres -c "createdb reviewboard"
+</code></pre>
+
+<p>Now create a database user for reviewboard. I&#8217;m going to be lazy here and create
+them as a superuser because I can&#8217;t be arsed setting up their correct priviledges.
+Don&#8217;t be as stupid as I am:</p>
+
+<pre><code>$ sudo su postgres -c "createuser -sP reviewboarduser"
+</code></pre>
+
+<p>Be sure to give them a decently strong password.</p>
+
+<p>Now, in case you have to reboot your server, you&#8217;ll want to make sure things
+start on boot. To do this, you can use <code>ntsysv</code>:</p>
+
+<pre><code>$ sudo ntsysv
+</code></pre>
+
+<p>Use the cursor keys to move, space to select, and tab to move between areas.
+Make sure you enable <code>httpd</code>, <code>memcached</code> and <code>postgresql</code>.</p>
+
+<p>Just to make sure it&#8217;s all running, reboot the instance.</p>
+
+<pre><code>$ sudo shutdown -r now
+</code></pre>
+
+<p>This will kick you out of your session, but just give it a minute or two
+and then log back in. The address of your server should still be the same
+at this point, but if it isn&#8217;t, you can find it again from the AWS web console.</p>
+
+<p>After you&#8217;ve logged back in, check that the webserver is running to make sure
+the <code>ntsysv</code> command above worked. The easiest way to do this is by using
+telnet to request the default page from the local webserver:</p>
+
+<pre><code>$ telnet 127.0.0.1 80
+GET /
+</code></pre>
+
+<p>You should see a screed of HTML returned. If you see a connection refused or
+timed out, go back to the <code>ntsysv</code> section above and try again. Note that
+<code>ntsysv</code> doesn&#8217;t start the services for you, it just marks them to start
+on boot, so you have to perform that shutdown step to test it.</p>
+
+<h2>Creating A ReviewBoard Site</h2>
+
+<p>That&#8217;s pretty much the server setup now. All that remains is to create a
+review board site. There&#8217;s a handy interactive script to do this. Create
+a directory for the site and then run the interactive script:</p>
+
+<pre><code>$ sudo mkdir -p /mnt/rb.data/www
+$ sudo rb-site install /mnt/rb.data/www/reviewboard.huzutech.com
+</code></pre>
+
+<p>The script is fairly informative, but if you need more information, see
+the ReviewBoard documentation for creating sites:</p>
+
+<ul>
+<li><a href="http://www.reviewboard.org/docs/manual/1.6/admin/installation/creating-sites/">http://www.reviewboard.org/docs/manual/1.6/admin/installation/creating-sites/</a></li>
+</ul>
+
+
+<p>Basically, the only thing to remember is that you are using a <strong>postgresql</strong> database,
+<strong>memcached</strong>, <strong>apache</strong> and <strong>wsgi</strong>.</p>
+
+<p>Give ownership of the web directory to Apache, and add the generated site
+config to the apache conf folder, then restart apache:</p>
+
+<pre><code>$ sudo chown -R apache:apache /mnt/rb.data/www
+$ sudo ln -s /mnt/rb.data/www/reviewboard.huzutech.com/conf/apache-wsgi.conf /etc/httpd/conf.d/XX_reviewboard.huzutech.com.conf
+$ sudo service httpd restart
+</code></pre>
+
+<p>Note that the link name starts with <code>XX_</code>. This is important so that it&#8217;s
+loaded in the correct order.</p>
+
+<h2>Finished!</h2>
+
+<p>That&#8217;s it! You should be able to see your server if you visit the public
+address in a web browser. There are several post setup things that you
+probably want to do, such as setting up a proper vhost file, locking user
+registration and setting up projects and repositories.</p>
+
+<p>If you installed lucene, don&#8217;t forget to add the lucene index updating cron
+job to cron, otherwise you&#8217;ll get errors when you try to search and it can&#8217;t
+find the search index files.</p>
+
+<p>Check out the guides on the main <a href="http://www.reviewboard.org/docs/">ReviewBoard</a> website for more information
+about all that. Then sit back and learn from all the glorious code reviews
+you see rolling in.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SparrowBones]]></title>
+    <link href="http://noiseandheat.com/blog/2011/11/sparrowbones/"/>
+    <updated>2011-11-22T23:39:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/11/sparrowbones</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://noiseandheat.com/images/SparrowBones_thumb.png" width="200" height="130"></p>
+
+<p><strong>UPDATE</strong>: <a href="http://gamua.com/blog/2012/03/sparrow-1-3/">Sparrow 1.3</a> has now
+been released and it includes an updated and significantly enhanced
+AppScaffold project which makes most of the reasons to use SparrowBones
+redundant. I recommend you use the official AppScaffold project as a starting
+point now, rather than SparrowBones.</p>
+
+<hr />
+
+<p><a href="http://www.sparrow-framework.org/">Sparrow-Framework</a> is pretty awesome for
+quickly chucking together iOS games. But wouldn&#8217;t it be nicer if there was a
+handy Xcode 4 template to start from?</p>
+
+<!--more-->
+
+
+<p>Your wish is my command! Presenting <strong>SparrowBones</strong>, a beautiful handcrafted
+Xcode 4 template:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/SparrowBones">https://github.com/mnem/SparrowBones</a></li>
+</ul>
+
+
+<p>It&#8217;s fairly simple and slightly hacky. Unlike the AppScaffold, which comes
+with Sparrow-Framework, it supports automatic rotation (because I always hold
+my iPhone the wrong way) and unit testing (because I&#8217;m crazy like that). The
+<a href="https://github.com/mnem/SparrowBones/blob/master/README.md">README.md</a> file
+in the project should guide you through the installation.</p>
+
+<p>If you use it, you&#8217;ll notice 2 template projects in the SparrowBones section -
+<em>&#8220;Game with Sparrow source copied&#8221;</em> and <em>&#8220;Game with Sparrow source linked&#8221;</em>.
+The only difference between them is that with the copied source the Sparrow
+Framework source code is copied into your new project. If you choose linked,
+the Sparrow Framework source is connected to your new project through your
+<code>SPARROW_SRC</code> variable in Xcode.</p>
+
+<p>Why 2 templates? Mainly because the Xcode template format is undocumented and
+I haven&#8217;t quite worked out how to include a linked project easily in a
+template. This means that you have to tweak a few things when you use a linked
+project unfortunately. But never fear! This post has a handy guide to getting
+it working a little further down.</p>
+
+<p>Although it&#8217;s recommended that you use the template with the linked Sparrow
+source (because it&#8217;s a lot easier to update Sparrow-Framework that way), you
+may actually want to have a project with the Sparrow source copied. For
+example, if you are doing some hardcore hacking of the source this is a good
+option, or if you want to create a self contained project you can archive and
+mail to people it&#8217;s great for that too.</p>
+
+<p>On with the guide!</p>
+
+<h2>Setting up linked source SparrowBones projects</h2>
+
+<p>Choose the right one:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/00_sb_choose.png" width="730" height="493"></p>
+
+<p>Fill in some blanks and choose which device family to aim for. <strong>IMPORTANT</strong>:
+Uncheck &#8220;Use Automatic Reference Counting&#8221; (Sparrow doesn&#8217;t work with that
+yet). I also uncheck &#8220;Use Storyboard&#8221; because I haven&#8217;t learned how to use
+those:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/01_sb_name_stuff.png" width="730" height="493"></p>
+
+<p>Next, we have to fix that red Sparrow.xcodeproj reference. Select it and press
+Alt-Cmd-1 to show the inspector:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/02_sb_select_sparrow.png" width="859" height="321"></p>
+
+<p>Then change it to be relative to your linked Sparrow Framework source.
+<strong>NOTE</strong>: the link name may be different for you – it depends on what you
+entered when setting it up (if you haven&#8217;t set a link to the source up, <a href="http://www.sparrow-framework.org/help/gettingstarted/">do that now</a> before
+continuing):</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/03_sb_adjust_link.png" width="260" height="228"></p>
+
+<p>If you look back at the Project navigator you should see Sparrow.xcodeproj as
+an <strong>expandable</strong> project:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/04_sb_linked_properly.png" width="260" height="64"></p>
+
+<p>This is <strong>important</strong>. If it doesn&#8217;t have the arrow, you will have to <strong>quit</strong>
+Xcode and then re-launch it and open the project. Sometimes Xcode is a bit
+slow about picking up path changes.</p>
+
+<p>If that all important triangle is next to Sparrow.xcodeproj, you have one more
+thing to do. Xcode needs to know that it has to build Sparrow.xcodeproj as a
+dependency of your game target. Here&#8217;s how: <strong>1)</strong> Select Sparrow.xcodeproj in
+the project navigator, <strong>2)</strong> select your game target in the editor window,
+<strong>3)</strong> go to the Build Phases section, <strong>4)</strong> expand the target dependencies
+and click the plus.</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/05_sb_add_dep.png" width="817" height="275"></p>
+
+<p>In the window that appears, select the Sparrow target:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/06_sb_choos_dep.png" width="402" height="462"></p>
+
+<p>Select Add. If my instructions worked, you should now have Sparrow as a
+dependency:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/07_sb_dep_added.png" width="591" height="159"></p>
+
+<p>That&#8217;s it! Simple once you know how. You should now be able to run the project
+in one of the simulator targets and you will some see Exciting Boxes on the
+screen. Awesome. Well done you!</p>
+
+<h2>A Note on Unit Tests</h2>
+
+<p>If you want to write unit tests, and I know you do, you will have to add all
+the Frameworks in the frameworks folder to your <code>&lt;AppName&gt;Tests</code> target,
+otherwise you will get lots of Mach-O linker errors:</p>
+
+<p><img class="center" src="http://noiseandheat.com/images/08_sb_unit_test.png" width="874" height="528"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[No Vodka Tampons, we're Scottish]]></title>
+    <link href="http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
+    <updated>2011-11-14T21:35:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Elements_of_a_tampon_with_applicator.jpg"><img class="right" src="http://noiseandheat.com/images/whisky_tampon.png" width="200" height="130"></a></p>
+
+<p>So I&#8217;ve been thinking about this, and pending further evidence I&#8217;m going to
+assume that the story about vodka soaked tampons (see
+<a href="http://goo.gl/7bpv3">KPHO</a>) is rubbish. Every so often it seems to make the
+rounds (see <a href="http://goo.gl/2u9Oe">Snopes</a>). Here&#8217;s why I&#8217;m an unbeliever.</p>
+
+<!--more-->
+
+
+<p>A tampon will soak up about 15ml-18ml (see <a href="http://goo.gl/jSCOQ">About.com</a>)
+of liquid which is a pathetic dram. Alcohol is not blood, but for this thought
+experiment it&#8217;ll do. I can test it later. Regardless, it&#8217;s likely much less
+than a shot.</p>
+
+<p>In addition tampons are designed to retain liquid rather than release it, so
+there&#8217;s a reasonable chance that it wouldn&#8217;t release the booze very quickly.</p>
+
+<p>Now, as far as I can discover, a stomach absorbs about 20% of consumed alcohol
+(see <a href="http://goo.gl/kqc7C">Brown University</a>), the rest is through your
+intestine. For the moment I&#8217;ll make the assumption that vaginal walls absorb
+alcohol at a similar rate as the intestine. Although this probably isn&#8217;t
+accurate due to the the quantity of blood vessels, it doesn&#8217;t matter because
+the rumour generally also includes men who, it is whispered, stick it up their
+bum.</p>
+
+<p>It follows, I think, that if I drink a Polite Dram (about 35ml - 40ml), 80% of
+that will end up in my intestines, which is 28ml - 32ml. That&#8217;s about double
+what this mythical Tampon Delivery Mechanism would offer. Also, drinking the
+Polite Dram on an empty stomach (remember kids: eatin&#8217; is cheatin&#8217;) will whap
+that Double Tampon Quantity right into my intestine, an organ which exists to
+diffuse things into my blood vessels and make embarassing noises during quiet
+moments.</p>
+
+<p>Therefore I conclude that ingesting a Polite Dram on an empty stomach may be
+up to twice as efficacious as Tampon Delivery, plus it&#8217;s easier to buy in
+rounds. Have you ever tried getting a tampon in a pub? Those bloody machines
+never work.</p>
+
+<p>Right, pending volunteers for double blind tests, I&#8217;ll get back to my coding
+with a nice <a href="http://www.thebalvenie.com/en-%0Agb/ourRange_currentRange_signature.php">Balvenie Doublewood</a>. In a
+<a href="http://www.whiskyglass.com/">glass</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Shuffling arrays, the Objective-C edition]]></title>
+    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition/"/>
+    <updated>2011-08-19T14:19:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays-the-objective-c-edition</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="http://noiseandheat.com/images/thumb-objective-c1.png" width="200" height="130"></a></p>
+
+<p>Shuffling is just like buses. You sit about being deterministic for years, and
+then all of a sudden, you need some random shuffling on two platforms at once.</p>
+
+<!--more-->
+
+
+<p>As a follow on from my previous post on <a href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/">shuffling AS3 arrays</a>,
+here&#8217;s the same algorithm implemented as a category addition to
+<a href="http://developer.apple.com/library/ios/#documentation/Cocoa/Reference/Foundation/Classes/NSMutableArray_Class/Reference/Reference.html">NSMutableArray</a>
+for all your easy array shuffling needs.</p>
+
+<p>To use it, download the method and header files, add them to your project and
+them simply include the header file wherever you you want to shuffle anNSMutableArray:</p>
+
+<figure class='code'><figcaption><span> (example_shuffle.m)</span> <a href='http://noiseandheat.com/downloads/code/example_shuffle.m'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp"> #import &quot;NSMutableArray+Shuffle.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSMutableArray</span><span class="o">*</span><span class="p">)</span><span class="nf">myAwesomeFunction</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSMutableArray</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithObjects:</span> <span class="s">@&quot;Fred&quot;</span><span class="p">,</span> <span class="s">@&quot;Bob&quot;</span><span class="p">,</span> <span class="s">@&quot;Alice&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">array</span> <span class="n">shuffle</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">array</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Grab it while it&#8217;s hot from github:</p>
+
+<div><script src='https://gist.github.com/1156719.js?file='></script>
+<noscript><pre><code>/**
+ * NSMutableArray+Shuffle.h
+ *
+ * (c) Copyright 2011 David Wagner.
+ *
+ * Complain/commend: http://noiseandheat.com/
+ *
+ *
+ * Licensed under the MIT license:
+ * 
+ *     http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+#import &lt;Foundation/Foundation.h&gt;
+
+@interface NSMutableArray (NSMutableArray_Shuffle)
+
+/**
+ * Shuffle the array elements in place.
+ */
+- (void)shuffle;
+
+@end
+</code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Shuffling arrays]]></title>
+    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/"/>
+    <updated>2011-08-11T17:11:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="http://noiseandheat.com/images/thumb1.png" width="200" height="130"></a></p>
+
+<p>For some reason, there doesn&#8217;t seem to be any sane example of shuffling
+arrays in ActionScript blogland. I discovered this when I was trying to send
+a lazy link to someone of an implementation rather than write the code
+myself. Oh, by sane I mean vaguely efficient, not overusing crazy Math.floor
+or Array.slice functions.</p>
+
+<!--more-->
+
+
+<p>Shuffling data isn&#8217;t a new problem, but people seem to always want to re-
+invent things. Alas, it&#8217;s often re-invented poorly. Here&#8217;s a nice vintage
+shuffling algorithm for you from 1964 (although the idea is based on a method
+from 1938. History rocks.). Example usage is in the huge header comment:</p>
+
+<div><script src='https://gist.github.com/1139943.js?file='></script>
+<noscript><pre><code>package utils
+{
+    /**
+     * Simple class to shuffle items in arrays using a modern Fisher–Yates shuffle as described
+     * by Richard Durstenfeld in ACM volume 7, issue 7: &quot;Algorithm 235: Random permutation&quot;.
+     *
+     *   Wikipedia: http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+     *
+     *
+     * Author: David Wagner
+     * Complain/compliment at: http://noiseandheat.com/
+     *
+     *
+     * Sample usage:
+     *
+     *   import utils.Shuffle
+     *   
+     *   function myFunction():void
+     *   {
+     *       var data:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+     *   
+     *       // Copy, leaving original untouched
+     *       trace(&quot;-[Shuffling array copy]-----------------------------------------&quot;);
+     *       trace( &quot;data before shuffle    : &quot; + data );
+     *   
+     *       var dataCopy = Shuffle.arrayCopy(data);
+     *   
+     *       trace( &quot;data after shuffle     : &quot; + data );
+     *       trace( &quot;dataCopy after shuffle : &quot; + dataCopy );
+     *   
+     *       // In place
+     *       trace(&quot;\n-[Shuffling array in place]-------------------------------------&quot;);
+     *       trace( &quot;data before shuffle: &quot; + data );
+     *   
+     *       Shuffle.array(data);
+     *   
+     *       trace( &quot;data after shuffle : &quot; + data );
+     *   }
+     *
+     * Sample output:
+     *
+     *   -[Shuffling array copy]-----------------------------------------
+     *   data before shuffle    : 0,1,2,3,4,5,6,7,8,9
+     *   data after shuffle     : 0,1,2,3,4,5,6,7,8,9
+     *   dataCopy after shuffle : 5,7,6,1,2,3,0,9,4,8
+     *   
+     *   -[Shuffling array in place]-------------------------------------
+     *   data before shuffle: 0,1,2,3,4,5,6,7,8,9
+     *   data after shuffle : 7,9,4,8,6,5,1,3,0,2
+     */
+    public class Shuffle
+    {
+        /**
+         * Shuffles an array in place.
+         *
+         * This assumes the array is 0 indexed (i.e. indexed start from 0) and
+         * that it is a dense array, that is the values run from 0 to array.length
+         * without any gaps.
+         */
+        static public function array(a:Array):void
+        {
+            // Using a variant type so any array member type can be swapped
+            var temp:*;
+            var j:int;
+            for (var i:int = a.length - 1; i &gt; 0; i--)
+            {
+                // Generate an integer, j, such that 0 &lt;= j &lt;= i
+                //
+                // Adding 1 to i because Math.random() returns values in the range: 0 &lt;= n &lt; 1
+                j = Math.random() * (i + 1);
+                
+                // Swap items
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+        
+        /**
+         * Creates a shuffled copy of the specified array. The original array
+         * remains in the order it was passed in.
+         *
+         * This assumes the array is 0 indexed (i.e. indexed start from 0) and
+         * that it is a dense array, that is the values run from 0 to array.length
+         * without any gaps.
+         */
+        static public function arrayCopy(source:Array):Array
+        {
+            var a:Array = new Array(source.length);
+            a[0] = source[0];
+            
+            var j:int;
+            for (var i:int = 1; i &lt; a.length; i++)
+            {
+                // Generate an integer, j, such that 0 &lt;= j &lt;= i
+                //
+                // Adding 1 to i because Math.random() returns values in the range: 0 &lt;= n &lt; 1
+                j = Math.random() * (i + 1);
+                
+                // Swap items
+                a[i] = a[j];
+                a[j] = source[i];
+            }
+            
+            return a;
+        }
+    }
+}
+</code></pre></noscript></div>
+
+
+<p>Feel free to extend the class to support typed Vectors. Sadly, you have to
+implement each Vector type yourself as AS3 currently has no non-hacky method
+of implementing template functions.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lion eats Ant, or giving Lion Java GUI programs access to environment variables (phew)]]></title>
+    <link href="http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/"/>
+    <updated>2011-07-27T15:02:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew</id>
+    <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/arthur_chapman/3462161644/"><img class="right" src="http://noiseandheat.com/images/thumb1.jpg" width="200" height="130" title="An ant, yesterday" ></a></p>
+
+<p>Upgrading an OS is always fun, especially when you go for a clean install and forget
+about the 40 million really useful applications you need to make your life
+comfortable. Then you run into all the subtle changes that break the way you
+did things before…</p>
+
+<!--more-->
+
+
+<p>I ran into one of those with <a href="http://www.fdt.powerflasher.com/">FDT 4.5</a> on
+Lion recently. Suddenly, my FDT Ant build scripts no longer picked up my
+<code>FLEX_HOME</code> environment variable. After much wailing and gnashing of teeth, it
+turns out that simply <code>export</code>ing a variable from your <code>.bash_profile</code> isn&#8217;t
+enough for some GUI applications. I&#8217;m not certain why yet, but FDT (or Java)
+is now launched by a service called <code>launchd</code> (<a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man8/launchd.8.html">man</a>,
+<a href="http://en.wikipedia.org/wiki/Launchd">wiki</a>). To make environment variables
+available to processes opened by <code>launchd</code>, you must set them using
+<code>launchctl setenv VAR $VALUE</code>.</p>
+
+<p>So, for example, the relevant part of my <code>.bash_profile</code> looks like this:</p>
+
+<div><script src='https://gist.github.com/1109369.js?file='></script>
+<noscript><pre><code>export FLEX_HOME=/Users/mnem/Developer/Frameworks/flex/4.5.1.21328
+launchctl setenv FLEX_HOME $FLEX_HOME</code></pre></noscript></div>
+
+
+<p>Add that to your <code>.bash_profile</code>, or type it into a terminal to test it,
+relaunch FDT and it should all work. If you want to check what variables are
+available in your ant file, don&#8217;t forget that you can add an <code>&lt;echoproperties/&gt;</code>
+tag to dump them to stdout.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FlexUnit Visual Listener]]></title>
+    <link href="http://noiseandheat.com/blog/2011/07/flexunit-visual-listener/"/>
+    <updated>2011-07-18T16:18:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/07/flexunit-visual-listener</id>
+    <content type="html"><![CDATA[<p>Let&#8217;s face it, we all use Flash and AS3 because we like pretty eye candy.
+Otherwise we&#8217;d just use a real language.</p>
+
+<!--more-->
+
+
+<p>In light of that, I&#8217;ve never been particularly happy with the standard
+AS3 FlexUnit listener you get when you aren&#8217;t running inside FlashBuilder. Trace
+statements are <em>so</em> last century. Also, they give me flashbacks to embedded C
+programming, and I have to go and brick a firmware. I&#8217;m running out of phones.</p>
+
+<p>So, in place of trace, I present: Green Dots (a.k.a. <a href="https://github.com/mnem/flexunit_visual_listener">FlexUnit Visual Listener</a>):</p>
+
+<p><a href="https://github.com/mnem/flexunit_visual_listener"><img class="center" src="http://noiseandheat.com/images/2_0_portfolio1.png" width="630" height="420"></a></p>
+
+<p>They&#8217;re totally contemporary, work with any dress and are a stylish addition
+to every modern CI system. They even give you some useful error information
+when you roll the mouse over the test result dot (which you can copy to the
+clipboard by clicking. Awesome!).</p>
+
+<p>Bonus! It&#8217;s simple to use too. Here&#8217;s an example:</p>
+
+<figure class='code'><figcaption><span> (example_flexunitvisuallistener.as)</span> <a href='http://noiseandheat.com/downloads/code/example_flexunitvisuallistener.as'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='as'><span class='line'><span class="kd">package</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">noiseandheat</span><span class="p">.</span><span class="nx">flexunit</span><span class="p">.</span><span class="nx">visuallistener</span><span class="p">.</span><span class="nx">VisualListener</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">org</span><span class="p">.</span><span class="nx">flexunit</span><span class="p">.</span><span class="nx">internals</span><span class="p">.</span><span class="nx">TraceListener</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">org</span><span class="p">.</span><span class="nx">flexunit</span><span class="p">.</span><span class="nx">runner</span><span class="p">.</span><span class="nx">FlexUnitCore</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">org</span><span class="p">.</span><span class="nx">fluint</span><span class="p">.</span><span class="nx">uiImpersonation</span><span class="p">.</span><span class="nx">VisualTestEnvironmentBuilder</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">flash</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nb">Sprite</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">flash</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nb">StageAlign</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">flash</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nb">StageScaleMode</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">import</span> <span class="nx">flash</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nb">Event</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="nx">SWF</span><span class="p">(</span><span class="nx">backgroundColor</span><span class="o">=</span><span class="s2">&quot;#000000&quot;</span><span class="o">,</span> <span class="nx">frameRate</span><span class="o">=</span><span class="s2">&quot;120&quot;</span><span class="o">,</span> <span class="nx">width</span><span class="o">=</span><span class="s2">&quot;800&quot;</span><span class="o">,</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;600&quot;</span><span class="p">)]</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">class</span> <span class="nx">TestRunner</span> <span class="kd">extends</span> <span class="nb">Sprite</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="k">var</span> <span class="nx">core</span><span class="o">:</span><span class="nx">FlexUnitCore</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="k">var</span> <span class="nx">listener</span><span class="o">:</span><span class="nx">VisualListener</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">public</span> <span class="kd">function</span> <span class="nx">TestRunner</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">core</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FlexUnitCore</span><span class="p">();</span>
+</span><span class='line'>            <span class="nx">VisualTestEnvironmentBuilder</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">listener</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VisualListener</span><span class="p">();</span>
+</span><span class='line'>            <span class="nx">addChild</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">core</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// Add a trace listener too if you want some trace output core.addListener(new</span>
+</span><span class='line'>            <span class="nx">TraceListener</span><span class="p">(</span><span class="mi">800</span><span class="o">,</span> <span class="mi">600</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">core</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">NoiseAndHeatSuite</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">addEventListener</span><span class="p">(</span><span class="nb">Event</span><span class="p">.</span><span class="nx">ADDED_TO_STAGE</span><span class="o">,</span> <span class="nx">addedToStage</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">protected</span> <span class="kd">function</span> <span class="nx">addedToStage</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span><span class="nb">Event</span><span class="p">)</span><span class="o">:</span><span class="nx">void</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">removeEventListener</span><span class="p">(</span><span class="nb">Event</span><span class="p">.</span><span class="nx">ADDED_TO_STAGE</span><span class="o">,</span> <span class="nx">addedToStage</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">stage</span><span class="p">.</span><span class="nx">align</span> <span class="o">=</span> <span class="nb">StageAlign</span><span class="p">.</span><span class="nx">TOP_LEFT</span><span class="o">;</span>
+</span><span class='line'>            <span class="nx">stage</span><span class="p">.</span><span class="nx">scaleMode</span> <span class="o">=</span> <span class="nb">StageScaleMode</span><span class="p">.</span><span class="nx">NO_SCALE</span><span class="o">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&#8217;s similar to the normal FlexUnit runner example, but with the addition of
+the VisualListener and stage tweaks.</p>
+
+<p>Grab it while it&#8217;s hot from: <a href="https://github.com/mnem/flexunit_visual_listener">https://github.com/mnem/flexunit_visual_listener</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

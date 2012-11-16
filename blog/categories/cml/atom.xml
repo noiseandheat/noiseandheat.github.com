@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CML | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/cml/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Eigen, GLM and CML: math lib performance on iOS]]></title>
+    <link href="http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/"/>
+    <updated>2012-09-23T21:12:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios</id>
+    <content type="html"><![CDATA[<p>At the moment I'm playing around with writing a cross platform game library, because that's what all the cool kids are doing. One of the parts I'm not particularly looking forward to is writing a math library for the rendering. Fortunately, far greater programmers than I have done so already. In fact, many greater programmers have. Three seem quite popular: <a href="http://cmldev.net/">CML</a>, <a href="http://eigen.tuxfamily.org/">Eigen</a> and <a href="http://glm.g-truc.net/">GLM</a>.</p>
+
+<!--more-->
+
+
+<p>Being lazy I searched around to find out which one seemed fastest or easiest to use with mobile, and I found a very useful post on the three common ones at <a href="http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/">http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/</a>. Unfortunately, the tests had been run only on desktop and Android, so I've forked the repository and added an iOS runner for the tests. You can find it at:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/Math-Library-Test/tree/ios-test">https://github.com/mnem/Math-Library-Test/tree/ios-test</a></li>
+</ul>
+
+
+<p>I also added a branch with the current latest source code for each of the libraries:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/Math-Library-Test/tree/update-mathlibs-to-latest-version">https://github.com/mnem/Math-Library-Test/tree/update-mathlibs-to-latest-version</a></li>
+</ul>
+
+
+<p>A full description of the tests can be seen in the source code, or you can read through the <a href="http://www.mfoot.com/2012/01/choosing-a-maths-library-for-cross-platform-c-game-development/">original article by Martin</a>.</p>
+
+<p>Here are the results for running it on my iPhone 4 with the original library versions:</p>
+
+<pre><code>                        iOS release build
+Eigen additions         2515
+Eigen multiplications   6915
+
+GLM additions           3549
+GLM multiplications     7347
+
+CML additions           3004
+CML multiplications     11511
+
+(Timings in milliseconds. Smaller is better.)
+</code></pre>
+
+<p>And once more with the latest library versions:</p>
+
+<pre><code>                        iOS release build
+Eigen additions         2161
+Eigen multiplications   6721
+
+GLM additions           3340
+GLM multiplications     5865
+
+CML additions           2964
+CML multiplications     11112
+
+(Timings in milliseconds. Smaller is better.)
+</code></pre>
+
+<p>I haven't fiddled with compile settings beyond using a release build, so it's quite likely the performance can be improved.</p>
+
+<p>The results for the <a href="http://cmldev.net/">CML</a> multiplications are suspiciously slow, so I wonder if something odd is going on there, but overall it seems to come down to <a href="http://eigen.tuxfamily.org/">Eigen</a> or <a href="http://glm.g-truc.net/">GLM</a>.</p>
+
+<p>I think, for the moment, I'll use <a href="http://glm.g-truc.net/">GLM</a> for a couple of reasons: it's geared towards OpenGL use rather than being a generic linear algebra library, and it has more straightforward MIT licensing.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sparrow Framework AppScaffold not archiving correctly - fix - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="UPDATED: The pull request was merged, so this should be all fixed. If you&#8217;ve tried to create an app using the latest Sparrow Framework
+and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2011/07/sparrow-framework-appscaffold-not-archiving-correctly-fix/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Sparrow Framework AppScaffold Not Archiving Correctly - Fix</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-09T01:49:00+01:00" pubdate data-updated="true">Setting Orange, 44 of Confusion 3177 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="right" src="/images/0_article_thumb21.png" width="200" height="130"></p>
+
+<p><strong>UPDATED</strong>: <em>The pull request was merged, so this should be all fixed.</em></p>
+
+<p>If you&#8217;ve tried to create an app using the latest <a href="http://www.sparrow-framework.org/">Sparrow Framework</a>
+and XCode 4, then tried to Archive it (say for distributing via the excellent
+<a href="https://testflightapp.com/">TestFlightApp</a> service), you may have run into an
+error similar to the following:</p>
+
+<blockquote><p>AppScaffold Cannot be Validated “AppScaffold” does not contain a single–bundle application or contains multiple products. Please select another archive, or adjust your scheme to create a single–bundle application.</p></blockquote>
+
+
+<!--more-->
+
+
+<p>Don&#8217;t panic! This solution is simple:</p>
+
+<ol>
+<li>In XCode, select the linked Sparrow project.</li>
+<li>In the editor, select the Sparrow target.</li>
+<li>Now select the &#8220;Build Phases&#8221; tab.</li>
+<li><p>Expand the &#8220;Copy Headers&#8221; section. It should look a little like this:</p>
+
+<p> <img class="center" src="/images/post_screenshot_011.png" width="800" height="200"></p></li>
+<li><p>Now select all the header files in the &#8220;Public&#8221; section and drag them to &#8220;Project&#8221;. You should end up with the section looking like this:</p>
+
+<p> <img class="center" src="/images/post_screenshot_11.png" width="444" height="351"></p></li>
+</ol>
+
+
+<p>That should be all you need to do. Now if you Archive the app, you should be
+able to successfully Share/Validate it from the Archive Organizer, and your
+icons and version numbers should look as delicious as you expected.</p>
+
+<p>I&#8217;ve submitted a <a href="https://github.com/PrimaryFeather/Sparrow-Framework/pull/1032">pull request</a>,
+so assuming I haven&#8217;t done anything too insane in it,
+these changes should make it into the main project at some point.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-09T01:49:00+01:00" pubdate data-updated="true">Setting Orange, 44 of Confusion 3177 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/open-source/'>Open Source</a>, <a class='category' href='/blog/categories/sparrow-framework/'>Sparrow Framework</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>, <a class='category' href='/blog/categories/xcode-4/'>xcode 4</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/07/simple-clipped-image-for-sparrow-framework/" title="Previous Post: Simple Clipped Image for Sparrow Framework">&laquo; Simple Clipped Image for Sparrow Framework</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/07/sparrow-framework-bitmap-fonts-and-not-having-black-text/" title="Next Post: Sparrow Framework, Bitmap Fonts and not having black text">Sparrow Framework, Bitmap Fonts and not having black text &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2011/07/sparrow-framework-appscaffold-not-archiving-correctly-fix/';
+        var disqus_url = 'http://noiseandheat.com/blog/2011/07/sparrow-framework-appscaffold-not-archiving-correctly-fix/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

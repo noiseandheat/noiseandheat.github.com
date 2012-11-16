@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: chrome | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/chrome/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Chrome and PPAPI Flash Audio Syncing Bug]]></title>
+    <link href="http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/"/>
+    <updated>2012-11-15T21:05:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug</id>
+    <content type="html"><![CDATA[<p>In a somewhat Microsoftian move, Google decided to change the standard browser plugin architecture called <a href="http://en.wikipedia.org/wiki/NPAPI">NPAPI</a> for Chrome and bundle a custom port of Flash which uses it. Sadly, this has lead to some differences for that version of Flash and, unfortunately, new bugs.</p>
+
+<!--more-->
+
+
+<p>The bug which is mainly causing me despair at the moment, is that there seems to be a small delay between telling a sound to play and it actually playing. Although small, it is noticeable enough to make the game I'm working on feel like it's a badly dubbed film.</p>
+
+<p><a name="example"></a></p>
+
+<h2>Example</h2>
+
+<p>This is can be illustrated by the following Flash movie. When you move your mouse over the blue rectangle, you should hear a rather jarring BZZZZ noise and simultaneously the square should turn red:</p>
+
+<div id="flash-container" style="text-align: center;">
+  <div class="flash-video" style="width: 564px;height: 414px;background-color: white;">
+    <div id="simpletest" style="width: 550px;height: 400px;">
+      <p>Loading movie... (or maybe not if you block Flash or don't have it installed)</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  function embedFlash() {
+    var flashvars = {};
+    var params = {
+      scale: 'noscale',
+      wmode: 'opaque'
+    };
+
+    swfobject.embedSWF(
+      '/images/sound_test.swf',
+      'simpletest',
+      "550",
+      "400",
+      "11.0.0",
+      null,
+      flashvars,
+      params);
+  };
+  embedFlash();
+</script>
+
+
+<p>On non-Chrome browsers, or if you disable the PPAPI version of Flash in Chrome, this is indeed the case. However, if you try it in Chrome with the PPAPI Flash plugin, there's a very short delay after the square turns red before the sound plays. It's easier to see and hear when comparing it with another browser using the standard Flash plugin.</p>
+
+<p>Sadly, I can't work out any suitable hack to get around this issue, so I've opened a bug on the Chromium project:</p>
+
+<ul>
+<li><a href="http://code.google.com/p/chromium/issues/detail?id=161387">http://code.google.com/p/chromium/issues/detail?id=161387</a></li>
+</ul>
+
+
+<h2>Example Source</h2>
+
+<p>Lest you think I've code anything especially insane, you can grab all the sources for the test movie:</p>
+
+<ul>
+<li><a href="https://gist.github.com/4077864">https://gist.github.com/4077864</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

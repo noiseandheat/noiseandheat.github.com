@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Shuffling arrays - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="For some reason, there doesn&#8217;t seem to be any sane example of shuffling
+arrays in ActionScript blogland. I discovered this when I was trying &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Shuffling Arrays</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-11T17:11:00+01:00" pubdate data-updated="true">Pungenday, 4 of Bureaucracy 3177 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="/images/thumb1.png" width="200" height="130"></a></p>
+
+<p>For some reason, there doesn&#8217;t seem to be any sane example of shuffling
+arrays in ActionScript blogland. I discovered this when I was trying to send
+a lazy link to someone of an implementation rather than write the code
+myself. Oh, by sane I mean vaguely efficient, not overusing crazy Math.floor
+or Array.slice functions.</p>
+
+<!--more-->
+
+
+<p>Shuffling data isn&#8217;t a new problem, but people seem to always want to re-
+invent things. Alas, it&#8217;s often re-invented poorly. Here&#8217;s a nice vintage
+shuffling algorithm for you from 1964 (although the idea is based on a method
+from 1938. History rocks.). Example usage is in the huge header comment:</p>
+
+<div><script src='https://gist.github.com/1139943.js?file='></script>
+<noscript><pre><code>package utils
+{
+    /**
+     * Simple class to shuffle items in arrays using a modern Fisher–Yates shuffle as described
+     * by Richard Durstenfeld in ACM volume 7, issue 7: &quot;Algorithm 235: Random permutation&quot;.
+     *
+     *   Wikipedia: http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+     *
+     *
+     * Author: David Wagner
+     * Complain/compliment at: http://noiseandheat.com/
+     *
+     *
+     * Sample usage:
+     *
+     *   import utils.Shuffle
+     *   
+     *   function myFunction():void
+     *   {
+     *       var data:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+     *   
+     *       // Copy, leaving original untouched
+     *       trace(&quot;-[Shuffling array copy]-----------------------------------------&quot;);
+     *       trace( &quot;data before shuffle    : &quot; + data );
+     *   
+     *       var dataCopy = Shuffle.arrayCopy(data);
+     *   
+     *       trace( &quot;data after shuffle     : &quot; + data );
+     *       trace( &quot;dataCopy after shuffle : &quot; + dataCopy );
+     *   
+     *       // In place
+     *       trace(&quot;\n-[Shuffling array in place]-------------------------------------&quot;);
+     *       trace( &quot;data before shuffle: &quot; + data );
+     *   
+     *       Shuffle.array(data);
+     *   
+     *       trace( &quot;data after shuffle : &quot; + data );
+     *   }
+     *
+     * Sample output:
+     *
+     *   -[Shuffling array copy]-----------------------------------------
+     *   data before shuffle    : 0,1,2,3,4,5,6,7,8,9
+     *   data after shuffle     : 0,1,2,3,4,5,6,7,8,9
+     *   dataCopy after shuffle : 5,7,6,1,2,3,0,9,4,8
+     *   
+     *   -[Shuffling array in place]-------------------------------------
+     *   data before shuffle: 0,1,2,3,4,5,6,7,8,9
+     *   data after shuffle : 7,9,4,8,6,5,1,3,0,2
+     */
+    public class Shuffle
+    {
+        /**
+         * Shuffles an array in place.
+         *
+         * This assumes the array is 0 indexed (i.e. indexed start from 0) and
+         * that it is a dense array, that is the values run from 0 to array.length
+         * without any gaps.
+         */
+        static public function array(a:Array):void
+        {
+            // Using a variant type so any array member type can be swapped
+            var temp:*;
+            var j:int;
+            for (var i:int = a.length - 1; i &gt; 0; i--)
+            {
+                // Generate an integer, j, such that 0 &lt;= j &lt;= i
+                //
+                // Adding 1 to i because Math.random() returns values in the range: 0 &lt;= n &lt; 1
+                j = Math.random() * (i + 1);
+                
+                // Swap items
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+        
+        /**
+         * Creates a shuffled copy of the specified array. The original array
+         * remains in the order it was passed in.
+         *
+         * This assumes the array is 0 indexed (i.e. indexed start from 0) and
+         * that it is a dense array, that is the values run from 0 to array.length
+         * without any gaps.
+         */
+        static public function arrayCopy(source:Array):Array
+        {
+            var a:Array = new Array(source.length);
+            a[0] = source[0];
+            
+            var j:int;
+            for (var i:int = 1; i &lt; a.length; i++)
+            {
+                // Generate an integer, j, such that 0 &lt;= j &lt;= i
+                //
+                // Adding 1 to i because Math.random() returns values in the range: 0 &lt;= n &lt; 1
+                j = Math.random() * (i + 1);
+                
+                // Swap items
+                a[i] = a[j];
+                a[j] = source[i];
+            }
+            
+            return a;
+        }
+    }
+}
+</code></pre></noscript></div>
+
+
+<p>Feel free to extend the class to support typed Vectors. Sadly, you have to
+implement each Vector type yourself as AS3 currently has no non-hacky method
+of implementing template functions.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-11T17:11:00+01:00" pubdate data-updated="true">Pungenday, 4 of Bureaucracy 3177 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/-dev-null/'>/dev/null</a>, <a class='category' href='/blog/categories/actionscript/'>ActionScript</a>, <a class='category' href='/blog/categories/flash/'>Flash</a>, <a class='category' href='/blog/categories/open-source/'>Open Source</a>, <a class='category' href='/blog/categories/random/'>Random</a>, <a class='category' href='/blog/categories/shuffle/'>Shuffle</a>, <a class='category' href='/blog/categories/utilities/'>Utilities</a>, <a class='category' href='/blog/categories/as3/'>as3</a>, <a class='category' href='/blog/categories/code/'>code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/" title="Previous Post: Lion eats Ant, or giving Lion Java GUI programs access to environment variables (phew)">&laquo; Lion eats Ant, or giving Lion Java GUI programs access to environment variables (phew)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/08/shuffling-arrays-the-objective-c-edition/" title="Next Post: Shuffling arrays, the Objective-C edition">Shuffling arrays, the Objective-C edition &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2011/08/shuffling-arrays/';
+        var disqus_url = 'http://noiseandheat.com/blog/2011/08/shuffling-arrays/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

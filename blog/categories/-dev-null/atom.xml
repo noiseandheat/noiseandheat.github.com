@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: /dev/null | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/-dev-null/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[No Vodka Tampons, we're Scottish]]></title>
+    <link href="http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
+    <updated>2011-11-14T21:35:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Elements_of_a_tampon_with_applicator.jpg"><img class="right" src="/images/whisky_tampon.png" width="200" height="130"></a></p>
+
+<p>So I've been thinking about this, and pending further evidence I'm going to
+assume that the story about vodka soaked tampons (see
+<a href="http://goo.gl/7bpv3">KPHO</a>) is rubbish. Every so often it seems to make the
+rounds (see <a href="http://goo.gl/2u9Oe">Snopes</a>). Here's why I'm an unbeliever.</p>
+
+<!--more-->
+
+
+<p>A tampon will soak up about 15ml-18ml (see <a href="http://goo.gl/jSCOQ">About.com</a>)
+of liquid which is a pathetic dram. Alcohol is not blood, but for this thought
+experiment it'll do. I can test it later. Regardless, it's likely much less
+than a shot.</p>
+
+<p>In addition tampons are designed to retain liquid rather than release it, so
+there's a reasonable chance that it wouldn't release the booze very quickly.</p>
+
+<p>Now, as far as I can discover, a stomach absorbs about 20% of consumed alcohol
+(see <a href="http://goo.gl/kqc7C">Brown University</a>), the rest is through your
+intestine. For the moment I'll make the assumption that vaginal walls absorb
+alcohol at a similar rate as the intestine. Although this probably isn't
+accurate due to the the quantity of blood vessels, it doesn't matter because
+the rumour generally also includes men who, it is whispered, stick it up their
+bum.</p>
+
+<p>It follows, I think, that if I drink a Polite Dram (about 35ml - 40ml), 80% of
+that will end up in my intestines, which is 28ml - 32ml. That's about double
+what this mythical Tampon Delivery Mechanism would offer. Also, drinking the
+Polite Dram on an empty stomach (remember kids: eatin' is cheatin') will whap
+that Double Tampon Quantity right into my intestine, an organ which exists to
+diffuse things into my blood vessels and make embarassing noises during quiet
+moments.</p>
+
+<p>Therefore I conclude that ingesting a Polite Dram on an empty stomach may be
+up to twice as efficacious as Tampon Delivery, plus it's easier to buy in
+rounds. Have you ever tried getting a tampon in a pub? Those bloody machines
+never work.</p>
+
+<p>Right, pending volunteers for double blind tests, I'll get back to my coding
+with a nice <a href="http://www.thebalvenie.com/en-%0Agb/ourRange_currentRange_signature.php">Balvenie Doublewood</a>. In a
+<a href="http://www.whiskyglass.com/">glass</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Shuffling arrays]]></title>
+    <link href="http://noiseandheat.com/blog/2011/08/shuffling-arrays/"/>
+    <updated>2011-08-11T17:11:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/08/shuffling-arrays</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Blues_shuffle_in_E.png"><img class="right" src="/images/thumb1.png" width="200" height="130"></a></p>
+
+<p>For some reason, there doesn't seem to be any sane example of shuffling
+arrays in ActionScript blogland. I discovered this when I was trying to send
+a lazy link to someone of an implementation rather than write the code
+myself. Oh, by sane I mean vaguely efficient, not overusing crazy Math.floor
+or Array.slice functions.</p>
+
+<!--more-->
+
+
+<p>Shuffling data isn't a new problem, but people seem to always want to re-
+invent things. Alas, it's often re-invented poorly. Here's a nice vintage
+shuffling algorithm for you from 1964 (although the idea is based on a method
+from 1938. History rocks.). Example usage is in the huge header comment:</p>
+
+<p><div><script src='https://gist.github.com/1139943.js?file='></script>
+<noscript><pre><code>package utils
+{
+    /**
+     * Simple class to shuffle items in arrays using a modern Fisher–Yates shuffle as described
+     * by Richard Durstenfeld in ACM volume 7, issue 7: &quot;Algorithm 235: Random permutation&quot;.
+     *
+     *   Wikipedia: http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+     *
+     *
+     * Author: David Wagner
+     * Complain/compliment at: http://noiseandheat.com/
+     *
+     *
+     * Sample usage:
+     *
+     *   import utils.Shuffle
+     *   
+     *   function myFunction():void
+     *   {
+     *       var data:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+     *   
+     *       // Copy, leaving original untouched
+     *       trace(&quot;-[Shuffling array copy]-----------------------------------------&quot;);
+     *       trace( &quot;data before shuffle    : &quot; + data );
+     *   
+     *       var dataCopy = Shuffle.arrayCopy(data);
+     *   
+     *       trace( &quot;data after shuffle     : &quot; + data );
+     *       trace( &quot;dataCopy after shuffle : &quot; + dataCopy );
+     *   
+     *       // In place
+     *       trace(&quot;\n-[Shuffling array in place]-------------------------------------&quot;);
+     *       trace( &quot;data before shuffle: &quot; + data );
+     *   
+     *       Shuffle.array(data);
+     *   
+     *       trace( &quot;data after shuffle : &quot; + data );
+     *   }
+     *
+     * Sample output:
+     *
+     *   -[Shuffling array copy]-----------------------------------------
+     *   data before shuffle    : 0,1,2,3,4,5,6,7,8,9
+     *   data after shuffle     : 0,1,2,3,4,5,6,7,8,9
+     *   dataCopy after shuffle : 5,7,6,1,2,3,0,9,4,8
+     *   
+     *   -[Shuffling array in place]-------------------------------------
+     *   data before shuffle: 0,1,2,3,4,5,6,7,8,9
+     *   data after shuffle : 7,9,4,8,6,5,1,3,0,2
+     */
+    public class Shuffle
+    {
+        /**
+         * Shuffles an array in place.
+         *
+         * This assumes the array is 0 indexed (i.e. indexed start from 0) and
+         * that it is a dense array, that is the values run from 0 to array.length
+         * without any gaps.
+         */
+        static public function array(a:Array):void
+        {
+            // Using a variant type so any array member type can be swapped
+            var temp:*;
+            var j:int;
+            for (var i:int = a.length - 1; i &gt; 0; i--)
+            {
+                // Generate an integer, j, such that 0 &lt;= j &lt;= i
+                //
+                // Adding 1 to i because Math.random() returns values in the range: 0 &lt;= n &lt; 1
+                j = Math.random() * (i + 1);
+                
+                // Swap items
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+        
+        /**
+         * Creates a shuffled copy of the specified array. The original array
+         * remains in the order it was passed in.
+         *
+         * This assumes the array is 0 indexed (i.e. indexed start from 0) and
+         * that it is a dense array, that is the values run from 0 to array.length
+         * without any gaps.
+         */
+        static public function arrayCopy(source:Array):Array
+        {
+            var a:Array = new Array(source.length);
+            a[0] = source[0];
+            
+            var j:int;
+            for (var i:int = 1; i &lt; a.length; i++)
+            {
+                // Generate an integer, j, such that 0 &lt;= j &lt;= i
+                //
+                // Adding 1 to i because Math.random() returns values in the range: 0 &lt;= n &lt; 1
+                j = Math.random() * (i + 1);
+                
+                // Swap items
+                a[i] = a[j];
+                a[j] = source[i];
+            }
+            
+            return a;
+        }
+    }
+}
+</code></pre></noscript></div>
+</p>
+
+<p>Feel free to extend the class to support typed Vectors. Sadly, you have to
+implement each Vector type yourself as AS3 currently has no non-hacky method
+of implementing template functions.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Aaaaaand, the hibernation ends]]></title>
+    <link href="http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends/"/>
+    <updated>2010-05-22T22:34:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2010/05/aaaaaand-the-hibernation-ends</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/01.jpg" width="200" height="130"></p>
+
+<p>Well, what a pleasant hiatus that was. Almost 3 months. However, no more! I
+shall get back to blogging random useless technical details about various
+things. I know you missed me really.</p>
+
+<!--more-->
+
+
+<p>So, what's happening next? Well, firstly, I'm temporarily turning to the Dark
+Side and getting a Nexus One. This shiny new toy should be in my sweaty paws
+within the week. I'm thoroughly looking forward to breaking it. I may even try
+some Flash programming on it, although I'm far more interested in the <a href="http://developer.android.com/sdk/ndk/index.html">Android NDK</a> at the moment. Since I
+have no creative bones, I want to see how well it lends itself to running
+<a href="http://www.box2d.org/">Box2D</a> (I know it's already been ported to NDK, but
+what's the point of Open Source if you can't rewrite the wheel every couple of
+weeks?).</p>
+
+<p>After that, I may actually get around to finishing the shabby little
+accelerated computation engine thingy I was writing for
+<a href="http://www.adobe.com/devnet/pixelbender/">PixelBender</a> and
+<a href="http://www.adobe.com/devnet/flash/">Flash</a>.</p>
+
+<p>Maybe by mentioning these things somewhere, I'll actually get around to
+finishing them…</p>
+
+<p>Firstly, however, I'll have to tinker with Eclipse. I really don't like white
+backgrounds and black text in a code editor. Plus, I like procrastinating and
+putting off actual productive work.</p>
+
+<p>While you are waiting for all those terribly exciting projects to appear, why
+not go an learn guitar? You'll have time. Try
+<a href="http://justinguitar.com/">http://justinguitar.com/</a> for nice course.</p>
+]]></content>
+  </entry>
+  
+</feed>

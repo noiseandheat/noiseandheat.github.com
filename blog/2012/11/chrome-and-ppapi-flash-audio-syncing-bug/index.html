@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Chrome and PPAPI Flash Audio Syncing Bug - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="In a somewhat Microsoftian move, Google decided to change the standard browser plugin architecture called NPAPI for Chrome and bundle a custom port &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Chrome and PPAPI Flash Audio Syncing Bug</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-15T21:05:00+00:00" pubdate data-updated="true">Prickle Prickle, 27 of The Aftermath 3178 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In a somewhat Microsoftian move, Google decided to change the standard browser plugin architecture called <a href="http://en.wikipedia.org/wiki/NPAPI">NPAPI</a> for Chrome and bundle a custom port of Flash which uses it. Sadly, this has lead to some differences for that version of Flash and, unfortunately, new bugs.</p>
+
+<!--more-->
+
+
+<p>The bug which is mainly causing me despair at the moment, is that there seems to be a small delay between telling a sound to play and it actually playing. Although small, it is noticeable enough to make the game I&#8217;m working on feel like it&#8217;s a badly dubbed film.</p>
+
+<p><a name="example"></a></p>
+
+<h2>Example</h2>
+
+<p>This is can be illustrated by the following Flash movie. When you move your mouse over the blue rectangle, you should hear a rather jarring BZZZZ noise and simultaneously the square should turn red:</p>
+
+<div id="flash-container" style="text-align: center;">
+  <div class="flash-video" style="width: 564px;height: 414px;background-color: white;">
+    <div id="simpletest" style="width: 550px;height: 400px;">
+      <p>Loading movie&#8230; (or maybe not if you block Flash or don&#8217;t have it installed)</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  function embedFlash() {
+    var flashvars = {};
+    var params = {
+      scale: 'noscale',
+      wmode: 'opaque'
+    };
+
+    swfobject.embedSWF(
+      '/images/sound_test.swf',
+      'simpletest',
+      "550",
+      "400",
+      "11.0.0",
+      null,
+      flashvars,
+      params);
+  };
+  embedFlash();
+</script>
+
+
+<p>On non-Chrome browsers, or if you disable the PPAPI version of Flash in Chrome, this is indeed the case. However, if you try it in Chrome with the PPAPI Flash plugin, there&#8217;s a very short delay after the square turns red before the sound plays. It&#8217;s easier to see and hear when comparing it with another browser using the standard Flash plugin.</p>
+
+<p>Sadly, I can&#8217;t work out any suitable hack to get around this issue, so I&#8217;ve opened a bug on the Chromium project:</p>
+
+<ul>
+<li><a href="http://code.google.com/p/chromium/issues/detail?id=161387">http://code.google.com/p/chromium/issues/detail?id=161387</a></li>
+</ul>
+
+
+<h2>Example Source</h2>
+
+<p>Lest you think I&#8217;ve code anything especially insane, you can grab all the sources for the test movie:</p>
+
+<ul>
+<li><a href="https://gist.github.com/4077864">https://gist.github.com/4077864</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-15T21:05:00+00:00" pubdate data-updated="true">Prickle Prickle, 27 of The Aftermath 3178 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/audio/'>audio</a>, <a class='category' href='/blog/categories/bugs/'>bugs</a>, <a class='category' href='/blog/categories/chrome/'>chrome</a>, <a class='category' href='/blog/categories/flash/'>flash</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/09/eigen-glm-and-cml--math-lib-performance-on-ios/" title="Previous Post: Eigen, GLM and CML: math lib performance on iOS">&laquo; Eigen, GLM and CML: math lib performance on iOS</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/';
+        var disqus_url = 'http://noiseandheat.com/blog/2012/11/chrome-and-ppapi-flash-audio-syncing-bug/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

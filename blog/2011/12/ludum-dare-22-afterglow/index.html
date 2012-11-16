@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ludum Dare 22: Afterglow - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="So, LD22 Compo is over.
+The judgement begins. My entry was Astronaut Alone
+(play/rate)
+which ended up being, basically, a rubbish asteroids clone. It &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ludum Dare 22: Afterglow</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-19T13:57:00+00:00" pubdate data-updated="true">Pungenday, 61 of The Aftermath 3177 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>So, <a href="http://www.ludumdare.com/compo/ludum-dare-22/?action=preview&amp;etype=compo">LD22 Compo</a> is over.
+The judgement begins. My entry was <strong>Astronaut Alone</strong>
+(<a href="http://mnem.github.com/LD22_Alone/">play</a>/<a href="http://www.ludumdare.com/compo/ludum-dare-22/?uid=7397">rate</a>)
+which ended up being, basically, a rubbish asteroids clone. It was great fun to create though.</p>
+
+<!--more-->
+
+
+<p>Next time, I&#8217;ll be more prepared… Maybe.</p>
+
+<p>In the meantime, here are some lists of things.</p>
+
+<h2>Things that worked well this time</h2>
+
+<ul>
+<li>Tablets totally rock. <em>Graphics</em> tablets. I used LD as an excuse to buy myself
+one. They can be found for <a href="http://amzn.to/uYUZUL">just over a tenner</a> (<a href="http://thedarkmaster.wordpress.com/2010/10/22/trust-flex-design-tablet-on-mac-osx-how-to-make-it-work/">OS X drivers</a>)
+and it made creating graphics a lot faster. I can&#8217;t believe I&#8217;ve not tried one before.</li>
+<li>Content generators are really fun to play with (<a href="http://thirdcog.eu/apps/cfxr">cfxr</a>, <a href="http://www.drpetter.se/project_sfxr.html">sfxr</a>, <a href="http://www.ludumdare.com/compo/2011/12/13/if-you-find-it-hard-to-make-music-read-this/">Autotracker-Bu</a>).
+I think I may spend some spare time creating a few for different purposes.</li>
+<li>The tight deadline forced me to handle time surprisingly well. Immediacy
+is a great axe for culling long tasks.</li>
+<li>I drew an astronaut. It didn&#8217;t look entirely shit. This makes me happy.</li>
+<li>Whisky helps.</li>
+</ul>
+
+
+<h2>Things to do next time</h2>
+
+<ul>
+<li>Prototype more on paper/other non functional medium.</li>
+<li>Don&#8217;t try to optimise anything.</li>
+<li>If a coding problem is taking more than an hour, put a hack in.</li>
+<li>Play with general concepts before the compo just to have things in mind.
+This probably just extends to the fact I should be doing more playful/experimental
+coding, with no firm gameplay in mind.</li>
+<li>Drink more whisky.</li>
+</ul>
+
+
+<h2>Game to do list with some things done</h2>
+
+<ul>
+<li>Necessary:
+
+<ul>
+<li><del>Drifting asteroids</del></li>
+<li><del>Wrap around</del></li>
+<li><del>Destroy asteroid</del></li>
+<li><del>Mine remainders</del></li>
+<li><del>Convert graphics to entities so they can collide</del></li>
+<li><del>Asteroid indicator</del></li>
+<li><del>intro</del></li>
+<li><del>win</del></li>
+<li><del>instructions</del></li>
+<li><del>audio in game</del></li>
+</ul>
+</li>
+<li>Graphics:
+
+<ul>
+<li><del>Astronaut</del></li>
+<li><del>Asteroids</del></li>
+</ul>
+</li>
+<li>Fluff:
+
+<ul>
+<li>Smooth wrapping</li>
+<li>Star trails</li>
+<li><del>Asteroid damage</del></li>
+<li>Asteroid death</li>
+<li><del>Asteroid colouring</del></li>
+</ul>
+</li>
+<li>Refactoring:
+
+<ul>
+<li><del>Pool managers don&#8217;t need to give themselves to entities - use the names.</del></li>
+<li>Pool managers can probably share a base class - or perhaps the SimpleObjectPool can do more work</li>
+<li>Refactor text class</li>
+</ul>
+</li>
+<li>Bugs:
+
+<ul>
+<li>Asteroids can spawn on you</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Tools I used this time</h2>
+
+<p>In no particular order, pretty much every tool I touched:</p>
+
+<ul>
+<li>Sublime Text 2 (<a href="http://www.sublimetext.com/">http://www.sublimetext.com/</a>)</li>
+<li>Buildr-AS3 / Buildr (<a href="https://github.com/devboy/buildr_as3">https://github.com/devboy/buildr_as3</a>/<a href="http://buildr.apache.org/">http://buildr.apache.org/</a>)</li>
+<li>Flashpunk (<a href="http://flashpunk.net/">http://flashpunk.net/</a>)</li>
+<li>FDT (<a href="http://fdt.powerflasher.com/">http://fdt.powerflasher.com/</a>)</li>
+<li>FlexSDK (<a href="http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK">http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK</a>)</li>
+<li>lame (<a href="http://lame.sourceforge.net/">http://lame.sourceforge.net/</a>)</li>
+<li>Homebrew (<a href="http://mxcl.github.com/homebrew/">http://mxcl.github.com/homebrew/</a>)</li>
+<li>Bash (<a href="http://www.gnu.org/s/bash/">http://www.gnu.org/s/bash/</a>)</li>
+<li>Vim (<a href="http://www.vim.org/">http://www.vim.org/</a>)</li>
+<li>Pixelmator (<a href="http://www.pixelmator.com/">http://www.pixelmator.com/</a>)</li>
+<li>SketchBook Pro (<a href="http://usa.autodesk.com/adsk/servlet/pc/index?id=6848332&amp;siteID=123112">http://usa.autodesk.com/adsk/servlet/pc/index?id=6848332&amp;siteID=123112</a>)</li>
+<li>Bamboo tablet (<a href="http://www.wacom.eu/index2.asp?pid=294&amp;spid=1">http://www.wacom.eu/index2.asp?pid=294&amp;spid=1</a>)</li>
+<li>cfxr (<a href="http://thirdcog.eu/apps/cfxr">http://thirdcog.eu/apps/cfxr</a>)</li>
+<li>git (<a href="http://git-scm.com/">http://git-scm.com/</a>)</li>
+<li>MacBook Pro 13 inch (<a href="http://www.apple.com/macbookpro/specs-13inch.html">http://www.apple.com/macbookpro/specs-13inch.html</a>)</li>
+<li>Lion (<a href="http://www.apple.com/macbookpro/osx.html">http://www.apple.com/macbookpro/osx.html</a>)</li>
+</ul>
+
+
+<h2>Food and Drink sequence:</h2>
+
+<ol>
+<li>Coffee</li>
+<li>Scrambled egg and tattie scone</li>
+<li>Coffee</li>
+<li>Coffee</li>
+<li>Chocolate mini roll thing</li>
+<li>Coffee</li>
+<li>Tangerine</li>
+<li>Dry frosties</li>
+<li>Tiny lindt chocolate things</li>
+<li>Aubergine bake</li>
+<li>Red wine</li>
+<li>Whisky</li>
+<li>Toasted cheese</li>
+<li>Coffee</li>
+<li>Scrambled egg</li>
+<li>Coffee</li>
+<li>Darjeeling tea</li>
+<li>Tablet</li>
+<li>Banana</li>
+<li>Stir fry</li>
+<li>Many freshly baked flapjacks</li>
+<li>Whisky</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-19T13:57:00+00:00" pubdate data-updated="true">Pungenday, 61 of The Aftermath 3177 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ld22/'>LD22</a>, <a class='category' href='/blog/categories/ludum-dare/'>Ludum Dare</a>, <a class='category' href='/blog/categories/postmortem/'>postmortem</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/12/ludum-dare-22-a-log-of-activity/" title="Previous Post: Ludum Dare 22: A Log of Activity">&laquo; Ludum Dare 22: A Log of Activity</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/01/vpn-with-amazon-ec2-or-saving-your-phone-from-promiscuity/" title="Next Post: VPN with Amazon EC2 or Saving Your phone from Promiscuity">VPN with Amazon EC2 or Saving Your phone from Promiscuity &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/';
+        var disqus_url = 'http://noiseandheat.com/blog/2011/12/ludum-dare-22-afterglow/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: lols | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/lols/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lazy One Liners: 'git rm' all deleted files]]></title>
+    <link href="http://noiseandheat.com/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/"/>
+    <updated>2012-02-16T21:51:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2012/02/lazy-one-liners-`git-rm`-all-deleted-files</id>
+    <content type="html"><![CDATA[<p><strong>[UPDATE]</strong> <em>My <code>git</code> skills are weak. You can achieve this much more simply by typing: <code>git add -A</code>. Still, knowing about the <code>--porcelain</code> option is useful. Honest.</em></p>
+
+<p>Deleted three hundred and seventy two files and forget to use <code>git rm</code>?
+This one liner will do it for you, if you run it from your repository
+root:</p>
+
+<pre><code>git status --porcelain | awk '/^.D .*$/ {print $2}' | xargs git rm
+</code></pre>
+
+<!--more-->
+
+
+<p>The <code>--porcelain</code> command is great for batch manipulations of your
+staged and unstaged files. Just replace the <code>D</code> in <code>/^.D .*$/</code> with the
+status letter for the sort of files you want to perform a batch
+operation on, and then replace the <code>git rm</code> at the end of the command
+with whatever you want to do to them. The filename will be passed at
+the end of the <code>git</code> command.</p>
+
+<p>When you change the letter, where you place the <strong>dots</strong> are important.
+<code>.D</code> is used for unstaged deleted files, whereas <code>D</code> (no dot before)
+indicates a staged deleted file. Those 2 columns can have many
+character combinations, so you may have to play with the <code>awk</code> matching
+string a little to filter what you want. To test the pattern safely, you
+can use:</p>
+
+<pre><code>git status --porcelain | awk '/^.D .*$/'
+</code></pre>
+
+<p>This will print any matching lines. If there's no output, the filter
+doesn't match anything.</p>
+
+<p>You can find more information about the status letters in the man
+page for <a href="http://schacon.github.com/git/git-status.html">git-status</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

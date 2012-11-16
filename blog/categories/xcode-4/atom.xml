@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xcode 4 | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/xcode-4/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sparrow Framework AppScaffold not archiving correctly - fix]]></title>
+    <link href="http://noiseandheat.com/blog/2011/07/sparrow-framework-appscaffold-not-archiving-correctly-fix/"/>
+    <updated>2011-07-09T01:49:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/07/sparrow-framework-appscaffold-not-archiving-correctly-fix</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/0_article_thumb21.png" width="200" height="130"></p>
+
+<p><strong>UPDATED</strong>: <em>The pull request was merged, so this should be all fixed.</em></p>
+
+<p>If you've tried to create an app using the latest <a href="http://www.sparrow-framework.org/">Sparrow Framework</a>
+and XCode 4, then tried to Archive it (say for distributing via the excellent
+<a href="https://testflightapp.com/">TestFlightApp</a> service), you may have run into an
+error similar to the following:</p>
+
+<p><blockquote><p>AppScaffold Cannot be Validated “AppScaffold” does not contain a single–bundle application or contains multiple products. Please select another archive, or adjust your scheme to create a single–bundle application.</p></blockquote></p>
+
+<!--more-->
+
+
+<p>Don't panic! This solution is simple:</p>
+
+<ol>
+<li>In XCode, select the linked Sparrow project.</li>
+<li>In the editor, select the Sparrow target.</li>
+<li>Now select the "Build Phases" tab.</li>
+<li><p>Expand the "Copy Headers" section. It should look a little like this:</p>
+
+<p> <img class="center" src="/images/post_screenshot_011.png" width="800" height="200"></p></li>
+<li><p>Now select all the header files in the "Public" section and drag them to "Project". You should end up with the section looking like this:</p>
+
+<p> <img class="center" src="/images/post_screenshot_11.png" width="444" height="351"></p></li>
+</ol>
+
+
+<p>That should be all you need to do. Now if you Archive the app, you should be
+able to successfully Share/Validate it from the Archive Organizer, and your
+icons and version numbers should look as delicious as you expected.</p>
+
+<p>I've submitted a <a href="https://github.com/PrimaryFeather/Sparrow-Framework/pull/1032">pull request</a>,
+so assuming I haven't done anything too insane in it,
+these changes should make it into the main project at some point.</p>
+]]></content>
+  </entry>
+  
+</feed>

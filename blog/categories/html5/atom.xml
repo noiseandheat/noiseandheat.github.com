@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: HTML5 | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/html5/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Unscientific Browser Speed Test]]></title>
+    <link href="http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test/"/>
+    <updated>2010-11-04T09:16:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/11/unscientific-browser-speed-test</id>
+    <content type="html"><![CDATA[<p>Out of curiosity, I ran the<a href="http://wip.noiseandheat.com/html5_particles/"> HTML5 particle</a>
+thing I hacked together on a few browsers, and the rough order of performance was:</p>
+
+<p><img class="center" src="http://chart.apis.google.com/chart?chxl=1:|iOS+Safari|Firefox+3|Firefox+4+b6|Internet+Explorer+9|OS+X+Safari|Win+7+Safari|Chrome&amp;chxr=1,0,6&amp;chxt=x,y&amp;chbh=a&amp;chs=512x256&amp;cht=bhs&amp;chco=4D89F9&amp;chd=t:83,82,60,54,43,16,3&amp;chdl=Potential+FPS&amp;chg=10,0&amp;chtt=Browser+Performance" width="512" height="256" title="Browser Performance" ></p>
+
+<!--more-->
+
+
+<ol>
+<li>Chrome: <strong>~83 FPS</strong></li>
+<li>Win 7 Safari: <strong>~82 FPS</strong></li>
+<li>OS X Safari: <strong>~60 FPS</strong></li>
+<li>Internet Explorer 9: <strong>~54 FPS</strong></li>
+<li>Firefox 4 b6: <strong>~43 FPS</strong></li>
+<li>Firefox 3: <strong>~16 FPS</strong></li>
+<li>iOS 4.2 Safari, iPhone 4: <strong>~3 FPS</strong></li>
+</ol>
+
+
+<p>The FPS recorded is the "Potential FPS" figure which is calculated by adding
+the average render and update times, and seeing how many of those cycles would
+fit in a second.</p>
+
+<p>It's interesting to see how far ahead of the others Chrome and Safari are on
+Windows. The other browsers have some catching up to do for raw pixel pushing
+(give or take my rubbish code).</p>
+
+<p>Even though this is a pretty uncontrolled measure, it's a beginning from which
+to work out how to do things better. I'm really looking forward to try to get
+some degree of useful performance from the mobile versions, especially after
+reading <a href="http://www.phoboslab.org/log/2010/10/impact-for-ios">this blog post</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pixels, HTML5 canvas style]]></title>
+    <link href="http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style/"/>
+    <updated>2010-11-04T00:37:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/11/pixels-html5-canvas-style</id>
+    <content type="html"><![CDATA[<p><a href="http://wip.noiseandheat.com/html5_particles/"><img class="right" src="/images/02.png" width="200" height="130"></a></p>
+
+<p>I have finally forced myself to fiddle a little with the
+<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html">canvas element</a>
+that's part of the HTML5 spec. It has some pretty groovy facilities, but I'm
+still playing around getting a feel for what it can do well and what it does
+badly. So far, it seems reasonable at primitive writing operations, easily
+handling 6,000 opaque filled rectangle draws at 30 frames per second:</p>
+
+<ul>
+<li><a href="http://wip.noiseandheat.com/html5_particles/">http://wip.noiseandheat.com/html5_particles/</a></li>
+</ul>
+
+
+<!--more-->
+
+
+<p>This drops a bit (as you would expect) when you add semi-transparency to
+things - hit the "blur" checkbox to try it. Sadly, it's totally pants on my
+iPhone. I rather suspect the <a href="http://wip.noiseandheat.com/particles/">Flash particle test</a>
+I knocked up will somewhat outperform the current canvas version I have on mobile.</p>
+
+<p>Hoewever - early days. I cobbled this together in an hour with some hasty
+skimming over the canvas stuff. Doubtless there are many things I've missed
+which may improve the performance. I'll plug away at it for a bit to see where
+it goes.</p>
+
+<p>The source code for it all is <a href="https://github.com/mnem/noiseandheat_web/tree/master/subdomains/wip/content/html5_particles/">available on github</a>, or just
+view source on the page and look at the linked JS files.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Response | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/response/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Stigmata]]></title>
+    <link href="http://noiseandheat.com/blog/2010/12/stigmata/"/>
+    <updated>2010-12-01T22:04:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/12/stigmata</id>
+    <content type="html"><![CDATA[<p>This is an extended reply to a question:</p>
+
+<p><blockquote><p>I was shocked to see the following listed as a negative against the<br/>Playbook: ‘Supports Flash’.</p></p><p><p>[...]</p></p><p><p>Does Flash deserve the criticism it’s getting at the moment and what can Adobe<br/>do to rectify the situation?</p><footer><strong>Christopher Caleb</strong> <cite><a href='http://www.yeahbutisitflash.com/?p=2339'>Flash Stigma</a></cite></footer></blockquote></p>
+
+<!--more-->
+
+
+<p>In order to reply, I'm going to include a short biased history for some
+context.</p>
+
+<p>Many moons ago, Adobe kicked up a large fuss when they saw that they were
+unable to exploit a particularly lucrative<sup id="refBody1"><a href="#refAnchor1">1</a></sup> new platform (iOS/iPhone/iJobs),
+leading them to trade lies and half truths around user freedoms in both blogs
+and the mainstream press. This provoked an uproar which, unfortunately for
+Adobe, caused many people to start looking at Flash and critically evaluate
+Adobe's closed tools and platform against the native tools (closed and open)
+and other alternatives.</p>
+
+<p>The fallout is ongoing, as can be seen from the article Christopher mentions.</p>
+
+<p>The people who are most likely to be aware of Flash on a platform, I think,
+are also those likely to be more technically au fait with the ins and outs of
+development, or at least techy geek types. Neither class of people are
+particularly renowned for enjoying bloated middleware, and that's led to (at
+times unfairly harsh) criticism of Flash and it's uses on phones, tablets,
+netbooks and so forth.</p>
+
+<p>That will all blow over - most people don't care how many layers there are
+between the thing they are looking at on screen and the instructions running
+on a CPU. They want the pretty colours or simulated flatulence generator
+buttons.</p>
+
+<p>Unfortunately for Adobe, Flash content is often noticeably worse on highly
+portable devices. Users <em>do</em> notice that. Degrading someone's expected
+experience is a cardinal sin, and a sin that is hard to forget. A couple of
+those and you are consigned to the "this is shit and doesn't work" bin from
+which it can take years to escape. Ask Javascript: it's had over a decade in
+that wilderness, and is only now being welcomed home.</p>
+
+<p>Adobe has exacerbated the situation by breathlessly exclaiming to users (and
+sometimes to developers/designers) that you'll have a desktop Flash experience
+everywhere. But then users see the jerky scrolling on pages laden with
+adverts, their battery life vanishing, bothersome control mechanisms, or games
+that don't have any of the 3D slickness of a natively developed application.</p>
+
+<p>At that point it's partly the developer's fault - but consumers see Flash as
+the issue, because that's the brand which has been sold to them. Adobe looks,
+to them, as if they are another company peddling the usual lies ("yes, this
+version of the OS will run faster than ever before!").</p>
+
+<p>So, that covers my answer to the first question - in many cases the criticism
+is justified. Caught out by their own mis-truths.</p>
+
+<p>How do they fix it? My answer to that one is: stop lying. Admit where the
+strengths and weaknesses are to everyone. Stop being so seemingly emotionally
+attached to Flash as a hammer for every solution. Although I'm sure you'll see
+that emotional attachment flip as soon as they have a viable, and priced,
+alternative for generating HTML versions of Flash content.</p>
+
+<p>Open source the Flash player - allow developers to improve your codebase,
+allow them to take what they want from it and remould it into something
+wonderful. Hell, let someone take the vector engine and add the good parts to
+the SVG spec and add the nice bitmap manipulations to the HTML 5 canvas spec.
+Make it a permissive licence like <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a>.</p>
+
+<p>Sadly, I feel its too late for that. There's a momentum behind the changes
+coming for HTML - nothing like a good old implementation war to drive the
+fires of innovation. That's something that Flash in its current form cannot
+have. The rate of useful additions to HTML has been astounding recently - far
+faster than the additions to Flash. Flash is being tweaked, HTML is innovating
+and adding new developer demanded features. For architecting a product, open
+source can be nothing short of miraculous. Flash is mired in its closed legacy.</p>
+
+<p><strong>tl;dr:</strong> Yes the criticism is justified, open source the player to attempt to fix it.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="refAnchor1">
+<p>Adobe's true concerns were over the indirect revenues they stood to lose if people no longer used their Flash development tools for content on iOS, whether that was as an application or as content served in a web page. For comparison, how many set top boxes have Adobe lambasted for not allowing their player on the platform? How about XBox 360 applications? Televisions? LG phones? Samsung phones without Symbian?  
+Adobe want to make money. It's what companies do. Most of them aren't silly
+enough to claim that their real intentions are selfless desires for user
+freedom. That sort of argument is generally reserved for misuse by
+governments, often while they're shooting at you. It's for your own good you
+see, now just put that stone down and let nice Mr. Tank through.
+<p>I digress somewhat...
+<a href="#refBody1"  class='footnoteBackLink'  title="Jump back to footnote 1 in the text.">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+<p></p>
+]]></content>
+  </entry>
+  
+</feed>

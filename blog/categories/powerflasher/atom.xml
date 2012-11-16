@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: powerflasher | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/powerflasher/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The curious case of Eclipse, msysgit, and the obstinate dot files]]></title>
+    <link href="http://noiseandheat.com/blog/2010/02/the-case-of-eclipse-msysgit-and-the-obstinate-dot-files/"/>
+    <updated>2010-02-17T21:05:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/02/the-case-of-eclipse-msysgit-and-the-obstinate-dot-files</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/01_dots.png" width="200" height="130"></p>
+
+<p>Just a quick tip if you are having problems with Eclipse, FDT or other Eclipse based
+tool and writing to dot files cloned from a git repository.</p>
+
+<!--more-->
+
+
+<p>If you are seeing messages about not have permission to write to <code>.project</code>,
+<code>.as3_classpath</code> and so on, there's a reasonable chance that
+<a href="http://code.google.com/p/msysgit/">msysgit</a> (or potentially
+<a href="http://code.google.com/p/tortoisegit/">TortoiseGit</a>) automatically set the
+dot files to hidden to mimic what you see on a unix based
+machine. While this is nice, for some reason Eclipse, or possibly the
+underlying Java file calls, can't write to hidden files on Windows so you get
+access denied messages.</p>
+
+<p>Fortunately, the solution is very simple. Open up a git Bash prompt, and enter
+this:</p>
+
+<pre><code>git config --global core.hidedotfiles false
+</code></pre>
+
+<p>And that's it. With <code>core.hidedotfiles</code> set to false,
+<a href="http://code.google.com/p/msysgit/">msysgit</a> will no longer set the hidden
+property on dot files, and Eclipse should be ready to rock.</p>
+
+<p>Of course, this only affects newly fetched files, so if you want to clear the
+hidden flag on existing files, jump into a cmd prompt (or this may work from
+the git bash prompt) and type:</p>
+
+<pre><code>cd folder_containing_the_repository
+attrib /s /d -H *
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

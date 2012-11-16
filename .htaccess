@@ -1,0 +1,25 @@
+ErrorDocument 404 /errordocs/404.html
+ErrorDocument 403 /errordocs/403.html
+
+#### CACHING ####
+ExpiresActive On
+ExpiresDefault A3600
+
+# 1 MONTH
+<FilesMatch "\.(ico|gif|jpe?g|png|flv|pdf|swf|mov|mp3|wmv|ppt)$">
+ExpiresDefault A2419200
+Header append Cache-Control "public"
+</FilesMatch>
+
+# 3 DAYS
+<FilesMatch "\.(xml|txt|html|htm|js|css)$">
+ExpiresDefault A259200
+Header append Cache-Control "private, must-revalidate"
+</FilesMatch>
+
+# NEVER CACHE
+<FilesMatch "\.(php|cgi|pl)$">
+ExpiresDefault A0
+Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+Header set Pragma "no-cache"
+</FilesMatch>

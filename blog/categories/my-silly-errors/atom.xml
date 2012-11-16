@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: My Silly Errors | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/my-silly-errors/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sparrow Framework, Bitmap Fonts and not having black text]]></title>
+    <link href="http://noiseandheat.com/blog/2011/07/sparrow-framework-bitmap-fonts-and-not-having-black-text/"/>
+    <updated>2011-07-12T12:17:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/07/sparrow-framework-bitmap-fonts-and-not-having-black-text</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/0_article_thumb31.png" width="200" height="130"></p>
+
+<p>Another one of my silly mistakes. I've been having problems getting fonts
+I was using in game (created with the rather excellent <a href="http://glyphdesigner.71squared.com/">Glyph Designer</a>)
+to display as anything other than a black blobby mess.</p>
+
+<!--more-->
+
+
+<p>Since we're living in the wonderful world of open source software here, I
+tracked down the issue to the color being applied to each character. I eagerly
+knocked up a quick pull request to make the application of color optional.</p>
+
+<p>It turns out none of that was needed. Simply set the color to white and
+everything is hunky dory:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Transparent Sparrow Fonts  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">fontName</span> <span class="o">=</span> <span class="s">@&quot;my-beautiful-font&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float</span> <span class="n">fontSize</span> <span class="o">=</span> <span class="mf">27.0f</span><span class="p">;</span>
+</span><span class='line'><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="n">SPTextField</span> <span class="nl">textFieldWithWidth:</span><span class="mf">100.0f</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>                             <span class="nl">height:</span><span class="mf">30.0f</span>
+</span><span class='line'>                               <span class="nl">text:</span><span class="s">@&quot;funkalicious&quot;</span>
+</span><span class='line'>                           <span class="nl">fontName:</span><span class="n">fontName</span>
+</span><span class='line'>                           <span class="nl">fontSize:</span><span class="n">fontSize</span>
+</span><span class='line'>                              <span class="nl">color:</span><span class="mh">0xffffff</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

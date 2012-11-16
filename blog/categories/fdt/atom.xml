@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fdt | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/fdt/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lion eats Ant, or giving Lion Java GUI programs access to environment variables (phew)]]></title>
+    <link href="http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew/"/>
+    <updated>2011-07-27T15:02:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/07/lion-eats-ant-or-giving-lion-java-gui-programs-access-to-environment-variables-phew</id>
+    <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/arthur_chapman/3462161644/"><img class="right" src="/images/thumb1.jpg" width="200" height="130" title="An ant, yesterday" ></a></p>
+
+<p>Upgrading an OS is always fun, especially when you go for a clean install and forget
+about the 40 million really useful applications you need to make your life
+comfortable. Then you run into all the subtle changes that break the way you
+did things before…</p>
+
+<!--more-->
+
+
+<p>I ran into one of those with <a href="http://www.fdt.powerflasher.com/">FDT 4.5</a> on
+Lion recently. Suddenly, my FDT Ant build scripts no longer picked up my
+<code>FLEX_HOME</code> environment variable. After much wailing and gnashing of teeth, it
+turns out that simply <code>export</code>ing a variable from your <code>.bash_profile</code> isn't
+enough for some GUI applications. I'm not certain why yet, but FDT (or Java)
+is now launched by a service called <code>launchd</code> (<a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man8/launchd.8.html">man</a>,
+<a href="http://en.wikipedia.org/wiki/Launchd">wiki</a>). To make environment variables
+available to processes opened by <code>launchd</code>, you must set them using
+<code>launchctl setenv VAR $VALUE</code>.</p>
+
+<p>So, for example, the relevant part of my <code>.bash_profile</code> looks like this:</p>
+
+<p><div><script src='https://gist.github.com/1109369.js?file='></script>
+<noscript><pre><code>export FLEX_HOME=/Users/mnem/Developer/Frameworks/flex/4.5.1.21328
+launchctl setenv FLEX_HOME $FLEX_HOME</code></pre></noscript></div>
+</p>
+
+<p>Add that to your <code>.bash_profile</code>, or type it into a terminal to test it,
+relaunch FDT and it should all work. If you want to check what variables are
+available in your ant file, don't forget that you can add an <code>&lt;echoproperties/&gt;</code>
+tag to dump them to stdout.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The curious case of Eclipse, msysgit, and the obstinate dot files]]></title>
+    <link href="http://noiseandheat.com/blog/2010/02/the-case-of-eclipse-msysgit-and-the-obstinate-dot-files/"/>
+    <updated>2010-02-17T21:05:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/02/the-case-of-eclipse-msysgit-and-the-obstinate-dot-files</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/01_dots.png" width="200" height="130"></p>
+
+<p>Just a quick tip if you are having problems with Eclipse, FDT or other Eclipse based
+tool and writing to dot files cloned from a git repository.</p>
+
+<!--more-->
+
+
+<p>If you are seeing messages about not have permission to write to <code>.project</code>,
+<code>.as3_classpath</code> and so on, there's a reasonable chance that
+<a href="http://code.google.com/p/msysgit/">msysgit</a> (or potentially
+<a href="http://code.google.com/p/tortoisegit/">TortoiseGit</a>) automatically set the
+dot files to hidden to mimic what you see on a unix based
+machine. While this is nice, for some reason Eclipse, or possibly the
+underlying Java file calls, can't write to hidden files on Windows so you get
+access denied messages.</p>
+
+<p>Fortunately, the solution is very simple. Open up a git Bash prompt, and enter
+this:</p>
+
+<pre><code>git config --global core.hidedotfiles false
+</code></pre>
+
+<p>And that's it. With <code>core.hidedotfiles</code> set to false,
+<a href="http://code.google.com/p/msysgit/">msysgit</a> will no longer set the hidden
+property on dot files, and Eclipse should be ready to rock.</p>
+
+<p>Of course, this only affects newly fetched files, so if you want to clear the
+hidden flag on existing files, jump into a cmd prompt (or this may work from
+the git bash prompt) and type:</p>
+
+<pre><code>cd folder_containing_the_repository
+attrib /s /d -H *
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

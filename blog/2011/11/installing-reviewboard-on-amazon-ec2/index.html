@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Installing ReviewBoard on Amazon EC2 - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="Recently at HuzuTech I updated our installation
+of ReviewBoard, which is a great code review
+tool. Rather than just update packages though, I decided &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Installing ReviewBoard on Amazon EC2</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time datetime="2011-11-30T21:44:00+00:00" pubdate data-updated="true">Prickle Prickle, 42 of The Aftermath 3177 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recently at <a href="http://www.huzutech.com/">HuzuTech</a> I updated our installation
+of <a href="http://www.reviewboard.org/">ReviewBoard</a>, which is a great code review
+tool. Rather than just update packages though, I decided to rebuild the
+server for shits and giggles. Herein lies my method, just in case you want
+to set one up yourself.</p>
+
+<!--more-->
+
+
+<h2>Pre-requisites</h2>
+
+<p>This guide assumes that you have an AWS EC2 account set up, and that you are
+comfortable with creating instances and SSH&#8217;ing into them. There are plenty
+of other guides out there to take you through those basics.</p>
+
+<h2>What You&#8217;ll End Up With</h2>
+
+<ul>
+<li>1 (one) EC2 server micro instance running with a 32-bit Amazon Linux AMI</li>
+<li>2 (two) VCS installed on the server: subversion and git</li>
+<li>1 (one) Data Volume containing:
+
+<ul>
+<li>1 (one) ReviewBoard site</li>
+<li>1 (one) PostgreSQL database</li>
+</ul>
+</li>
+<li>1 (one) Glowing feeling of a Job Well Done</li>
+</ul>
+
+
+<p>The precise security configuration and so forth for the instance is likely
+to vary depending on what your preferred policies are.</p>
+
+<h2>Creating The Instance</h2>
+
+<p>Sign in to the EC2 web console and select &#8220;Launch Instance&#8221; for the region
+you prefer. I&#8217;m using US East because it&#8217;s cheap.</p>
+
+<p>The following few screens show the Quick Launch instance wizard thing which
+seems to have just sprung up on the site, but you should be able to work
+out what to do in the normal/classic wizard.</p>
+
+<p>The important points are:</p>
+
+<ul>
+<li>Use a Basic 32-bit Amazon Linux AMI</li>
+<li>Use a micro instance</li>
+</ul>
+
+
+<p>Give your instance a sane name and create and download a new key pair for
+it. You can use an existing pair, but I tend to use a new key pair for each
+image for finer grained access control. Make sure it&#8217;s the 32-bit Amazon
+Linux AMI which you choose.</p>
+
+<p><img class="center" src="/images/rb-setup-00.png" width="934" height="441"></p>
+
+<p>In the next screen, you may find it useful to add termination protection
+and check that it&#8217;s selected a micro instance.</p>
+
+<p><img class="center" src="/images/rb-setup-01.png" width="934" height="451"></p>
+
+<p>Next, set up an new security group for it. You <strong>can&#8217;t</strong> change the security
+group later (although you can add and remove ports in the group), so make
+sure you create a new one unless you are <em>certain</em> you want to share an
+existing one. Make sure <code>SSH</code> and <code>HTTP</code> ports are open and accessible from your
+<a href="http://www.google.co.uk/search?q=My+IP+Address">current public IP address</a>.
+If in doubt, you can make the ports accessible from any address for the moment
+by specifying a source of <code>0.0.0.0/0</code>.</p>
+
+<p><img class="center" src="/images/rb-setup-02.png" width="934" height="465"></p>
+
+<p>That&#8217;s the basic instance set up. Click &#8220;Save details&#8221; and then you should
+see the launching screen:</p>
+
+<p><img class="center" src="/images/rb-setup-03.png" width="934" height="443"></p>
+
+<p>Close it. Now create the volume to use for data. Expand the &#8220;Elastic Block Store&#8221;
+menu at the left side if it isn&#8217;t already and select Volumes. Click the
+&#8220;Create Volume&#8221; button and make it about 1 GiB or so, depending on the
+size of the repositories you&#8217;ll store on it:</p>
+
+<p><img class="center" src="/images/rb-setup-05.png" width="530" height="216"></p>
+
+<p>Now all that remains to do is to attach it to the instance you just launched.
+Select the new volume and click &#8220;Attach Volume&#8221; and attach it to your fresh
+instance:</p>
+
+<p><img class="center" src="/images/rb-setup-06.png" width="530" height="269"></p>
+
+<p>That&#8217;s the basic setup done. Now on to installing bytes.</p>
+
+<h2>Setting Up The Instance and Data Volume</h2>
+
+<p>SSH into your server:</p>
+
+<pre><code>$ ssh -i ~/.ec2/tools-reviewboard.pem ec2-user@ec2-107-22-136-39.compute-1.amazonaws.com
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+See /usr/share/doc/system-release/ for latest release notes.
+There are 14 security update(s) out of 18 total update(s) available
+[ec2-user@ip-10-116-186-53 ~]$
+</code></pre>
+
+<p>The first thing you&#8217;re likely to notice is that the instance requires some
+updates already, so we will install those.</p>
+
+<p><em><strong>NOTE</strong>: for the rest of the
+article, I&#8217;ll just show the commands to run without showing the output, except
+where the output is important or interactive. Also, the <strong>$</strong> at the start of
+a line indicates a command to type - you don&#8217;t type the dollar, but type the rest…</em></p>
+
+<pre><code>$ sudo yum --assumeyes update
+</code></pre>
+
+<p>That should update the basic image to the latest versions of the pre-installed
+packages.</p>
+
+<p>Now, before we go any further, lets set up the data volume. You should
+have already created a new volume and attached it to the ReviewBoard server
+instance. If this is the first time you&#8217;ve used separate data volumes (something
+you should really get into the habit of using), the thing to remember is that
+it&#8217;s sitting as a raw, unformatted block device initially. In order to use
+it, it needs to be partitioned, formatted, and then mounted.</p>
+
+<p>First, format it. I&#8217;m assuming that your device is <code>/dev/xvdf</code>. If it isn&#8217;t,
+adjust the instructions as appropriate. Run fdisk on the device. It&#8217;s
+interactive so the following few steps include the console output for clarity.</p>
+
+<pre><code>$ sudo fdisk /dev/xvdf
+
+Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+Building a new DOS disklabel with disk identifier 0xb6d71f5e.
+Changes will remain in memory only, until you decide to write them.
+After that, of course, the previous content won't be recoverable.
+
+Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+
+WARNING: DOS-compatible mode is deprecated. It's strongly recommended to
+         switch off the mode (command 'c') and change display units to
+         sectors (command 'u').
+
+Command (m for help):
+</code></pre>
+
+<p>Enter <strong>m</strong> in order to show a menu.</p>
+
+<pre><code>Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+
+Command (m for help):
+</code></pre>
+
+<p>Enter <strong>n</strong> to create a new partition.</p>
+
+<pre><code>Command action
+   e   extended
+   p   primary partition (1-4)
+</code></pre>
+
+<p>Enter <strong>p</strong> to create a primary partition.</p>
+
+<pre><code>Partition number (1-4):
+</code></pre>
+
+<p>Enter <strong>1</strong>.</p>
+
+<pre><code>First cylinder (1-261, default 1):
+</code></pre>
+
+<p>Press <strong>enter</strong> to select the default.</p>
+
+<pre><code>Last cylinder, +cylinders or +size{K,M,G} (1-261, default 261):
+</code></pre>
+
+<p>Press <strong>enter</strong> to select the default. The actual value for the default will
+depend on how large a volume you created with the Amazon web console. This
+is a 2 GiB volume.</p>
+
+<pre><code>Command (m for help):
+</code></pre>
+
+<p>Enter <strong>w</strong> to write the changes to the disk. The partition will be created
+and you should see:</p>
+
+<pre><code>The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+</code></pre>
+
+<p>The next step is formatting the partition. Use <code>mkfs</code> to create a new ext4
+partition:</p>
+
+<pre><code>$ sudo mkfs -t ext4 /dev/xvdf
+</code></pre>
+
+<p>Now create an empty folder in <code>/mnt</code> for the partition, and edit <code>/etc/fstab</code>
+to mount it on boot.</p>
+
+<pre><code>$ sudo mkdir /mnt/rb.data
+$ sudo nano /etc/fstab
+</code></pre>
+
+<p>The entry to add to fstab should look like this:</p>
+
+<pre><code>/dev/xvdf     /mnt/rb.data   ext4    defaults    0   0
+</code></pre>
+
+<p>If you chose a different folder, filesystem or have it available on a different
+device, remember to use your values here.</p>
+
+<p>The final task is simply to mount the volume, and then run <code>df</code> to check
+that it has mounted:</p>
+
+<pre><code>$ sudo mount /mnt/rb.data
+$ df -h
+
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/xvda1            7.9G  1.1G  6.8G  14% /
+tmpfs                 302M     0  302M   0% /dev/shm
+/dev/xvdf             2.0G   67M  1.9G   4% /mnt/rb.data
+</code></pre>
+
+<p>If you don&#8217;t see your volume in the <code>Mounted on</code> column, check all the
+previous steps worked.</p>
+
+<h2>Installing Lots Of Stuff</h2>
+
+<p>Now to install all we need for ReviewBoard Cut and paste this full block
+into the command line:</p>
+
+<pre><code>$ sudo yum --assumeyes install \
+    ant \
+    ant-apache-regexp \
+    autoconf \
+    gcc \
+    gcc-c++ \
+    git \
+    httpd \
+    icu \
+    java-1.6.0-openjdk-devel \
+    libicu \
+    libicu-devel \
+    libjpeg \
+    libjpeg-devel \
+    libpng \
+    libpng-devel \
+    lucene \
+    make \
+    memcached \
+    mod_wsgi \
+    patch \
+    postgresql \
+    postgresql-devel \
+    postgresql-server \
+    python-devel \
+    svn \
+    telnet
+</code></pre>
+
+<p>Now to install the python prerequisite packages:</p>
+
+<pre><code>$ sudo easy_install \
+    python-memcached \
+    pycrypto\&gt;=2.4.1 \
+    psycopg2 \
+    django-storages
+</code></pre>
+
+<p>Pyconfig will probably spew out lots of warnings, but it should be OK to
+ignore those.</p>
+
+<p>Next, install ReviewBoard:</p>
+
+<pre><code>$ sudo easy_install ReviewBoard
+</code></pre>
+
+<p>Now you have a choice – install pylucene so that you can have full text
+search in ReviewBoard, or skip it and just move on to setting up the database.</p>
+
+<h2>Installing Pylucene <em>(optional)</em></h2>
+
+<p>Although you don&#8217;t need Pylucene installed, it&#8217;s nice to have it because
+of the search features it adds to ReviewBoard. However, it can be a bit of
+a bugger to install, so although these instructions work for now, if they&#8217;re
+broken by the time you read this, you may want to skip it.</p>
+
+<p>Brave? Then on-wards…</p>
+
+<p>Create a folder to build and install Pylucene from, download and extract
+the archive:</p>
+
+<pre><code>$ mkdir pylucene
+$ cd pylucene
+$ curl apache.mirror.rbftpnetworks.com/lucene/pylucene/pylucene-3.4.0-1-src.tar.gz | tar -xvz
+</code></pre>
+
+<p><code>tar</code> may take a while to extract the large archive being fed to it, but
+once it&#8217;s finished, compile jcc:</p>
+
+<pre><code>$ cd pylucene-3.4.0-1/jcc
+$ sudo env JCC_JDK=/usr/lib/jvm/java-1.6.0-openjdk NO_SHARED=true python setup.py build
+$ sudo env JCC_JDK=/usr/lib/jvm/java-1.6.0-openjdk NO_SHARED=true python setup.py install
+$ cd ..
+</code></pre>
+
+<p>Now to build Pylucene. First you have to edit some values in the Makefile, so
+open that:</p>
+
+<pre><code>$ nano Makefile
+</code></pre>
+
+<p>And then paste these lines at the top of the very top of file, before the
+block comment:</p>
+
+<pre><code>JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk
+PREFIX_PYTHON=/usr
+ANT=ant
+PYTHON=$(PREFIX_PYTHON)/bin/python
+JCC=$(PYTHON) -m -m jcc.__main__
+NUM_FILES=3
+</code></pre>
+
+<p>Now you should be ready to build it:</p>
+
+<pre><code>$ make
+</code></pre>
+
+<p>This can take a long time (30 minutes or so), so go get some tea. After it&#8217;s
+complete you can now install it:</p>
+
+<pre><code>$ sudo make install
+</code></pre>
+
+<p>That&#8217;s Pylucene dealt with. On to the database.</p>
+
+<h2>Creating the ReviewBoard Database</h2>
+
+<p>The database will also reside on the data volume. This setup assumes that
+you only want one PostgreSQL cluster. I&#8217;ve no idea why you&#8217;d want more than
+that, but if you do, you&#8217;re advanced enough to figure out how to make the
+next few steps fit into that configuration yourself.</p>
+
+<p>First, create a folder for the database, and give it to the postgres user:</p>
+
+<pre><code>$ sudo mkdir -p /mnt/rb.data/db/pg
+$ sudo chown postgres:postgres /mnt/rb.data/db/pg
+</code></pre>
+
+<p>And now set that data location in the postgres conf file:</p>
+
+<pre><code>$ echo "PGDATA=/mnt/rb.data/db/pg" | sudo tee /etc/sysconfig/pgsql/postgresql
+</code></pre>
+
+<p>With that sorted, we can now tell PostgreSQL to create the cluster:</p>
+
+<pre><code>$ sudo service postgresql initdb
+</code></pre>
+
+<p>Next, we want to change the database authentication method for connections
+from <code>127.0.0.1</code> in order to allow ReviewBoard to connect. To do this, edit
+<code>/mnt/rb.data/db/pg/pg_hba.conf</code> and change the method used for <code>127.0.0.1/32</code>
+from <code>ident</code> to <code>md5</code>:</p>
+
+<pre><code>$ sudo nano /mnt/rb.data/db/pg/pg_hba.conf
+</code></pre>
+
+<p>Near the bottom of the file, change the line <code>host    all         all         127.0.0.1/32          ident</code>
+to <code>host    all         all         127.0.0.1/32          md5</code>.</p>
+
+<p>All that&#8217;s left is to start it and then create the empty ReviewBoard database:</p>
+
+<pre><code>$ sudo service postgresql start
+$ sudo su postgres -c "createdb reviewboard"
+</code></pre>
+
+<p>Now create a database user for reviewboard. I&#8217;m going to be lazy here and create
+them as a superuser because I can&#8217;t be arsed setting up their correct priviledges.
+Don&#8217;t be as stupid as I am:</p>
+
+<pre><code>$ sudo su postgres -c "createuser -sP reviewboarduser"
+</code></pre>
+
+<p>Be sure to give them a decently strong password.</p>
+
+<p>Now, in case you have to reboot your server, you&#8217;ll want to make sure things
+start on boot. To do this, you can use <code>ntsysv</code>:</p>
+
+<pre><code>$ sudo ntsysv
+</code></pre>
+
+<p>Use the cursor keys to move, space to select, and tab to move between areas.
+Make sure you enable <code>httpd</code>, <code>memcached</code> and <code>postgresql</code>.</p>
+
+<p>Just to make sure it&#8217;s all running, reboot the instance.</p>
+
+<pre><code>$ sudo shutdown -r now
+</code></pre>
+
+<p>This will kick you out of your session, but just give it a minute or two
+and then log back in. The address of your server should still be the same
+at this point, but if it isn&#8217;t, you can find it again from the AWS web console.</p>
+
+<p>After you&#8217;ve logged back in, check that the webserver is running to make sure
+the <code>ntsysv</code> command above worked. The easiest way to do this is by using
+telnet to request the default page from the local webserver:</p>
+
+<pre><code>$ telnet 127.0.0.1 80
+GET /
+</code></pre>
+
+<p>You should see a screed of HTML returned. If you see a connection refused or
+timed out, go back to the <code>ntsysv</code> section above and try again. Note that
+<code>ntsysv</code> doesn&#8217;t start the services for you, it just marks them to start
+on boot, so you have to perform that shutdown step to test it.</p>
+
+<h2>Creating A ReviewBoard Site</h2>
+
+<p>That&#8217;s pretty much the server setup now. All that remains is to create a
+review board site. There&#8217;s a handy interactive script to do this. Create
+a directory for the site and then run the interactive script:</p>
+
+<pre><code>$ sudo mkdir -p /mnt/rb.data/www
+$ sudo rb-site install /mnt/rb.data/www/reviewboard.huzutech.com
+</code></pre>
+
+<p>The script is fairly informative, but if you need more information, see
+the ReviewBoard documentation for creating sites:</p>
+
+<ul>
+<li><a href="http://www.reviewboard.org/docs/manual/1.6/admin/installation/creating-sites/">http://www.reviewboard.org/docs/manual/1.6/admin/installation/creating-sites/</a></li>
+</ul>
+
+
+<p>Basically, the only thing to remember is that you are using a <strong>postgresql</strong> database,
+<strong>memcached</strong>, <strong>apache</strong> and <strong>wsgi</strong>.</p>
+
+<p>Give ownership of the web directory to Apache, and add the generated site
+config to the apache conf folder, then restart apache:</p>
+
+<pre><code>$ sudo chown -R apache:apache /mnt/rb.data/www
+$ sudo ln -s /mnt/rb.data/www/reviewboard.huzutech.com/conf/apache-wsgi.conf /etc/httpd/conf.d/XX_reviewboard.huzutech.com.conf
+$ sudo service httpd restart
+</code></pre>
+
+<p>Note that the link name starts with <code>XX_</code>. This is important so that it&#8217;s
+loaded in the correct order.</p>
+
+<h2>Finished!</h2>
+
+<p>That&#8217;s it! You should be able to see your server if you visit the public
+address in a web browser. There are several post setup things that you
+probably want to do, such as setting up a proper vhost file, locking user
+registration and setting up projects and repositories.</p>
+
+<p>If you installed lucene, don&#8217;t forget to add the lucene index updating cron
+job to cron, otherwise you&#8217;ll get errors when you try to search and it can&#8217;t
+find the search index files.</p>
+
+<p>Check out the guides on the main <a href="http://www.reviewboard.org/docs/">ReviewBoard</a> website for more information
+about all that. Then sit back and learn from all the glorious code reviews
+you see rolling in.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time datetime="2011-12-02T21:44:00+00:00" class="updated">Updated Sweetmorn, 44 of The Aftermath 3177 YOLD [2011-12-02 21:44]</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/aws/'>AWS</a>, <a class='category' href='/blog/categories/admin/'>Admin</a>, <a class='category' href='/blog/categories/codereview/'>Codereview</a>, <a class='category' href='/blog/categories/ec2/'>EC2</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/11/sparrowbones/" title="Previous Post: SparrowBones">&laquo; SparrowBones</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/12/os-x-lion-terminal-colours/" title="Next Post: OS X Lion Terminal Colours">OS X Lion Terminal Colours &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/';
+        var disqus_url = 'http://noiseandheat.com/blog/2011/11/installing-reviewboard-on-amazon-ec2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

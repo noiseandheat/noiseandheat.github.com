@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>OS X Lion Terminal Colours - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="OS X is awesome for command line stuff, that&#8217;s why real programmers
+love it. But some of the defaults Apple have used make me sad. Where are &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">OS X Lion Terminal Colours</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-03T21:25:00+00:00" pubdate data-updated="true">Boomtime, 45 of The Aftermath 3177 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://www.vim.org/scripts/script.php?script_id=1349"><img class="right" src="/images/terminal_colours.png" width="200" height="130"></a></p>
+
+<p>OS X is awesome for command line stuff, that&#8217;s why <a href="http://xkcd.com/378/">real programmers</a>
+love it. But some of the defaults Apple have used make me sad. Where are all
+the colours? I <em>demand</em> my <code>ls</code> command be pretty and colourful! Why is Vim
+so bland? While we&#8217;re at it, can&#8217;t ping lick my eyeballs more?</p>
+
+<!--more-->
+
+
+<p>Good news: yes, they can! I&#8217;ve stuck some tips together so I can remind
+myself what to do when I inevitably reinstall my system for some pointless
+reason, and for any new Mac users out there. It is near peak commercial
+season after all, and I&#8217;m sure you&#8217;ve been good little boys and girls.</p>
+
+<p>Let&#8217;s start with the simple things.</p>
+
+<h2>Making <code>ls</code> and <code>grep</code> Colourful</h2>
+
+<p>Add these lines to your <code>.bash_profile</code> file which is in your home directory:</p>
+
+<figure class='code'><figcaption><span>~/.bash_profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Tell ls to be colourful</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">CLICOLOR</span><span class="o">=</span>1
+</span><span class='line'>
+</span><span class='line'><span class="c"># Tell grep to highlight matches</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GREP_OPTIONS</span><span class="o">=</span><span class="s1">&#39;--color=auto&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now when you use <code>ls</code>, folders and executables will appear in different
+colours from normal files, and when you use grep to find text in files, the
+matches will be highlighted.</p>
+
+<p>You can change the colours used by <code>ls</code> via the <code>LSCOLORS</code> environment
+variable. For example:</p>
+
+<figure class='code'><figcaption><span>~/.bash_profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Tell ls to be colourful</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">CLICOLOR</span><span class="o">=</span>1
+</span><span class='line'><span class="nb">export </span><span class="nv">LSCOLORS</span><span class="o">=</span>Exfxcxdxbxegedabagacad
+</span><span class='line'>
+</span><span class='line'><span class="c"># Tell grep to highlight matches</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GREP_OPTIONS</span><span class="o">=</span><span class="s1">&#39;--color=auto&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s a handy website you can use to define your <code>LSCOLORS</code> scheme:
+<a href="http://geoff.greer.fm/lscolors/">http://geoff.greer.fm/lscolors/</a>. It also
+generates <code>LS_COLORS</code> definitions, useful if you&#8217;re a Linux user. One thing
+to note, though, is that the colours you will see in your terminal depend on
+the particular theme you are using. Which brings me to my next tip.</p>
+
+<h2>Using A Better Terminal Theme</h2>
+
+<p>If you haven&#8217;t changed the default terminal theme you must still be gazing
+in to the snowy wasteland that is the default. This is insane. Programmers
+are incompatible with white backgrounds. Er, except in blogs. <em>*cough*</em></p>
+
+<p>Changing the terminal theme is marginally trickier than it should be. Here&#8217;s
+how you do it:</p>
+
+<ol>
+<li>Go to <code>Terminal</code> &rarr; <code>Preferences…</code></li>
+<li>Select the <code>Settings</code> group.</li>
+<li>Pick something nice that doesn&#8217;t sear your retinas.</li>
+<li>At the bottom of the list box, click <code>Default</code> so that new terminals will
+open with the selected colour scheme.</li>
+</ol>
+
+
+<p>Anything other than the default is a good start, but there are better themes out there than those bundled
+with Lion. At the moment, my colour scheme of choice is <a href="http://ethanschoonover.com/solarized">Solarized</a>.
+You can get a <a href="http://ethanschoonover.com/solarized">Solarized</a> scheme for
+OS X&#8217;s Terminal from here:</p>
+
+<ul>
+<li><a href="https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized">https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized</a></li>
+</ul>
+
+
+<p>If you are running <strong>Lion</strong>, <strong>ignore</strong> the README at the site. All you have to do to
+install the theme is to open the <code>*.terminal</code> file. That should be enough to
+make it appear in the themes list in the preferences dialog, where you can set
+it as default.</p>
+
+<p><a href="http://ethanschoonover.com/solarized">Solarized</a> is a great general purpose theme and there are settings for many
+text environments - I use it in Xcode, <a href="http://www.sublimetext.com/2">Sublime Text 2</a>,
+<a href="http://www.eclipsecolorthemes.org/?list=all&amp;q=solarized">Eclipse</a> and even
+<a href="http://www.vim.org/">Vim</a>.</p>
+
+<p>Which, niftily, brings me on to my next section.</p>
+
+<h2>Making Vim Pretty</h2>
+
+<p>Much as I&#8217;ve rallied against <a href="http://www.vim.org/">Vim</a> over the years, <a href="https://twitter.com/vizio360">Vizio360</a>
+and <a href="https://twitter.com/Rev_Kachowski">Rev. Kachowski</a> have now drugged me
+sufficiently to admit that it&#8217;s pretty damn nice really. If you can handle
+memorising &pi; to 300 digits, then you should be fine with <a href="http://www.vim.org/">Vim</a>
+shortcuts. On the other hand if you&#8217;re like me, you may want to use a
+<a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">cheatsheet</a>.</p>
+
+<p>However, we aren&#8217;t here to learn, we&#8217;re here to colourise. So, in order
+to make Vim a bit more colourful on OS X, copy the example <code>vimrc</code> file
+to your home directory:</p>
+
+<pre><code>cp /usr/share/vim/vim73/vimrc_example.vim ~/.vimrc
+</code></pre>
+
+<p>Now you can enjoy pretty colours in Vim. If you want to add <a href="http://ethanschoonover.com/solarized">Solarized</a>
+as your colour theme in Vim, I recommend installing the rather fantastic
+<a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a> in your .vimrc (<a href="https://github.com/tpope/vim-pathogen/blob/master/README.markdown">instructions</a>) and
+then follow the instructions for &#8220;Option 2&#8221; in <a href="http://ethanschoonover.com/solarized/vim-colors-solarized">vim-colors-solarized README</a>.</p>
+
+<h2>Making Nano Pretty</h2>
+
+<p>If Nano is your Terminal text editor weapon of choice, then you can
+enable syntax colouring by uncommenting the syntax files referenced in
+<code>/etc/nanorc</code>. First, open it for editing:</p>
+
+<pre><code>sudo nano /etc/nanorc
+</code></pre>
+
+<p>Move to the bottom of the file and then remove the <code>#</code> character
+at the beginning of the lines which include other <code>*.nanorc</code> files. For
+example, change:</p>
+
+<figure class='code'><figcaption><span>/etc/nanorc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## Nanorc files</span>
+</span><span class='line'><span class="c">#include &quot;/usr/local/share/nano/nanorc.nanorc&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To:</p>
+
+<figure class='code'><figcaption><span>/etc/nanorc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## Nanorc files</span>
+</span><span class='line'>include <span class="s2">&quot;/usr/local/share/nano/nanorc.nanorc&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Further Eyeball Licking via Homebrew</h2>
+
+<p>For the next tip, I recommend using <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+as the method of installation. If you aren&#8217;t using <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+yet, you probably should be. It&#8217;s by far the <a href="http://mozidesign.com/2011/03/15/dinosaurs/">Most Awesome</a> package manager
+available for OS X. So go install it:</p>
+
+<ul>
+<li><a href="https://github.com/mxcl/homebrew/wiki/installation">https://github.com/mxcl/homebrew/wiki/installation</a></li>
+</ul>
+
+
+<p>Installed? Good. Let us continue.</p>
+
+<h2>Generic Colouriser</h2>
+
+<p><a href="http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt">Generic Colouriser</a>
+is a great utility which can be used for colourising many different types of
+output and log files. If you installed <a href="http://mxcl.github.com/homebrew/">Homebrew</a>
+, installing grc is as simple as typing:</p>
+
+<pre><code>brew install grc
+</code></pre>
+
+<p><strong>NOTE</strong>: If you followed the first tip and created a <code>.bash_profile</code>,
+rather than appending the command to load grc to your <code>.bashrc</code>,
+you want to append it to your <code>.bash_profile</code> file instead:</p>
+
+<pre><code>echo 'source "`brew --prefix grc`/etc/grc.bashrc"' &gt;&gt; ~/.bash_profile
+</code></pre>
+
+<p>If you are confused as to why, it&#8217;s because the logic Bash uses for loading
+these files is non-obvious. For a good description of the load sequence, read
+<a href="http://www.thegeekstuff.com/2008/10/execution-sequence-for-bash_profile-bashrc-bash_login-profile-and-bash_logout/">Execution sequence for .bash_profile, .bashrc, .bash_login, .profile and .bash_logout</a>
+by Ramesh Natarajan.</p>
+
+<p>After you have added that line to your <code>.bash_profile</code>, either start a new
+session, or reload the profile:</p>
+
+<pre><code>source ~/.bash_profile
+</code></pre>
+
+<p>Now when you use certain commands such as traceroute, the output should be
+colourised:</p>
+
+<p><img class="center" src="/images/traceroute-grc.png" width="622" height="422"></p>
+
+<p>Or you can call <code>tail</code> and <code>head</code> using grc to colourise log output:</p>
+
+<p><img class="center" src="/images/head-grc.png" width="512" height="156"></p>
+
+<h2>That&#8217;s all Folks!</h2>
+
+<p>Well, that&#8217;s all I have for now. If anyone has any other good ones,
+stick them in a comment below.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-03T21:25:00+00:00" pubdate data-updated="true">Boomtime, 45 of The Aftermath 3177 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/color/'>Color</a>, <a class='category' href='/blog/categories/colour/'>Colour</a>, <a class='category' href='/blog/categories/command-line/'>Command Line</a>, <a class='category' href='/blog/categories/grc/'>GRC</a>, <a class='category' href='/blog/categories/nano/'>Nano</a>, <a class='category' href='/blog/categories/os-x/'>OS X</a>, <a class='category' href='/blog/categories/pretty/'>Pretty</a>, <a class='category' href='/blog/categories/terminal/'>Terminal</a>, <a class='category' href='/blog/categories/utility/'>Utility</a>, <a class='category' href='/blog/categories/vim/'>Vim</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/11/installing-reviewboard-on-amazon-ec2/" title="Previous Post: Installing ReviewBoard on Amazon EC2">&laquo; Installing ReviewBoard on Amazon EC2</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/12/ludum-dare-22-alone/" title="Next Post: Ludum Dare 22: Alone">Ludum Dare 22: Alone &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours/';
+        var disqus_url = 'http://noiseandheat.com/blog/2011/12/os-x-lion-terminal-colours/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

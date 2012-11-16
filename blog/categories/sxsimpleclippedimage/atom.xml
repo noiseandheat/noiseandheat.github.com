@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: SXSimpleClippedImage | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/sxsimpleclippedimage/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Simple Clipped Image for Sparrow Framework]]></title>
+    <link href="http://noiseandheat.com/blog/2011/07/simple-clipped-image-for-sparrow-framework/"/>
+    <updated>2011-07-06T23:52:00+01:00</updated>
+    <id>http://noiseandheat.com/blog/2011/07/simple-clipped-image-for-sparrow-framework</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/mnem/SXSimpleClippedImage/"><img class="right" src="/images/0_article_thumb5.png" width="200" height="130"></a></p>
+
+<p>I'm currently playing around with the rather fine iOS game engine,
+<a href="http://www.sparrow-framework.org/">Sparrow Framework</a>.</p>
+
+<p>I had been aware of it for a while, but hadn't really got my hands dirty using
+it. However I've recently resolved to work on a few side projects with <a href="https://twitter.com/dwlt">Dave Thomson</a> who waxed lyrical about it's ease of use,
+so I decided to learn a bit more about it.</p>
+
+<!--more-->
+
+
+<p>It's great. No, really, it is. It's fairly lightweight, but quite powerful -
+it uses a display model similar to Flash so anyone who has coded in AS3 will
+immediately feel at home. I'm looking forward to mastering it, and I suspect
+I'll be writing a few posts about using it in the games I'm working on.</p>
+
+<p>However, the lightweightness does mean that sometimes simple features you want
+to use aren't there. That's not a problem though - it has a small but vibrant
+developer community, and the main website encourages people to add extensions
+to it. These are essentially classes or simple modifications posted as
+<a href="http://gist.github.com/">gists</a>, or sometimes provided as full
+<a href="http://github.com/">github</a> repositories, which are all linked to from the
+<a href="http://wiki.sparrow-framework.org/extensions/start">extensions</a> section in
+the Sparrow wiki. You just grab the files and add them to your own project.</p>
+
+<p>So, here is my first extension:</p>
+
+<ul>
+<li><a href="https://github.com/mnem/SXSimpleClippedImage/tree/master/Classes">https://github.com/mnem/SXSimpleClippedImage/tree/master/Classes</a></li>
+</ul>
+
+
+<p>It's a simple extension to the <a href="http://doc.sparrow-framework.org/core/Classes/SPImage.html">SPImage</a>
+class so that you can display only a sub-region of the image texture associated
+with the <a href="http://doc.sparrow-framework.org/core/Classes/SPImage.html">SPImage</a>.
+If you've used Flash, you can think of it as a rectangular mask for the image data.
+The main difference is that as you move the mask from <code>0,0</code> in the
+<a href="http://doc.sparrow-framework.org/core/Classes/SPImage.html">SPImage</a>,
+the remaining image data is drawn starting at the current location of the
+<a href="http://doc.sparrow-framework.org/core/Classes/SPImage.html">SPImage</a>
+object on the screen. That probably makes no sense, but if you play with it,
+you'll see what I mean. There's a reasonable chance that behaviour will
+sufficiently annoy me in the near future that I'll fix it.</p>
+
+<p>For an example on how to use it, clone or browse the project repository and
+have a look in <a href="https://github.com/mnem/SXSimpleClippedImage/blob/master/TestClasses/Game.m">TestClasses/game.m</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

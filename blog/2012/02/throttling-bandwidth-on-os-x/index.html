@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Throttling bandwidth on OS X - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="Recently I started pushing a repository to GitHub only to find out it
+was a couple of GB in size. Due to my ISPs network
+connection being made of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Throttling Bandwidth on OS X</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-03T22:35:00+00:00" pubdate data-updated="true">Prickle Prickle, 34 of Chaos 3178 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recently I started pushing a repository to GitHub only to find out it
+was a couple of GB in size. Due to my <a href="http://www.virginmedia.com/">ISPs</a> network
+connection being made of soiled tissue paper, dead earwigs and lost
+hope, it quickly saturated it. This interrupted watching
+<a href="https://en.wikipedia.org/wiki/Breaking_Bad">Breaking Bad</a> on <a href="http://www.netflix.com/">Netflix</a>. Clearly something had to be done.</p>
+
+<p>Enter <code>ipfw</code>.</p>
+
+<!--more-->
+
+
+<p><code>ipfw</code> is more generally thought of as a utility for managing firewall
+rules on OS X, but it&#8217;s also great for shaping traffic. Doing that is a
+simple two step process: create an <code>ipfw pipe</code> for a data flow and then
+configure how big that pipe is.</p>
+
+<p>First, create a pipe which matches a flow of data. A pipe is a
+combination of source address, destination address and optional matching
+patterns. In my case I wanted to affect outgoing traffic to port 22
+which is used by <code>ssh</code>, the program <code>git</code> generally talks to servers
+with:</p>
+
+<pre><code>$ sudo ipfw add pipe 1 ip from any to any out dst-port 22
+</code></pre>
+
+<p>I&#8217;ve been a bit lazy here by using <code>any</code> for the IP address fields. I
+know that only my connection to github will be using <code>dst-port 22</code>. The
+<code>from</code> IP address and <code>to</code> IP address may be written as a specifc IP, or
+ a range of IPs using <a href="http://en.wikipedia.org/wiki/CIDR_notation">CIDR notation</a>, instead of the <code>any</code> wildcard.
+ I&#8217;ve specifically set the rule to only match <code>out</code> going traffic. If
+ you want to control the flow of data in both directions, you would
+ generally create an <code>in</code> pipe and an <code>out</code> pipe separately</p>
+
+<p>Note that I&#8217;ve named this pipe <strong>1</strong>. This number is used to uniquely
+identify the pipe when carrying out other operations on it. If you
+create more than one pipe, be sure to use unique numbers for each one.</p>
+
+<p>Next, we have to configure the pipe to control the data flow:</p>
+
+<pre><code>$ sudo ipfw pipe 1 config bw 75KBytes/s
+</code></pre>
+
+<p>The <code>bw</code> setting ensures that data passing through pipe 1 is
+transferring at most 75 KBytes per second. You can set this to whatever
+value is suitable for your connection.</p>
+
+<p>If you want, you can check what connections are being affected:</p>
+
+<pre><code>$ sudo ipfw pipe list
+00001: 600.000 Kbit/s    0 ms   50 sl. 1 queues (1 buckets) droptail
+    mask: 0x00 0x00000000/0x0000 -&gt; 0x00000000/0x0000
+BKT Prot ___Source IP/port____ ____Dest. IP/port____ Tot_pkt/bytes Pkt/Byte Drp
+  0 tcp    192.168.0.100/61291  207.97.227.239/22     685   991700 31 43792   0
+</code></pre>
+
+<p>Finally, don&#8217;t forget to remove the pipe when you no longer need to
+limit the data transfer rate:</p>
+
+<pre><code>$ sudo ipfw pipe delete 1
+</code></pre>
+
+<p>There are many other options in <code>ipfw</code> for shaping traffic, including
+commands for dropping a certain percentage of packets (great for testing
+game networking code), and you can limit the bandwidth to very small
+rates which is handy for seeing how slow connections experience websites
+you create. Check out the
+<a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man8/ipfw.8.html">man page</a>
+for more details.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-03T22:35:00+00:00" pubdate data-updated="true">Prickle Prickle, 34 of Chaos 3178 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/os-x/'>OS X</a>, <a class='category' href='/blog/categories/admin/'>admin</a>, <a class='category' href='/blog/categories/terminal/'>terminal</a>, <a class='category' href='/blog/categories/tips/'>tips</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/clang-failed-with-exit-code-1/" title="Previous Post: clang failed with exit code 1">&laquo; clang failed with exit code 1</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/02/lazy-one-liners-%60git-rm%60-all-deleted-files/" title="Next Post: Lazy One Liners: 'git rm' all deleted files">Lazy One Liners: 'git rm' all deleted files &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x/';
+        var disqus_url = 'http://noiseandheat.com/blog/2012/02/throttling-bandwidth-on-os-x/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

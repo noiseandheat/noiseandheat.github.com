@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>clang failed with exit code 1 - Noise & Heat</title>
+  <meta name="author" content="David Wagner">
+
+  
+  <meta name="description" content="Apple Mach-O Linker ErrorCommand /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang failed with exit code 1Xcode 4 Bringing the Pain &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Noise & Heat" type="application/atom+xml">
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript" src="http://use.typekit.com/ncc1ikl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<!-- For flattr widget -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/logo.png" width="140" height="51" title="'Noise and Heat'" ></a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:noiseandheat.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/mnem">Code</a></li>
+  <li><a href="https://twitter.com/kaeladan">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Clang Failed With Exit Code 1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-30T15:23:00+00:00" pubdate data-updated="true">Setting Orange, 30 of Chaos 3178 YOLD</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><blockquote><p>Apple Mach-O Linker Error<br/>Command /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang failed with exit code 1</p><footer><strong>Xcode 4</strong> <cite>Bringing the Pain</cite></footer></blockquote>
+
+
+<p>Experiencing <code>clang</code> failing with no other error information?</p>
+
+<!--more-->
+
+
+<p>If so, then check the scheme name you are building. If it has a space in it,
+that&#8217;s probably the issue. This had me tearing my hair out for about an hour.</p>
+
+<p>If you run the full command which Xcode is using, you can see in a terminal
+what&#8217;s causing the failure:</p>
+
+<pre><code>$ export IPHONEOS_DEPLOYMENT_TARGET=4.3
+$ export PATH="/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+$ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk "-L/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/Flurry -L/Users/mnem/Developer/github/private/Cartouche/ios/Cartouche/../third_party/TestFlightSDK "-F/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos" -filelist "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/IntermediateBuildFilesPath/Cartouche.build/Release-iphoneos/Matching Set TestFlight.build/Objects-normal/armv7/Matching Set TF.LinkFileList" -dead_strip /Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a -ObjC -all_load -lz -fobjc-arc -miphoneos-version-min=4.3 -framework Twitter -framework Accounts -framework MessageUI -framework UIKit -framework Foundation -framework CoreGraphics -framework AudioToolbox -framework AVFoundation -framework OpenAL -framework OpenGLES -framework QuartzCore -lFlurryAnalytics -lTestFlight -o "/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH Distribution/InstallationBuildProductsLocation/Applications/Matching Set TF.app/Matching Set TF"
+
+clang: error: no such file or directory: '/Users/mnem/Library/Developer/Xcode/DerivedData/Cartouche-gptqetvxyitumqejkandgswxgqob/ArchiveIntermediates/NAH'
+clang: error: no such file or directory: 'Distribution/BuildProductsPath/Release-iphoneos/libSparrow.a'
+</code></pre>
+
+<p><img class="right" src="/images/xcode_whitespace.png" width="128" height="128" title="The Culprit" >
+You can see fairly clearly that <code>clang</code> is failing to find a directory because
+of the space in the scheme name, &#8221;<strong>NAH Distribution</strong>&#8221;. If you dig through
+the command text, it appears that Xcode doesn&#8217;t use quotes for the library
+passed to the <code>-dead_strip</code> command. This may be peculiar to projects with
+sub-projects.</p>
+
+<p>Whitespace problems in 3178. Oh dear.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Wagner</span></span>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-30T15:23:00+00:00" pubdate data-updated="true">Setting Orange, 30 of Chaos 3178 YOLD</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/xcode/'>Xcode</a>, <a class='category' href='/blog/categories/clang/'>clang</a>, <a class='category' href='/blog/categories/errors/'>errors</a>, <a class='category' href='/blog/categories/whitespace-hate/'>whitespace hate</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://noiseandheat.com/"></a>
+  <noscript><a href="http://flattr.com/thing/453986/Noise-Heat" target="_blank">
+  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/uncrustifying-objective-c-source-in-xcode-4/" title="Previous Post: Uncrustifying Objective-C Source in Xcode 4">&laquo; Uncrustifying Objective-C Source in Xcode 4</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/02/throttling-bandwidth-on-os-x/" title="Next Post: Throttling bandwidth on OS X">Throttling bandwidth on OS X &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Wagner -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'noiseandheat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/';
+        var disqus_url = 'http://noiseandheat.com/blog/2012/01/clang-failed-with-exit-code-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f2d5f2f613f5d0ae300002f');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body>
+</html>

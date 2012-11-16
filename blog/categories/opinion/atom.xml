@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Opinion | Noise & Heat]]></title>
+  <link href="http://noiseandheat.com/blog/categories/opinion/atom.xml" rel="self"/>
+  <link href="http://noiseandheat.com/"/>
+  <updated>2012-11-16T00:01:02+00:00</updated>
+  <id>http://noiseandheat.com/</id>
+  <author>
+    <name><![CDATA[David Wagner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[No Vodka Tampons, we're Scottish]]></title>
+    <link href="http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish/"/>
+    <updated>2011-11-14T21:35:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2011/11/no-vodka-tampons-were-scottish</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/File:Elements_of_a_tampon_with_applicator.jpg"><img class="right" src="/images/whisky_tampon.png" width="200" height="130"></a></p>
+
+<p>So I've been thinking about this, and pending further evidence I'm going to
+assume that the story about vodka soaked tampons (see
+<a href="http://goo.gl/7bpv3">KPHO</a>) is rubbish. Every so often it seems to make the
+rounds (see <a href="http://goo.gl/2u9Oe">Snopes</a>). Here's why I'm an unbeliever.</p>
+
+<!--more-->
+
+
+<p>A tampon will soak up about 15ml-18ml (see <a href="http://goo.gl/jSCOQ">About.com</a>)
+of liquid which is a pathetic dram. Alcohol is not blood, but for this thought
+experiment it'll do. I can test it later. Regardless, it's likely much less
+than a shot.</p>
+
+<p>In addition tampons are designed to retain liquid rather than release it, so
+there's a reasonable chance that it wouldn't release the booze very quickly.</p>
+
+<p>Now, as far as I can discover, a stomach absorbs about 20% of consumed alcohol
+(see <a href="http://goo.gl/kqc7C">Brown University</a>), the rest is through your
+intestine. For the moment I'll make the assumption that vaginal walls absorb
+alcohol at a similar rate as the intestine. Although this probably isn't
+accurate due to the the quantity of blood vessels, it doesn't matter because
+the rumour generally also includes men who, it is whispered, stick it up their
+bum.</p>
+
+<p>It follows, I think, that if I drink a Polite Dram (about 35ml - 40ml), 80% of
+that will end up in my intestines, which is 28ml - 32ml. That's about double
+what this mythical Tampon Delivery Mechanism would offer. Also, drinking the
+Polite Dram on an empty stomach (remember kids: eatin' is cheatin') will whap
+that Double Tampon Quantity right into my intestine, an organ which exists to
+diffuse things into my blood vessels and make embarassing noises during quiet
+moments.</p>
+
+<p>Therefore I conclude that ingesting a Polite Dram on an empty stomach may be
+up to twice as efficacious as Tampon Delivery, plus it's easier to buy in
+rounds. Have you ever tried getting a tampon in a pub? Those bloody machines
+never work.</p>
+
+<p>Right, pending volunteers for double blind tests, I'll get back to my coding
+with a nice <a href="http://www.thebalvenie.com/en-%0Agb/ourRange_currentRange_signature.php">Balvenie Doublewood</a>. In a
+<a href="http://www.whiskyglass.com/">glass</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Stigmata]]></title>
+    <link href="http://noiseandheat.com/blog/2010/12/stigmata/"/>
+    <updated>2010-12-01T22:04:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/12/stigmata</id>
+    <content type="html"><![CDATA[<p>This is an extended reply to a question:</p>
+
+<p><blockquote><p>I was shocked to see the following listed as a negative against the<br/>Playbook: ‘Supports Flash’.</p></p><p><p>[...]</p></p><p><p>Does Flash deserve the criticism it’s getting at the moment and what can Adobe<br/>do to rectify the situation?</p><footer><strong>Christopher Caleb</strong> <cite><a href='http://www.yeahbutisitflash.com/?p=2339'>Flash Stigma</a></cite></footer></blockquote></p>
+
+<!--more-->
+
+
+<p>In order to reply, I'm going to include a short biased history for some
+context.</p>
+
+<p>Many moons ago, Adobe kicked up a large fuss when they saw that they were
+unable to exploit a particularly lucrative<sup id="refBody1"><a href="#refAnchor1">1</a></sup> new platform (iOS/iPhone/iJobs),
+leading them to trade lies and half truths around user freedoms in both blogs
+and the mainstream press. This provoked an uproar which, unfortunately for
+Adobe, caused many people to start looking at Flash and critically evaluate
+Adobe's closed tools and platform against the native tools (closed and open)
+and other alternatives.</p>
+
+<p>The fallout is ongoing, as can be seen from the article Christopher mentions.</p>
+
+<p>The people who are most likely to be aware of Flash on a platform, I think,
+are also those likely to be more technically au fait with the ins and outs of
+development, or at least techy geek types. Neither class of people are
+particularly renowned for enjoying bloated middleware, and that's led to (at
+times unfairly harsh) criticism of Flash and it's uses on phones, tablets,
+netbooks and so forth.</p>
+
+<p>That will all blow over - most people don't care how many layers there are
+between the thing they are looking at on screen and the instructions running
+on a CPU. They want the pretty colours or simulated flatulence generator
+buttons.</p>
+
+<p>Unfortunately for Adobe, Flash content is often noticeably worse on highly
+portable devices. Users <em>do</em> notice that. Degrading someone's expected
+experience is a cardinal sin, and a sin that is hard to forget. A couple of
+those and you are consigned to the "this is shit and doesn't work" bin from
+which it can take years to escape. Ask Javascript: it's had over a decade in
+that wilderness, and is only now being welcomed home.</p>
+
+<p>Adobe has exacerbated the situation by breathlessly exclaiming to users (and
+sometimes to developers/designers) that you'll have a desktop Flash experience
+everywhere. But then users see the jerky scrolling on pages laden with
+adverts, their battery life vanishing, bothersome control mechanisms, or games
+that don't have any of the 3D slickness of a natively developed application.</p>
+
+<p>At that point it's partly the developer's fault - but consumers see Flash as
+the issue, because that's the brand which has been sold to them. Adobe looks,
+to them, as if they are another company peddling the usual lies ("yes, this
+version of the OS will run faster than ever before!").</p>
+
+<p>So, that covers my answer to the first question - in many cases the criticism
+is justified. Caught out by their own mis-truths.</p>
+
+<p>How do they fix it? My answer to that one is: stop lying. Admit where the
+strengths and weaknesses are to everyone. Stop being so seemingly emotionally
+attached to Flash as a hammer for every solution. Although I'm sure you'll see
+that emotional attachment flip as soon as they have a viable, and priced,
+alternative for generating HTML versions of Flash content.</p>
+
+<p>Open source the Flash player - allow developers to improve your codebase,
+allow them to take what they want from it and remould it into something
+wonderful. Hell, let someone take the vector engine and add the good parts to
+the SVG spec and add the nice bitmap manipulations to the HTML 5 canvas spec.
+Make it a permissive licence like <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a>.</p>
+
+<p>Sadly, I feel its too late for that. There's a momentum behind the changes
+coming for HTML - nothing like a good old implementation war to drive the
+fires of innovation. That's something that Flash in its current form cannot
+have. The rate of useful additions to HTML has been astounding recently - far
+faster than the additions to Flash. Flash is being tweaked, HTML is innovating
+and adding new developer demanded features. For architecting a product, open
+source can be nothing short of miraculous. Flash is mired in its closed legacy.</p>
+
+<p><strong>tl;dr:</strong> Yes the criticism is justified, open source the player to attempt to fix it.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="refAnchor1">
+<p>Adobe's true concerns were over the indirect revenues they stood to lose if people no longer used their Flash development tools for content on iOS, whether that was as an application or as content served in a web page. For comparison, how many set top boxes have Adobe lambasted for not allowing their player on the platform? How about XBox 360 applications? Televisions? LG phones? Samsung phones without Symbian?  
+Adobe want to make money. It's what companies do. Most of them aren't silly
+enough to claim that their real intentions are selfless desires for user
+freedom. That sort of argument is generally reserved for misuse by
+governments, often while they're shooting at you. It's for your own good you
+see, now just put that stone down and let nice Mr. Tank through.
+<p>I digress somewhat...
+<a href="#refBody1"  class='footnoteBackLink'  title="Jump back to footnote 1 in the text.">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+<p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Further ruminations on Adobe, Flash and mobile devices.]]></title>
+    <link href="http://noiseandheat.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices/"/>
+    <updated>2010-01-04T18:15:00+00:00</updated>
+    <id>http://noiseandheat.com/blog/2010/01/further-ruminations-on-adobe-flash-and-mobile-devices</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/skep-hippo.jpg" width="200" height="130"></p>
+
+<p><em>[This entry
+was originally going to be a comment on Christopher Caleb's post,
+"<a href="http://www.yeahbutisitflash.com/?p=332">Adobe's Mobile Strategy Fundamentally Flawed?</a>",
+but I have an annoying
+habit of writing rather more than I have to, so I granted this corpulent
+comment a promotion to First Real Post.]</em></p>
+
+<p>Flash on mobile devices. It's an interesting prospect. Of course, it's more
+than a prospect, it already exists to some extent. Adobe's dream is to create
+an engine which allows Flash content to be run on all major platforms, and it
+has set it's sights upon mobile devices because they offer the tantalising
+prospect of being a bit of a cash cow, one way or another.</p>
+
+<!--more-->
+
+
+<p><a href="http://www.yeahbutisitflash.com/?p=332">Christopher's post</a> is a partial
+response to <a href="http://aralbalkan.com/2895">Aral Balkan's post</a>, so you may want
+to have a quick skim over them. They're quite interesting. I'll wait here for
+you. Go on. Just don't forget to come back, y'hear?</p>
+
+<p>Read them? Good. Let us begin...</p>
+
+<p>Flash Lite. Failure? Yes. Success? Yes.</p>
+
+<p>Flash Lite failed in it's grand vision of providing a large, consistent,
+mobile platform on which to view Flash style content. Currently only a handful
+of phone models support the latest (backwardly not very compatible) version of
+Flash Lite, and even amongst those, horrible incompatibility pixies strut
+around presenting their fail feathers.</p>
+
+<p>It succeeded, however, as a necessary first failure in order to work out what
+was probably for a successful cross platform, uh, platform. I'm sure within
+Adobe it spurred many people along paths that needed to trodden in order to
+move toward a reasonable version of Flash on mobile devices. It also succeeded
+in inspiring a small but remarkably dedicated segment of developers and
+designers, giving them a tantalising hint as to what could have been, or
+should have been possible for mobile app creation.</p>
+
+<p>It's time to let it rest in peace though. Flash Lite, as it stands, is dead,
+or perhaps the living dead. Not only is it quite expensive to develop content
+for, there is very little chance you will recoup all of that investment.
+Distribution for developed applications remains a nightmare because it is
+modelled on the old, pre-Apple distribution mechanisms: carrier deals, random
+user stumbling and dusty website warehouses holding applications of unknown
+quality.</p>
+
+<p>The next big failure looming for Adobe is their Flash web plugin for mobile
+devices. Why will it be a failure? Partially because even on my dual core, 64
+bit laptop with 4GB of RAM and a ridiculously huge amount of memory bandwidth,
+the (mis)use of Flash causes a significant proportion of web pages to run far
+slower than they need to. This isn't necessarily the fault of the
+<a href="http://en.wikipedia.org/wiki/Rich_Internet_application">RIA</a>/Flash game you
+came to look at, but when you add all the Flash adverts and other random
+elements into the mix, it is an unpleasant experience. Now try to imagine this
+on a mobile device which can't throw data around very fast, either in terms of
+memory bandwidth or network bandwidth. Then mix in a healthy dose of sucky and
+uncertain device input capabilities, developer assumptions over screen size
+and resolution and pour in some speed-of-development-over-engineering-
+worthiness-of-development and inhale the resulting heady scent of user
+disappointment. It's going to be a mess.</p>
+
+<p>Traditionally, this is where advocates of mobile and desktop convergence drag
+out the old dying horse representing the Speed of Technological Advance. Alas,
+unless desktop technologies stand still (they won't), this argument is
+hobbling along on shaky hooves as it is. Coupled with cold hard physical facts
+to do with heat dispersion versus space, battery life versus cpu power and,
+finally, the harsh pointy stick of cost of manufacture, we can lead the old
+horse gently to the great big glue factory in the sky. Small handheld mobile
+devices will be playing catch up for the currently foreseeable future.</p>
+
+<p>Adobe's last gasp for mobile success rests on other people doing Adobe's work
+for them, and providing nice hooks for a core Flash component on all mobile
+devices. This is likely to yield one or two high profile success stories, but
+will be followed by an awful lot of poorer stories.</p>
+
+<p>Part of the reason is what commercial advantage do OEMs have for ensuring
+excellent compatibility for Adobe's Open Screen project?</p>
+
+<p>Initially, there will be a significant marketing advantage for the first
+devices out to support Flash well. It will be a bullet point which will
+persuade many uncertain buyers to part with their cash. However, this will be
+a short lived advantage. If it is popular, a version will be quickly offered
+on other devices (apart from iPhone of course), summarily added to the
+marketing bullet point list, and then left to rot in good-enough feature hell.
+And lo, the mistakes of version fragmentation shall be repeated once more.</p>
+
+<p>An alternative would be for Adobe to keep the versions for every platform in
+house and ensure the quality itself. However, it's very unlikely they have the
+resources to undertake such an enormous project, and they certainly won't have
+all the access they need to pre-market devices to ensure quality.</p>
+
+<p>A brief diversion here over the responsibilities of OEMs. Many people blame
+OEMs for device fragmentation hurting 3rd party technologies. They are wrong.
+The pusher of the proclaimed cross platform product bears the majority of that
+burden. Said pusher (be it Adobe, be it Sun) is likely to benefit most from
+wide adoption, so they must accept most of the risk. OEMs have already
+invested a huge amount in the design, production and likely marketing of the
+device, so they have already brought enough to the table.</p>
+
+<p>Where was I? Ah yes, version fragmentation. Version fragmentation is bad,
+however hardware fragmentation is worse. Version fragmentation can be
+reasonably dealt with, hardware fragmentation is almost impossible to deal
+with fully. Beyond some sort of certification program run by Adobe to ensure a
+minimum set of capabilities, there isn't a great deal Adobe can offer. This
+will result in the Flash Lite mistake of writing for the largest common
+feature set, which may not be the most enticing feature set.</p>
+
+<p>The problems faced by Adobe here are not new. They were the same problems
+brought to light by Java Mobile (or whatever J2ME is called these days). Sun
+failed to solve them despite coming up with some cunning engineering
+solutions. Adobe so far seems to be hoping that user pressure from desire for
+Flash on mobile will solve some of these issues for them, rather than provide
+any solid technical solutions.</p>
+
+<p>This is was a long, and somewhat Adobe negative entry. However, for the
+record, I like Flash. My job involves creating wonderful things with Flash. It
+is with vim and finesse Flash allows me to do this. Flash has changed the face
+of the Desktop Experience by allowing non computer science people into the
+geek ridden programming club, and it has changed it for the better, in my
+opinion.</p>
+
+<p>However, I have to agree with Aral to a large extent. Adobe are drunk on
+success. This is very dangerous. The clear speed of development advantages
+offered by Flash are diminishing. JavaScript in browsers now provide enough
+scripting power to replace Flash in a great many RIA areas, and unlike Adobe's
+laughable claim that Flash is a de facto standard, JavaScript actually is a de
+facto standard. Flash still reigns supreme in the browser game arena, but even
+here it is under attack from the hugely impressive
+<a href="http://unity3d.com/">Unity3D</a> framework. AIR has no clear challenger, but it
+also has no broad adoption either, despite it's excellent selling points for
+desktop application development. In a future where
+<a href="http://en.wikipedia.org/wiki/Google_Chrome_OS">GoogleOS</a> controls your life
+and your choice of applications, AIR may become irrelevant.</p>
+
+<p>It's a tough future, but I hope Adobe sip some strong coffee, awaken from
+their reverie, and stride confidently through it. It's not too late for them…
+Yet.</p>
+]]></content>
+  </entry>
+  
+</feed>
